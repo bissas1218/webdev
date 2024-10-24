@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+body{
+	font-size:12pt;
+}
+
+header{
+	margin:2px;
+	background-color:red;
+}
+
+main{
+	margin:2px;
+	background-color:red;
+	min-height:300px;
+}
+
+footer{
+	margin:2px;
+	background-color:red;
+}
+
+/* 뷰포트의 가로너비가 1025px 이상인 경우 적용 : 데스트탑 환경 */
+@media screen and (min-width: 1025px){
+	body{
+		background-color:pink;
+	}
+	
+}
+
+/* 뷰포트의 가로너비가 769px 이상 1024px 이하 : 태블릿 환경 */
+@media screen and (min-width:769px) and (max-width:1024px) {
+	body{
+		background-color:gray;
+	}
+	
+} 
+
+/* 뷰포트의 가로너비가 768px 이하인 경우 적용 : 모바일 환경 */
+@media screen and (max-width: 768px){
+	body{
+		background-color:blue;
+	}
+	
+}

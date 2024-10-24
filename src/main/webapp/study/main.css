@@ -1,0 +1,111 @@
+@charset "UTF-8";
+
+html{
+	margin:0;
+	padding:0;
+}
+
+body{
+	font-size:12pt;
+	margin:0;
+	padding:0;
+}
+
+ul, p{
+	margin:0;
+	padding:0;	
+}
+
+header{
+	margin:0;
+	padding:0;
+	background-color:#fff;
+	min-height:60px;
+	width:100%;
+	border-bottom:1px solid #d0d7de;
+}
+
+main{
+	margin:0;
+	background-color:#fff;
+	height:600px;
+}
+
+footer{
+	margin:0;
+	min-height:100px;
+	background-color:green;
+}
+
+/* 뷰포트의 가로너비가 1025px 이상인 경우 적용 : 데스트탑 환경 */
+@media screen and (min-width: 1400px){
+	body{
+		background-color:pink;
+	}
+	
+	#mainWrap{
+		width:100%;
+		background-color:blue;
+	}
+	
+	#mainWrap .left{
+		float:left;
+		margin:0 auto;
+		width:20%;
+		background-color:orange;
+		border-right:0px solid #d0d7de;
+	}
+	
+	#mainWrap .right{
+		float:left;
+		margin:0 auto;
+		width:80%;
+		background-color:#fff;
+		border-left:0px solid #d0d7de;
+	}
+	
+	#mainWrap .right p {
+		font-size:11pt;
+		padding:3px;
+	}
+	
+	#mainWrap .right #navi{
+		font-size:10pt;
+		color:gray;
+		margin:10px 0 20px 0;
+	}
+	
+	#mainWrap .right #title{
+		font-size:20pt;
+		font-weight:bold;
+		margin:20px 0 0 0;
+	}
+	
+	#mainWrap .right #title_exp{
+		font-size:13pt;
+		color:gray;
+		margin:0 0 10px 0;
+	}
+	
+	#mainWrap .right #sub_title{
+		font-size:15pt;
+		font-weight:bold;
+		margin:30px 0 10px 0;
+	}
+}
+
+/* 뷰포트의 가로너비가 769px 이상 1024px 이하 : 태블릿 환경 */
+@media screen and (min-width:769px) and (max-width:1399px) {
+	body{
+		background-color:gray;
+	}
+	
+} 
+
+/* 뷰포트의 가로너비가 768px 이하인 경우 적용 : 모바일 환경 */
+@media screen and (max-width: 768px){
+	body{
+		background-color:blue;
+	}
+	
+}

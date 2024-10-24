@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width" />
+<title>Github</title>
+ 
+ <link rel="stylesheet" href="/study/main.css" type="text/css" />
+ 
+</head>
+<body>
+
+	<header>
+	Header
+	<a href="/">Home</a>
+	</header>
+	
+	<main>
+		<div id="mainWrap">
+			<div class="left">
+				<div>aaaa</div>
+				<div>bbbbb</div>
+			</div>
+			<div class="right">
+				
+				<p id="navi">시작하기 / 경험시작</p>
+				
+				<p id="title">Github 시작하기</p>
+				<p id="title_exp">Github를 접속하고 로그인한다.</p>
+				
+				<p id="sub_title">Github 접속하기</p>
+				<hr>
+				<p>https://github.com에 접속한다.</p>
+				
+				<p id="sub_title">Github 로그인하기</p>
+				<hr>
+				<p>bissas@naver.com / qusehd#82로 로그인한다.</p>
+				
+				<p id="sub_title">Github 신규프로젝트 만들기</p>
+				<hr>
+				<p>Dashboard의 New버튼을 클릭한다. New repository에서 신규 Repository명을 입력한다. Create repository클릭.</p>
+				<p>생성된 Repository의 주소를 복사한다.</p>
+				<p>https://github.com/bissas1218/webdev.git</p>
+				
+				<p id="sub_title">Github 토큰생성하기</p>
+				<hr>
+				<p>Settings > Developer settings > Personal access tokens > Fine-grained tokens에서 신규토큰 생성</p>
+				<p>토큰의 Repository access, Permisions을 설정한다. 모든 권한을 Read and Write로 변경한다.</p>
+				<p>github에 커밋시 소스에서 토큰정보는 삭제한다(별도보관)</p>
+				
+				<p id="sub_title">이클립스 신규 프로젝트 Github에 올리기</p>
+				<hr>
+				<p>이클립스 프로젝트 Team > Share Project... > Git Repository Type 선택</p>
+				<p>Use or create repository in parent folder of project체크</p>
+				<p>목록에서 프로젝트 선택 후 Create Repository버튼 클릭 후 Finish</p>
+				<p>Git Repositories에서 commit > Staged Changes이동(이동 안될시 이클립스 재기동) 후 Commit and Push</p>
+				
+				<p id="sub_title">이클립스에서 Github Repository불러오기</p>
+				<hr>
+				<p>이클립스의 Window > ShowView > Other... > Git > Git Repositories를 선택한다.</p>
+				<p>Clone a Git repository선택	 Clone URI > Next선택</p> 
+				<p>https://github.com/bissas1218/webdev.git</p>
+				<p>bissas@naver.com / 토큰값</p> 
+				<p>Local Destination경로 설정</p>
+				<p>프로젝트 생성시 workspace에 생성, 생성된 프로젝트에 소스파일 이동 후 커밋하기.</p>
+				
+				<p id="sub_title">이클립스에서 소스관리하기</p>
+				<hr>
+				<p>커밋하기 : Team > Commit... > Unstaged Changes -> Add to index > Commit Message 입력 > Commit and Push</p>
+				<p>이클립스에서 git-receive-pack not permitted on 에러 발생시 토큰의 권한부여 후 Push HEAD...</p>
+			</div>
+		</div>
+		
+	</main>
+	
+	<footer>
+	Footer
+	</footer>
+
+</body>
+</html>
