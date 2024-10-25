@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width" />
+<title>Oracle</title>
+ 
+ <link rel="stylesheet" href="/study/main.css" type="text/css" />
+ 
+</head>
+<body>
+
+	<header>
+	Header <br/>
+	<a href="/">Home</a> > <a href="/study">Study</a> > Oracle
+	</header>
+	
+	<main>
+		<div id="mainWrap">
+			<div class="left">
+				<div>aaaa</div>
+				<div>bbbbb</div>
+			</div>
+			<div class="right">
+				
+				<p id="navi">시작하기 / 경험시작</p>
+				
+				<p id="title">Oracle 시작하기</p>
+				<p id="title_exp">Github를 접속하고 로그인한다.</p>
+				
+				<p id="sub_title">Oracle 설치하기</p>
+				<hr>
+				<p>https://www.oracle.com/kr/database/technologies/xe-downloads.html에 접속한다.</p>
+				<p>OracleXE213_Win64.zip를 다운로드 및 설치</p>
+				C:\Users\PC>sqlplus "/as sysdba"
+
+SQL*Plus: Release 21.0.0.0.0 - Production on 금 10월 25 17:00:32 2024
+Version 21.3.0.0.0
+
+Copyright (c) 1982, 2021, Oracle.  All rights reserved.
+
+
+다음에 접속됨:
+Oracle Database 21c Express Edition Release 21.0.0.0.0 - Production
+Version 21.3.0.0.0
+
+SQL> create user bissas identified by 1111;
+create user bissas identified by 1111
+            *
+1행에 오류:
+ORA-65096: 공통 사용자 또는 롤 이름이 부적합합니다.
+
+
+SQL> create user c##bissas identified by 1111;
+
+사용자가 생성되었습니다.
+
+SQL> grant connect, resource, dba to c##bissas;
+
+권한이 부여되었습니다.
+
+SQL>
+			</div>
+		</div>
+		
+	</main>
+	
+	<footer>
+	Footer
+	</footer>
+
+</body>
+</html>
