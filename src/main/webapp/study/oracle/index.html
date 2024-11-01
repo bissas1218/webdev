@@ -18,8 +18,8 @@
 	<main>
 		<div id="mainWrap">
 			<div class="left">
-				<div>aaaa</div>
-				<div>bbbbb</div>
+				<div>오라클 설치하기</div>
+				<div>오라클 공부하기</div>
 			</div>
 			<div class="right">
 				
@@ -32,11 +32,33 @@
 				<hr>
 				<p>https://www.oracle.com/kr/database/technologies/xe-downloads.html에 접속한다.</p>
 				<p>OracleXE213_Win64.zip를 다운로드 및 설치</p>
-				<p>사용자생성 : 명령프롬프트 열기 >sqlplus "/as sysdba"</p>
-				<p>SQL> create user c##bissas identified by 1111;</p>
-				<p>사용자가 생성되었습니다.</p>
-				<p>SQL> grant connect, resource, dba to c##bissas;</p>
-				<p>권한이 부여되었습니다.</p>
+				<p>C:\app\kbs\product\21c\homes\OraDB21Home1\network\admin\tnsnames.ora 파일열기 서비스네임 확인</p>
+				<p>Cmd창 열기</p>
+				<p>Microsoft Windows [Version 10.0.22631.4317]<br/>
+				(c) Microsoft Corporation. All rights reserved.
+				<br/>
+				C:\Users\kbs>tnsping XE<br/>
+				<br/>
+				TNS Ping Utility for 64-bit Windows: Version 21.0.0.0.0 - Production on 02-11월-2024 06:36:12<br/>
+				<br/>
+				Copyright (c) 1997, 2021, Oracle.  All rights reserved.<br/>
+				<br/>
+				사용된 매개변수 파일:<br/>
+				C:\app\kbs\product\21c\homes\OraDB21Home1\network\admin\sqlnet.ora<br/>
+				<br/>
+				<br/>
+				별칭 분석을 위해 TNSNAMES 어댑터 사용<br/>
+				(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = DESKTOP-6LUA33S)(PORT = 1521)) (CONNECT_DATA = (SERVER = DEDICATED) (SERVICE_NAME = XE)))에 접속하려고 시도하는 중<br/>
+				확인(40밀리초)<br/>
+				<br/>
+				C:\Users\kbs></p>
+				<p>https://dbeaver.io/ 사이트 접속 DBeaver Community 다운로드 및 설치</p>
+				<p>DBeaver 실행 후 연결 설정</p>
+				<p>Connection Type을 TNS로 변경 TNS names path 부분을 네트워크 파일(tnsnames.ora)이 존재하는 경로 입력</p>
+				<p>Network Alias 선택 후 system 패스워드 입력 후 하단 Test Connection 선택</p>
+				<p>Download driver files 창에서 다운로드</p>
+				<p>SELECT con_id, name, open_mode FROM v$containers;</p>
+				<p>정상적으로 XEPDB1이라는 PDB에 접속되었음</p>
 
 			</div>
 		</div>
