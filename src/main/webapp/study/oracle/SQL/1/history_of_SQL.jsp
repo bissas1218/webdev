@@ -1,9 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width" />
-<title>Atmega</title>
+<title>SQL의 역사</title>
  
  <link rel="stylesheet" href="/study/main.css" type="text/css" />
  
@@ -12,18 +14,18 @@
 
 	<header>
 	Header <br/>
-	<a href="/">Home</a> > <a href="/study">Study</a> > Oracle
+	<a href="/">Home</a> > <a href="/study">Study</a> > <a href="/study/oracle/index.jsp">Oracle</a> > Oracle SQL소개 > SQL의 역사
 	</header>
 	
 	<main>
 		<div id="mainWrap">
 			<div class="left">
 				<ul>
-					<li><a href="/study/oracle/index.html">오라클XE 설치하기</a></li>
+					<li><a href="/study/oracle/index.jsp">오라클XE 설치하기</a></li>
 					<li>Oracle SQL소개
 						<ul>
-							<li><a href="/study/oracle/SQL/1/history_of_SQL.html">SQL의 역사</a></li>
-							<li><a href="">SQL표준</a></li>
+							<li><a href="/study/oracle/SQL/1/history_of_SQL.jsp">SQL의 역사</a></li>
+							<li><a href="/study/oracle/SQL/1/SQL_Standards.jsp">SQL표준</a></li>
 							<li><a href="">Enterprise Manager 사용</a></li>
 							<li><a href="">어휘 규칙</a></li>
 							<li><a href="">도구 지원</a></li>
