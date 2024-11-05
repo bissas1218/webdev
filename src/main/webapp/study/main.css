@@ -52,8 +52,18 @@ footer{
 		float:left;
 		margin:0 auto;
 		width:20%;
-		background-color:orange;
+		background-color:#ededed;
 		border-right:0px solid #d0d7de;
+	}
+	
+	#mainWrap .left .depth1 li {
+		padding:0 0 0 5px;
+		font-size:12pt;
+	}
+	
+	#mainWrap .left .depth2 li {
+		padding:5px 0 0 10px;
+		font-size:11pt;
 	}
 	
 	#mainWrap .right{
@@ -62,6 +72,11 @@ footer{
 		width:80%;
 		background-color:#fff;
 		border-left:0px solid #d0d7de;
+	}
+	
+	#mainWrap .right .execute {
+		padding:10px;
+		border:1px solid;
 	}
 	
 	#mainWrap .right p {
@@ -91,6 +106,19 @@ footer{
 		font-size:15pt;
 		font-weight:bold;
 		margin:30px 0 10px 0;
+	}
+	
+	#mainWrap .right .table_res {
+		font-size:10pt;
+		border:2px solid #ededed;
+		border-spacing:20px 10px;
+		border-collapse:collapse;
+	}
+	
+	#mainWrap .right .table_res th, td{
+		border:1px solid #ededed;
+		padding:10px;
+		text-align:left;
 	}
 }
 

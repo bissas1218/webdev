@@ -19,20 +19,7 @@
 	
 	<main>
 		<div id="mainWrap">
-			<div class="left">
-				<ul>
-					<li><a href="/study/oracle/index.jsp">오라클XE 설치하기</a></li>
-					<li>Oracle SQL소개
-						<ul>
-							<li><a href="/study/oracle/SQL/1/history_of_SQL.jsp">SQL의 역사</a></li>
-							<li><a href="/study/oracle/SQL/1/SQL_Standards.jsp">SQL표준</a></li>
-							<li><a href="">Enterprise Manager 사용</a></li>
-							<li><a href="/study/oracle/SQL/1/Lexical_Conventions.jsp">어휘 규칙</a></li>
-							<li><a href="">도구 지원</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div>
+			<jsp:include page="/study/oracle/left.jsp"></jsp:include>
 			<div class="right">
 				
 				<p id="navi">시작하기 / 경험시작</p>
