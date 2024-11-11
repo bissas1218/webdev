@@ -14,7 +14,7 @@
 
 	<header>
 	Header <br/>
-	<a href="/">Home</a> > <a href="/study">Study</a> > <a href="/study/oracle/index.jsp">Oracle</a> > 유사컬럼 > Hierarchical Query 의사 열(Hierarchical Query Pseudocolumns)
+	<a href="/">Home</a> > <a href="/study">Study</a> > <a href="/study/oracle/index.jsp">Oracle</a> > 유사컬럼 > 계층형 쿼리의 의사 열
 	</header>
 	
 	<main>
@@ -24,8 +24,8 @@
 				
 				<p id="navi">시작하기 / 경험시작</p>
 				
-				<p id="title">Hierarchical Query 의사 열(Hierarchical Query Pseudocolumns)</p>
-				<p>hierarchical query 의사 열은 hierarchical queries에서만 유효합니다. 계층적 쿼리 의사 열은 다음과 같습니다.</p>
+				<p id="title">계층형 쿼리의 의사 열</p>
+				<p>계층형 쿼리 의사 열은 계층형 쿼리에서만 유효합니다. 계층적 쿼리 의사 열은 다음과 같습니다.</p>
 
 				<p>쿼리에서 계층적 관계를 정의하려면 이 절을 사용해야 합니다. CONNECTBY</p>
 				
@@ -40,39 +40,30 @@
 				
 				<b>CONNECT_BY_ISLEAF 예시</b>
 				<p>다음 예에서는 테이블의 처음 세 수준을 보여 주며 각 행에 대해 리프 행(열에서 1로 표시) 또는 자식 행(열에서 0으로 표시)이 있는지 여부를 나타냅니다. hr.employeesIsLeafIsLeaf</p>
-				<div class="execute">
-					<p>SELECT last_name "Employee", CONNECT_BY_ISLEAF "IsLeaf",<br/>
-					       LEVEL, SYS_CONNECT_BY_PATH(last_name, '/') "Path"<br/>
-					  FROM employees<br/>
-					  WHERE LEVEL <= 3 AND department_id = 80<br/>
-					  START WITH employee_id = 100<br/>
-					  CONNECT BY PRIOR employee_id = manager_id AND LEVEL <= 4<br/>
-					  ORDER BY "Employee", "IsLeaf";<br/>
-					<br/>
-					Employee&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IsLeaf
-					&nbsp;&nbsp;&nbsp;&nbsp;LEVEL 
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Path<br/>
-					--------------- ---------- ---------- -------------------------<br/>
-					Abel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1          
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3 
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/King/Zlotkey/Abel<br/>
-					Ande&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1          
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3 
-					&nbsp;&nbsp;&nbsp;/King/Errazuriz/Ande<br/>
-					Banda&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1          
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3 
-					&nbsp;&nbsp;/King/Errazuriz/Banda<br/>
-					Bates&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1
-					3 /King/Cambrault/Bates<br/>
-					Bernstein                          1          3 /King/Russell/Bernstein<br/>
-					Bloom                              1          3 /King/Cambrault/Bloom<br/>
-					Cambrault                          0          2 /King/Cambrault<br/>
-					Cambrault                          1          3 /King/Russell/Cambrault<br/>
-					Doran                              1          3 /King/Partners/Doran<br/>
-					Errazuriz                          0          2 /King/Errazuriz<br/>
-					Fox                                1          3 /King/Cambrault/Fox<br/>
-					. . . </p>
-				</div>
+				<pre class="execute">
+SELECT last_name "Employee", CONNECT_BY_ISLEAF "IsLeaf",
+       LEVEL, SYS_CONNECT_BY_PATH(last_name, '/') "Path"
+  FROM employees
+  WHERE LEVEL <= 3 AND department_id = 80
+  START WITH employee_id = 100
+  CONNECT BY PRIOR employee_id = manager_id AND LEVEL <= 4
+  ORDER BY "Employee", "IsLeaf";
+
+Employee                      IsLeaf      LEVEL Path
+------------------------- ---------- ---------- -------------------------
+Abel                               1          3 /King/Zlotkey/Abel
+Ande                               1          3 /King/Errazuriz/Ande
+Banda                              1          3 /King/Errazuriz/Banda
+Bates                              1          3 /King/Cambrault/Bates
+Bernstein                          1          3 /King/Russell/Bernstein
+Bloom                              1          3 /King/Cambrault/Bloom
+Cambrault                          0          2 /King/Cambrault
+Cambrault                          1          3 /King/Russell/Cambrault
+Doran                              1          3 /King/Partners/Doran
+Errazuriz                          0          2 /King/Errazuriz
+Fox                                1          3 /King/Cambrault/Fox
+. . . 
+				</pre>
 			</div>
 		</div>
 		
