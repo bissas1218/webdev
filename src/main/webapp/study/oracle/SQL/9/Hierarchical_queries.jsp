@@ -33,7 +33,13 @@
 				<p>condition조건에 설명된 대로 모든 조건이 될 수 있습니다.</p>
 				<p>START WITH계층 구조의 루트 행을 지정합니다.</p>
 				<p>CONNECT BY계층 구조의 부모 행과 자식 행 사이의 관계를 지정합니다.</p>
-				
+
+				<ul>
+					<li>NOCYCLE매개 변수는 오라클 데이터베이스에 CONNECT BY 루프가 데이터에 존재하더라도 쿼리에서 행을 반환하도록 지시합니다.
+				이 매개 변소를 CONNECT_BY_ISCYCLE의사 열과 함께 사용하여 루프가 포함된 행을 확인합니다. 자세한 내용은 CONNECT_BY_ISCYCLE의사 열을 참조하십시오.</li>
+					<li>계층적 쿼리에서 상위 행을 참조하려면 조건의 한 식을 PRIOR 연산자에게 자격을 부여해야 합니다. 예를 들어,</li>
+				</ul>
+
 				<pre class="execute">
 ... PRIOR expr = expr
 or

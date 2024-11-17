@@ -11,9 +11,13 @@ body{
 	padding:0;
 }
 
-ul, p{
+p {
 	margin:0;
 	padding:0;	
+}
+
+ul {
+	padding:0 0 0 30px;	
 }
 
 header{
@@ -57,12 +61,12 @@ footer{
 	}
 	
 	#mainWrap .left .depth1 li {
-		padding:0 0 0 5px;
+		padding:0 0 0 0px;
 		font-size:12pt;
 	}
 	
 	#mainWrap .left .depth2 li {
-		padding:5px 0 0 10px;
+		padding:0px 0 0 0px;
 		font-size:11pt;
 	}
 	
