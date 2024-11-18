@@ -28,6 +28,12 @@
 		<li>9.SQL쿼리 및 하위쿼리
 			<ul class="depth2">
 				<li><a href="/study/oracle/SQL/9/Hierarchical_queries.jsp">계층형 쿼리</a></li>
+				<li><a href="/study/oracle/SQL/9/Join.jsp">조인</a></li>
+			</ul>
+		</li>
+		<li>19.SQL문 MERGE에서 UPDATE로
+			<ul class="depth2">
+				<li><a href="/study/oracle/SQL/19/Select.jsp">SELECT</a>
 			</ul>
 		</li>
 	</ul>
