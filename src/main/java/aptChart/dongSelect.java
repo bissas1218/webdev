@@ -49,7 +49,7 @@ public class dongSelect extends HttpServlet {
 		String dongCode2 = request.getParameter("dongCode").substring(5,10);
 		
 		try {
-			String sql = "select apt_seq, apt_nm from apt_30000 where sgg_cd = ? and umd_cd = ? group by apt_seq , apt_nm";
+			String sql = "select apt_seq, apt_nm from apt_"+dongCode1.substring(0,2)+"000 where sgg_cd = ? and umd_cd = ? group by apt_seq , apt_nm";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, dongCode1);
 			pstmt.setString(2, dongCode2);

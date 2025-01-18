@@ -13,15 +13,51 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <script type="text/javascript" src="/js/utils2.js"></script>
 
+<style type="text/css">
+
+#loading_spinner{
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 99;
+}
+.cv_spinner{
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: stretch;
+    justify-content: center;
+    align-items: baseline;
+    position: relative;
+}
+.spinner {
+  width: 100px;
+  height: 100px;
+  border: 15px #ddd solid;
+  border-top: 15px #2e93e6 solid;
+  border-radius: 50%;
+  animation: sp-anime 0.8s infinite linear;
+}
+@keyframes sp-anime {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+</style>
+
 <script type="text/javascript">
 
+	// 시도변경
 	function sidoChange(val){
 		
 		console.log( val );
 		
 		deletedraw();
-		//var guList = null;
-		
+
+		// 구에 데이터삽입
 		$.ajax({
 			type: 'get',
 			url: '/sidoSelect',
@@ -47,7 +83,51 @@
 			error:function(request, status, error){
 				console.log('error!!!'+error);
 			}
-		})
+		});
+		
+		// 시도 거래금액 조회
+		$.ajax({
+			type: 'get',
+			url: '/sidoDealAmount',
+		//	dataType: 'text',
+			data : {sidoCode:val},
+			beforeSend:function(){
+				$('#loading_spinner').show();
+			},
+			success:function(data){
+				
+				// line chart
+				aptDealAmtLineChart.data.labels = data.dealDate2;
+				
+				const dataset2 = [{
+				      label: $("#sidoCode option:selected").text(),
+				      data: data.dealAmountSum,
+				      borderColor: 'rgb('+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+')',
+				      fill: false,
+				      tension: 0.4
+				    }];
+				
+				aptDealAmtLineChart.data.datasets = dataset2;
+				aptDealAmtLineChart.options.plugins.title.text = $("#sidoCode option:selected").text() + ' 아파트 실거래가';
+				aptDealAmtLineChart.update();
+				
+				/* bar chart */
+				aptDealCntChart.data.labels = data.dealDate2;
+				aptDealCntChart.data.datasets = [{
+				        label: $("#sidoCode option:selected").text() + ' 아파트 월별 거래량',
+				        data: data.monthDealCnt,
+				        borderWidth: 1
+				      }];
+				aptDealCntChart.update();
+				
+			},
+			error:function(request, status, error){
+				console.log('error!!!'+error);
+			},
+			complete:function(){
+				$('#loading_spinner').hide();
+			}
+		});
 	}
 	
 	function guChange(val){
@@ -116,6 +196,9 @@
 			type: 'get',
 			url: '/aptDealAmountList',
 			data : {aptSeq:val},
+			beforeSend:function(){
+				$('#loading_spinner').show();
+			},
 			success:function(data){
 				
 				// line chart
@@ -150,6 +233,9 @@
 			},
 			error:function(request, status, error){ 
 				console.log('error!!!'+error);
+			},
+			complete:function(){
+				$('#loading_spinner').hide();
 			}
 		})
 		
@@ -181,6 +267,12 @@
 
 </head>
 <body>
+
+<div id="loading_spinner">
+    <div class="cv_spinner">
+        <span class="spinner"></span>
+    </div>
+</div>
 
 <select name="sidoCode" id="sidoCode" onchange="sidoChange(this.value);">
 	<option value="">==선택==</option>

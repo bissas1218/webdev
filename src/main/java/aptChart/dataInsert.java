@@ -70,7 +70,7 @@ public class dataInsert extends HttpServlet {
 		
 		try {
 			String sql = "";
-			String[] arr_30000 = {"30170","30200","30230","30140","30110"};
+			
 			String cur_year = "";
 			String cur_month = "";
 			int cur_month_int = 0;
@@ -88,8 +88,20 @@ public class dataInsert extends HttpServlet {
 			
 			cur_month_int = Integer.parseInt(cur_month);
 			
+			// 대구
+			String[] arr_27000 = {"27720","27200","27290","27710","27140","27230","27170","27260","27110"};
+			for(int i=0; i<arr_27000.length; i++) {
+				sql = "select count(*) from apt_27000 where sgg_cd = '"+arr_27000[i]+"' and deal_year = '"+cur_year+"' and deal_month = '"+cur_month_int+"'";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					request.setAttribute("a"+arr_27000[i], rs.getInt(1));
+				}
+			}
+			
+			// 대전
+			String[] arr_30000 = {"30170","30200","30230","30140","30110"};
 			for(int i=0; i<arr_30000.length; i++) {
-			//	System.out.println(arr_30000[i]);
 				sql = "select count(*) from apt_30000 where sgg_cd = '"+arr_30000[i]+"' and deal_year = '"+cur_year+"' and deal_month = '"+cur_month_int+"'";
 				pstmt = con.prepareStatement(sql);
 				rs = pstmt.executeQuery();
@@ -143,110 +155,94 @@ public class dataInsert extends HttpServlet {
 		
 		try {
 			
+			String url = "https://apis.data.go.kr/1613000/RTMSDataSvcAptTradeDev/getRTMSDataSvcAptTradeDev?LAWD_CD="+lawdCd+"&DEAL_YMD="+dealYmd+"&pageNo=1&numOfRows=1000&serviceKey=2qUF4KecEbh1c3ZDyxLBSsqfF5MMNQhUh7mh%2FF3d8Lc3FhbTUgwz9N1iClExVzdhQ9GJNr%2B9uoI0ZiX0zExUnw%3D%3D";
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.parse(url);
 			
-			//System.out.println("---------------- start ----------------------");
+			doc.getDocumentElement().normalize();
 			
-				//	try{
-						
-						String url = "https://apis.data.go.kr/1613000/RTMSDataSvcAptTradeDev/getRTMSDataSvcAptTradeDev?LAWD_CD="+lawdCd+"&DEAL_YMD="+dealYmd+"&pageNo=1&numOfRows=1000&serviceKey=2qUF4KecEbh1c3ZDyxLBSsqfF5MMNQhUh7mh%2FF3d8Lc3FhbTUgwz9N1iClExVzdhQ9GJNr%2B9uoI0ZiX0zExUnw%3D%3D";
-						DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-						DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-						Document doc = dBuilder.parse(url);
-						
-						doc.getDocumentElement().normalize();
-						//doc.getElementById(elementId)
-						//System.out.println("===>"+doc.getElementsByTagName("totalCount").item(0).getChildNodes());
-						
-						NodeList nList = doc.getElementsByTagName("item");
-						
-				//		System.out.println("length : "+nList.getLength());
-						
-						for(int temp = 0; temp < nList.getLength(); temp++){
-							Node nNode = nList.item(temp);
-							if(nNode.getNodeType() == Node.ELEMENT_NODE){
-								Element eElement = (Element) nNode;
-								System.out.println(getTagValue("aptNm", eElement));
-								
-								String sql = "insert into apt_30000 (apt_nm,"
-										+ "sgg_cd,"
-										+ "umd_cd,"
-										+ "land_cd,"
-										+ "bonbun,"
-										+ "bubun,"
-										+ "road_nm,"
-										+ "road_nm_sgg_cd,"
-										+ "road_nm_cd,"
-										+ "road_nm_seq,"
-										+ "road_nmb_cd,"
-										+ "road_nm_bonbun,"
-										+ "road_nm_bubun,"
-										+ "umd_nm,"
-										+ "jibun,"
-										+ "exclu_use_ar,"
-										+ "deal_year,"
-										+ "deal_month,"
-										+ "deal_day,"
-										+ "deal_amount,"
-										+ "floor,"
-										+ "build_year,"
-										+ "apt_seq,"
-										+ "cdeal_type,"
-										+ "cdeal_day,"
-										+ "dealing_gbn,"
-										+ "estate_agent_sgg_nm,"
-										+ "rgst_date,"
-										+ "apt_dong,"
-										+ "sler_gbn,"
-										+ "buyer_gbn,"
-										+ "land_leasehold_gbn" 
-										+ ") values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"; 
-								pstmt = con.prepareStatement(sql);
-								pstmt.setString(1, getTagValue("aptNm", eElement));
-								pstmt.setString(2, getTagValue("sggCd", eElement));
-								pstmt.setString(3, getTagValue("umdCd", eElement));
-								pstmt.setString(4, getTagValue("landCd", eElement));
-								pstmt.setString(5, getTagValue("bonbun", eElement));
-								pstmt.setString(6, getTagValue("bubun", eElement));
-								pstmt.setString(7, getTagValue("roadNm", eElement));
-								pstmt.setString(8, getTagValue("roadNmSggCd", eElement));
-								pstmt.setString(9, getTagValue("roadNmCd", eElement));
-								pstmt.setString(10, getTagValue("roadNmSeq", eElement));
-								pstmt.setString(11, getTagValue("roadNmbCd", eElement));
-								pstmt.setString(12, getTagValue("roadNmBonbun", eElement));
-								pstmt.setString(13, getTagValue("roadNmBubun", eElement));
-								pstmt.setString(14, getTagValue("undNm", eElement));
-								pstmt.setString(15, getTagValue("jibun", eElement));
-								pstmt.setString(16, getTagValue("excluUseAr", eElement));
-								pstmt.setString(17, getTagValue("dealYear", eElement));
-								pstmt.setString(18, getTagValue("dealMonth", eElement));
-								pstmt.setString(19, getTagValue("dealDay", eElement));
-								pstmt.setString(20, getTagValue("dealAmount", eElement));
-								pstmt.setString(21, getTagValue("floor", eElement));
-								pstmt.setString(22, getTagValue("buildYear", eElement));
-								pstmt.setString(23, getTagValue("aptSeq", eElement));
-								pstmt.setString(24, getTagValue("cdealType", eElement));
-								pstmt.setString(25, getTagValue("cdealDay", eElement));
-								pstmt.setString(26, getTagValue("dealingGbn", eElement));
-								pstmt.setString(27, getTagValue("estateAgentSggNm", eElement));
-								pstmt.setString(28, getTagValue("rgstDate", eElement));
-								pstmt.setString(29, getTagValue("aptDong", eElement));
-								pstmt.setString(30, getTagValue("alerGbn", eElement));
-								pstmt.setString(31, getTagValue("slerGbn", eElement));
-								pstmt.setString(32, getTagValue("landLeaseholdGbn", eElement)); 
-								
-								pstmt.executeQuery();
-								
-							}
-						}
-				//	}catch(Exception e){
-						
-				//	}
+			NodeList nList = doc.getElementsByTagName("item");
+			
+			for(int temp = 0; temp < nList.getLength(); temp++){
+				Node nNode = nList.item(temp);
+				if(nNode.getNodeType() == Node.ELEMENT_NODE){
+					Element eElement = (Element) nNode;
 					
+					String sql = "insert into apt_"+lawdCd.substring(0,2)+"000 (apt_nm,"
+							+ "sgg_cd,"
+							+ "umd_cd,"
+							+ "land_cd,"
+							+ "bonbun,"
+							+ "bubun,"
+							+ "road_nm,"
+							+ "road_nm_sgg_cd,"
+							+ "road_nm_cd,"
+							+ "road_nm_seq,"
+							+ "road_nmb_cd,"
+							+ "road_nm_bonbun,"
+							+ "road_nm_bubun,"
+							+ "umd_nm,"
+							+ "jibun,"
+							+ "exclu_use_ar,"
+							+ "deal_year,"
+							+ "deal_month,"
+							+ "deal_day,"
+							+ "deal_amount,"
+							+ "floor,"
+							+ "build_year,"
+							+ "apt_seq,"
+							+ "cdeal_type,"
+							+ "cdeal_day,"
+							+ "dealing_gbn,"
+							+ "estate_agent_sgg_nm,"
+							+ "rgst_date,"
+							+ "apt_dong,"
+							+ "sler_gbn,"
+							+ "buyer_gbn,"
+							+ "land_leasehold_gbn" 
+							+ ") values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"; 
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, getTagValue("aptNm", eElement));
+					pstmt.setString(2, getTagValue("sggCd", eElement));
+					pstmt.setString(3, getTagValue("umdCd", eElement));
+					pstmt.setString(4, getTagValue("landCd", eElement));
+					pstmt.setString(5, getTagValue("bonbun", eElement));
+					pstmt.setString(6, getTagValue("bubun", eElement));
+					pstmt.setString(7, getTagValue("roadNm", eElement));
+					pstmt.setString(8, getTagValue("roadNmSggCd", eElement));
+					pstmt.setString(9, getTagValue("roadNmCd", eElement));
+					pstmt.setString(10, getTagValue("roadNmSeq", eElement));
+					pstmt.setString(11, getTagValue("roadNmbCd", eElement));
+					pstmt.setString(12, getTagValue("roadNmBonbun", eElement));
+					pstmt.setString(13, getTagValue("roadNmBubun", eElement));
+					pstmt.setString(14, getTagValue("undNm", eElement));
+					pstmt.setString(15, getTagValue("jibun", eElement));
+					pstmt.setString(16, getTagValue("excluUseAr", eElement));
+					pstmt.setString(17, getTagValue("dealYear", eElement));
+					pstmt.setString(18, getTagValue("dealMonth", eElement));
+					pstmt.setString(19, getTagValue("dealDay", eElement));
+					pstmt.setString(20, getTagValue("dealAmount", eElement));
+					pstmt.setString(21, getTagValue("floor", eElement));
+					pstmt.setString(22, getTagValue("buildYear", eElement));
+					pstmt.setString(23, getTagValue("aptSeq", eElement));
+					pstmt.setString(24, getTagValue("cdealType", eElement));
+					pstmt.setString(25, getTagValue("cdealDay", eElement));
+					pstmt.setString(26, getTagValue("dealingGbn", eElement));
+					pstmt.setString(27, getTagValue("estateAgentSggNm", eElement));
+					pstmt.setString(28, getTagValue("rgstDate", eElement));
+					pstmt.setString(29, getTagValue("aptDong", eElement));
+					pstmt.setString(30, getTagValue("alerGbn", eElement));
+					pstmt.setString(31, getTagValue("slerGbn", eElement));
+					pstmt.setString(32, getTagValue("landLeaseholdGbn", eElement)); 
 					
-				//	System.out.println("---------------- end ----------------------");
+					pstmt.executeQuery();
+					
+				}
+			}
+					
 		}catch(Exception e) {
 			
-		//}catch(SQLException e) {
 			System.out.println("error: " + e);
 		}finally {
 			try {
