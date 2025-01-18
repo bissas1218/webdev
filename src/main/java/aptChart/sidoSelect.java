@@ -74,6 +74,10 @@ public class sidoSelect extends HttpServlet {
 					con.close();
 				}
 				
+				if(rs != null) {
+					rs.close();
+				}
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

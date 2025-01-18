@@ -32,3 +32,9 @@ CREATE TABLE `apt_30000` (
   `buyer_gbn` varchar(100) DEFAULT NULL COMMENT '매수자',
   `land_leasehold_gbn` varchar(1) DEFAULT NULL COMMENT '토지임대부 아파트 여부'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+CREATE TABLE `dong_code` (
+  `code` varchar(11) DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `use_yn` varchar(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci COMMENT='법정동코드';

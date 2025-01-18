@@ -61,7 +61,7 @@ public class dataInsert extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		System.out.println("dealYmd:"+request.getParameter("dealYmd"));
+		//System.out.println("dealYmd:"+request.getParameter("dealYmd"));
 		
 		DBConnection dbcon = new DBConnection();
 		Connection con = dbcon.dbConn();
@@ -77,8 +77,8 @@ public class dataInsert extends HttpServlet {
 			
 			if(request.getParameter("dealYmd") != null) {
 				String dealYmd = request.getParameter("dealYmd");
-				System.out.println(dealYmd.substring(0, 4));
-				System.out.println(dealYmd.substring(4, 6));
+				//System.out.println(dealYmd.substring(0, 4));
+			//	System.out.println(dealYmd.substring(4, 6));
 				cur_year = dealYmd.substring(0, 4);
 				cur_month = dealYmd.substring(4, 6);
 			}else {
@@ -89,7 +89,7 @@ public class dataInsert extends HttpServlet {
 			cur_month_int = Integer.parseInt(cur_month);
 			
 			for(int i=0; i<arr_30000.length; i++) {
-				System.out.println(arr_30000[i]);
+			//	System.out.println(arr_30000[i]);
 				sql = "select count(*) from apt_30000 where sgg_cd = '"+arr_30000[i]+"' and deal_year = '"+cur_year+"' and deal_month = '"+cur_month_int+"'";
 				pstmt = con.prepareStatement(sql);
 				rs = pstmt.executeQuery();
@@ -136,7 +136,7 @@ public class dataInsert extends HttpServlet {
 		
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		System.out.println("---------------- post ----------------------");
+		//System.out.println("---------------- post ----------------------");
 		DBConnection dbconn = new DBConnection();
 		Connection con = dbconn.dbConn();
 		PreparedStatement pstmt = null;
@@ -144,7 +144,7 @@ public class dataInsert extends HttpServlet {
 		try {
 			
 			
-			System.out.println("---------------- start ----------------------");
+			//System.out.println("---------------- start ----------------------");
 			
 				//	try{
 						
@@ -159,7 +159,7 @@ public class dataInsert extends HttpServlet {
 						
 						NodeList nList = doc.getElementsByTagName("item");
 						
-						System.out.println("length : "+nList.getLength());
+				//		System.out.println("length : "+nList.getLength());
 						
 						for(int temp = 0; temp < nList.getLength(); temp++){
 							Node nNode = nList.item(temp);
@@ -243,7 +243,7 @@ public class dataInsert extends HttpServlet {
 				//	}
 					
 					
-					System.out.println("---------------- end ----------------------");
+				//	System.out.println("---------------- end ----------------------");
 		}catch(Exception e) {
 			
 		//}catch(SQLException e) {

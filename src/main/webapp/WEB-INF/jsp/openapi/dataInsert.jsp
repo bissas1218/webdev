@@ -13,7 +13,7 @@
 function submit(lawdCd){
 	var form = document.getElementById("dataInsertFrm");
 	var insertDate = document.getElementById("insertDate");
-	alert(insertDate.value+' '+lawdCd);
+	//alert(insertDate.value+' '+lawdCd);
 	
 	form.dealYmd.value=insertDate.value;
 	form.lawdCd.value=lawdCd;
