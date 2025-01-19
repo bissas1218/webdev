@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     
 <!DOCTYPE html>
 <html>
@@ -89,67 +90,36 @@ function next_month(){
 <input type="button" onclick="next_month();" value="Next" />
 <br/>
 
-대구광역시<br>
-군위군[27720](<c:out value="${a27720}" />)
-<c:if test="${a27720 eq '0'}">
-<input type="button" value="저장" onclick="submit('27720');" />
-</c:if>,
-남구[27200](<c:out value="${a27200}" />)
-<c:if test="${a27200 eq '0'}">
-<input type="button" value="저장" onclick="submit('27200');" />
-</c:if>,
-달서구[27290](<c:out value="${a27290}" />)
-<c:if test="${a27290 eq '0'}">
-<input type="button" value="저장" onclick="submit('27290');" />
-</c:if>,
-달성군[27710](<c:out value="${a27710}" />)
-<c:if test="${a27710 eq '0'}">
-<input type="button" value="저장" onclick="submit('27710');" />
-</c:if>,
-동구[27140](<c:out value="${a27140}" />)
-<c:if test="${a27140 eq '0'}">
-<input type="button" value="저장" onclick="submit('27140');" />
-</c:if>,
-북구[27230](<c:out value="${a27230}" />)
-<c:if test="${a27230 eq '0'}">
-<input type="button" value="저장" onclick="submit('27230');" />
-</c:if>,
-서구[27170](<c:out value="${a27170}" />)
-<c:if test="${a27170 eq '0'}">
-<input type="button" value="저장" onclick="submit('27170');" />
-</c:if>,
-수성구[27260](<c:out value="${a27260}" />)
-<c:if test="${a27260 eq '0'}">
-<input type="button" value="저장" onclick="submit('27260');" />
-</c:if>,
-중구[27110](<c:out value="${a27110}" />)
-<c:if test="${a27110 eq '0'}">
-<input type="button" value="저장" onclick="submit('27110');" />
-</c:if>
-<br/><br/>
+<c:forEach items="${dongCdList }" var="dongCdList">
 
-대전광역시<br>
-서구[30170](<c:out value="${a30170}" />)
-<c:if test="${a30170 eq '0'}">
-<input type="button" value="저장" onclick="submit('30170');" />
-</c:if>,
-유성구[30200](<c:out value="${a30200}" />) 
-<c:if test="${a30200 eq '0'}">
-<input type="button" value="저장" onclick="submit('30200');" />
-</c:if>,
-대덕구[30230](<c:out value="${a30230}" />)
-<c:if test="${a30230 eq '0'}">
-<input type="button" value="저장" onclick="submit('30230');" />
-</c:if>,
-중구[30140](<c:out value="${a30140}" />)
-<c:if test="${a30140 eq '0'}">
-<input type="button" value="저장" onclick="submit('30140');" />
-</c:if>,
-동구[30110](<c:out value="${a30110}" />)
-<c:if test="${a30110 eq '0'}">
-<input type="button" value="저장" onclick="submit('30110');" />
-</c:if>
-<br/>
+	<c:if test="${fn:substring(dongCdList.code, 2, 9) eq '0000000' or dongCdList.code eq '3611000000'}">
+	
+	<c:out value="${dongCdList.name }" />[<c:out value="${fn:substring(dongCdList.code, 0, 5)}" />]
+	<c:if test="${dongCdList.code eq '3611000000' }">
+		(<c:out value="${sejongCnt }"/>)
+		<c:if test="${sejongCnt eq '0'}">
+			<input type="button" value="저장" onclick="submit('<c:out value="${fn:substring(dongCdList.code,0,5) }" />');" />
+		</c:if>
+	</c:if><br/>
+		
+		<c:forEach items="${dongCdList2 }" var="dongCdList2">
+		
+			<c:if test="${fn:substring(dongCdList.code, 0, 2) eq fn:substring(dongCdList2.code, 0, 2) and dongCdList.code ne dongCdList2.code}">
+				<c:out value="${fn:split(dongCdList2.name, ' ')[1] }" />
+				[<c:out value="${fn:substring(dongCdList2.code,0,5) }" />]
+				(<c:out value="${dongCdList2.cnt }" />)
+				<c:if test="${dongCdList2.cnt eq '0'}">
+				<input type="button" value="저장" onclick="submit('<c:out value="${fn:substring(dongCdList2.code,0,5) }" />');" />
+				</c:if>,
+			</c:if>
+			
+		</c:forEach>
+		<br/><br/>
+		
+	</c:if>
+	
+</c:forEach>
+
 
 <form name="dataInsertFrm" id="dataInsertFrm" action="/dataInsert" method="post" >
 <input type="hidden" name="dealYmd" id="dealYmd" />

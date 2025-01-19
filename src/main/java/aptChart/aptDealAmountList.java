@@ -48,10 +48,18 @@ public class aptDealAmountList extends HttpServlet {
 		
 		JSONObject jObj = new JSONObject();
 		
+	//	System.out.println(aptSeq);
+		String table_nm = "";
+		if(aptSeq.substring(0,5).equals("36110")) {
+			table_nm = "36110";
+		}else {
+			table_nm = aptSeq.substring(0,2)+"000";
+		}
+	//	System.out.println(aptSeq);
 		try {
 			
 			// 면적구하기 ㎡
-			String sql = "select exclu_use_ar from apt_"+aptSeq.substring(0,2)+"000 where apt_seq = ? group by exclu_use_ar order by cast(exclu_use_ar as unsigned) asc";
+			String sql = "select exclu_use_ar from apt_"+table_nm+" where apt_seq = ? group by exclu_use_ar order by cast(exclu_use_ar as unsigned) asc";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, aptSeq);
 			rs = pstmt.executeQuery();
@@ -65,7 +73,7 @@ public class aptDealAmountList extends HttpServlet {
 			jObj.put("excluUseAr", excluUseAr);
 			
 			// 기간구하기
-			sql = "select deal_year , deal_month from apt_"+aptSeq.substring(0,2)+"000 where apt_seq = ? group by deal_year , deal_month order by cast(deal_year as unsigned) asc, cast(deal_month as unsigned) asc";
+			sql = "select deal_year , deal_month from apt_"+table_nm+" where apt_seq = ? group by deal_year , deal_month order by cast(deal_year as unsigned) asc, cast(deal_month as unsigned) asc";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, aptSeq);
 			rs = pstmt.executeQuery();
@@ -111,7 +119,7 @@ public class aptDealAmountList extends HttpServlet {
 				
 				for(int j=0; j<dealDate.size(); j++) {
 					
-					sql = "select avg(replace(deal_amount,',','')) avg_deal_amt from apt_"+aptSeq.substring(0,2)+"000 where apt_seq = ? and deal_year = ? and deal_month = ? and exclu_use_ar = ?";
+					sql = "select avg(replace(deal_amount,',','')) avg_deal_amt from apt_"+table_nm+" where apt_seq = ? and deal_year = ? and deal_month = ? and exclu_use_ar = ?";
 					pstmt = con.prepareStatement(sql);
 					pstmt.setString(1, aptSeq);
 					pstmt.setString(2, dealDate.get(j).substring(0,4));
@@ -131,7 +139,7 @@ public class aptDealAmountList extends HttpServlet {
 			for(int s=0; s<dealDate.size(); s++) {
 				//System.out.println(dealDate.get(s));
 				
-				sql = "select count(*) from apt_"+aptSeq.substring(0,2)+"000 where apt_seq = ? and deal_year = ? and deal_month = ?";
+				sql = "select count(*) from apt_"+table_nm+" where apt_seq = ? and deal_year = ? and deal_month = ?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, aptSeq);
 				pstmt.setString(2, dealDate.get(s).substring(0,4));

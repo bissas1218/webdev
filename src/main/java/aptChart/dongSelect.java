@@ -37,7 +37,7 @@ public class dongSelect extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		System.out.println(request.getParameter("dongCode").substring(0,5)+" "+request.getParameter("dongCode").substring(5,10));
+		//System.out.println(request.getParameter("dongCode").substring(0,5)+" "+request.getParameter("dongCode").substring(5,10));
 		
 		DBConnection dbconn = new DBConnection();
 		Connection con = dbconn.dbConn();
@@ -47,16 +47,24 @@ public class dongSelect extends HttpServlet {
 		List<DongCodeVO> aptList = new ArrayList<DongCodeVO>();
 		String dongCode1 = request.getParameter("dongCode").substring(0,5);
 		String dongCode2 = request.getParameter("dongCode").substring(5,10);
+		//System.out.println(dongCode1);
+		
+		String table_nm = "";
+		if(dongCode1.equals("36110")) {
+			table_nm = "36110";
+		}else {
+			table_nm = dongCode1.substring(0,2)+"000";
+		}
 		
 		try {
-			String sql = "select apt_seq, apt_nm from apt_"+dongCode1.substring(0,2)+"000 where sgg_cd = ? and umd_cd = ? group by apt_seq , apt_nm";
+			String sql = "select apt_seq, apt_nm from apt_"+table_nm+" where sgg_cd = ? and umd_cd = ? group by apt_seq , apt_nm";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, dongCode1);
 			pstmt.setString(2, dongCode2);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				System.out.println(rs.getString(1));
+				//System.out.println(rs.getString(1));
 				DongCodeVO dongCdVO = new DongCodeVO();
 				dongCdVO.setCode(rs.getString(1));
 				dongCdVO.setName(rs.getString(2));

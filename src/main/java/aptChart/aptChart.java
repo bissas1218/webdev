@@ -58,7 +58,7 @@ public class aptChart extends HttpServlet {
 			List<DongCodeVO> dongCdList = new ArrayList<DongCodeVO>();
 			
 			while(rs.next()) {
-				System.out.println(rs.getString(1)+" "+rs.getString(2));
+				//System.out.println(rs.getString(1)+" "+rs.getString(2));
 				DongCodeVO dongCdVO = new DongCodeVO();
 				dongCdVO.setCode(rs.getString(1));
 				dongCdVO.setName(rs.getString(2));

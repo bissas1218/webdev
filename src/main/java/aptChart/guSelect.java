@@ -36,7 +36,7 @@ public class guSelect extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println(request.getParameter("guCode").substring(0,5));
+	//	System.out.println(request.getParameter("guCode").substring(0,5));
 		
 		DBConnection dbconn = new DBConnection();
 		Connection con = dbconn.dbConn();
@@ -47,13 +47,15 @@ public class guSelect extends HttpServlet {
 		String guCode = request.getParameter("guCode").substring(0,5);
 		
 		try {
-			String sql = "select code, substring_index(name, ' ', -1) dong from dong_code where code like '"+guCode+"%' and code != concat(?,'00000') and use_yn = 'Y' order by name";
+			String sql = "select code, substring_index(name, ' ', -1) dong from dong_code where code like '"+guCode+"%' and code != concat(?,'00000') and use_yn = 'Y' order by dong";
+			//System.out.println(sql);
+			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, guCode);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				System.out.println(rs.getString(1));
+			//	System.out.println(rs.getString(1));
 				DongCodeVO dongCdVO = new DongCodeVO();
 				dongCdVO.setCode(rs.getString(1));
 				dongCdVO.setName(rs.getString(2));

@@ -37,7 +37,7 @@ public class sidoSelect extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println(request.getParameter("sidoCode").substring(0,2));
+	//	System.out.println(request.getParameter("sidoCode").substring(0,2));
 		
 		DBConnection dbconn = new DBConnection();
 		Connection con = dbconn.dbConn();
@@ -54,7 +54,7 @@ public class sidoSelect extends HttpServlet {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				System.out.println(rs.getString(1));
+			//	System.out.println(rs.getString(1));
 				DongCodeVO dongCdVO = new DongCodeVO();
 				dongCdVO.setCode(rs.getString(1));
 				dongCdVO.setName(rs.getString(2));

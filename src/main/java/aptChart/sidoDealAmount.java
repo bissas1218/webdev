@@ -44,11 +44,19 @@ public class sidoDealAmount extends HttpServlet {
 		
 		String sidoCode = request.getParameter("sidoCode");
 		JSONObject jObj = new JSONObject();
+		System.out.println(sidoCode);
+		
+		String table_nm = "";
+		if(sidoCode.substring(0,5).equals("36110")) {
+			table_nm = "36110";
+		}else {
+			table_nm = sidoCode.substring(0,2)+"000";
+		}
 		
 		try {
 			
 			// 기간구하기
-			String sql = "select deal_year , deal_month from apt_"+sidoCode.substring(0,2)+"000 group by deal_year , deal_month order by cast(deal_year as unsigned) asc, cast(deal_month as unsigned) asc";
+			String sql = "select deal_year , deal_month from apt_"+table_nm+" group by deal_year , deal_month order by cast(deal_year as unsigned) asc, cast(deal_month as unsigned) asc";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -89,7 +97,7 @@ public class sidoDealAmount extends HttpServlet {
 			for(int s=0; s<dealDate.size(); s++) {
 				//System.out.println(dealDate.get(s));
 				
-				sql = "select sum(replace(deal_amount,',','')) sum_deal_amt from apt_"+sidoCode.substring(0,2)+"000 where deal_year = ? and deal_month = ?";
+				sql = "select sum(replace(deal_amount,',','')) sum_deal_amt from apt_"+table_nm+" where deal_year = ? and deal_month = ?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, dealDate.get(s).substring(0,4));
 				pstmt.setInt(2, Integer.parseInt(dealDate.get(s).substring(4,6)));
@@ -106,7 +114,7 @@ public class sidoDealAmount extends HttpServlet {
 			for(int s=0; s<dealDate.size(); s++) {
 				//System.out.println(dealDate.get(s));
 				
-				sql = "select count(*) from apt_"+sidoCode.substring(0,2)+"000 where deal_year = ? and deal_month = ?";
+				sql = "select count(*) from apt_"+table_nm+" where deal_year = ? and deal_month = ?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, dealDate.get(s).substring(0,4));
 				pstmt.setInt(2, Integer.parseInt(dealDate.get(s).substring(4,6)));

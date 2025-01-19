@@ -15,6 +15,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -67,48 +70,107 @@ public class dataInsert extends HttpServlet {
 		Connection con = dbcon.dbConn();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		ResultSet rs2 = null;
+		
+		String cur_year = "";
+		String cur_month = "";
+		int cur_month_int = 0;
+		
+		if(request.getParameter("dealYmd") != null) {
+			String dealYmd = request.getParameter("dealYmd");
+			cur_year = dealYmd.substring(0, 4);
+			cur_month = dealYmd.substring(4, 6);
+		}else {
+			cur_year = "2024";
+			cur_month = "12";
+		}
+		
+		cur_month_int = Integer.parseInt(cur_month);
 		
 		try {
 			String sql = "";
 			
-			String cur_year = "";
-			String cur_month = "";
-			int cur_month_int = 0;
+			// 법정동 코드 조회
+			ArrayList<DongCodeVO> dongCdList = new ArrayList<DongCodeVO>();
+			ArrayList<DongCodeVO> dongCdList2 = new ArrayList<DongCodeVO>();
+			sql = "select code, name from dong_code where code like '%00000' and use_yn = 'Y'";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			String sidoCdBak = "";
+			int sejongCnt = 0;
 			
-			if(request.getParameter("dealYmd") != null) {
-				String dealYmd = request.getParameter("dealYmd");
-				//System.out.println(dealYmd.substring(0, 4));
-			//	System.out.println(dealYmd.substring(4, 6));
-				cur_year = dealYmd.substring(0, 4);
-				cur_month = dealYmd.substring(4, 6);
-			}else {
-				cur_year = "2024";
-				cur_month = "12";
-			}
-			
-			cur_month_int = Integer.parseInt(cur_month);
-			
-			// 대구
-			String[] arr_27000 = {"27720","27200","27290","27710","27140","27230","27170","27260","27110"};
-			for(int i=0; i<arr_27000.length; i++) {
-				sql = "select count(*) from apt_27000 where sgg_cd = '"+arr_27000[i]+"' and deal_year = '"+cur_year+"' and deal_month = '"+cur_month_int+"'";
-				pstmt = con.prepareStatement(sql);
-				rs = pstmt.executeQuery();
-				if(rs.next()) {
-					request.setAttribute("a"+arr_27000[i], rs.getInt(1));
+			while(rs.next()) {
+				
+				DongCodeVO dongCdVO = new DongCodeVO();
+				dongCdVO.setCode(rs.getString(1));
+				dongCdVO.setName(rs.getString(2));
+				dongCdList.add(dongCdVO);
+				
+			//	System.out.println(dongCdVO.getCode().substring(2,10));
+				
+				// 시도일경우
+				if(dongCdVO.getCode().substring(2,10).trim().equals("00000000") ) {
+					
+					dongCdVO.setCnt(1);
+					dongCdList2.add(dongCdVO);
+					
+					sidoCdBak = dongCdVO.getCode().substring(0,5);
+					
+				}else if(dongCdVO.getCode().equals("3611000000")) { // 세종시일경우
+				
+					sql = "select count(*) from information_schema.tables where table_name = 'apt_36110'";
+					pstmt = con.prepareStatement(sql);
+					rs2 = pstmt.executeQuery();
+					rs2.next();
+					
+					// 테이블 존재시
+					if(rs2.getString(1).equals("1")) {
+						// 시군구 매물수 조회
+						sql = "select count(*) from apt_36110 where sgg_cd = '"+dongCdVO.getCode().substring(0,5)+"' and deal_year = '"+cur_year+"' and deal_month = '"+cur_month_int+"'";
+						pstmt = con.prepareStatement(sql);
+						rs2 = pstmt.executeQuery();
+						if(rs2.next()) {
+							sejongCnt = rs2.getInt(1);
+						}
+					}else {
+						sejongCnt = -1;
+					}
+					
+					request.setAttribute("sejongCnt", sejongCnt);
+					
+				}else {	// 시군구일 경우
+					
+				//	System.out.print(sidoCdBak + ", " + dongCdVO.getCode().substring(0,5)+", ");
+					
+					sql = "select count(*) from information_schema.tables where table_name = 'apt_"+sidoCdBak+"'";
+					pstmt = con.prepareStatement(sql);
+					rs2 = pstmt.executeQuery();
+					rs2.next();
+				//	System.out.println(rs2.getString(1));
+					
+					// 테이블 존재시
+					if(rs2.getString(1).equals("1")) {
+						// 시군구 매물수 조회
+						sql = "select count(*) from apt_"+sidoCdBak+" where sgg_cd = '"+dongCdVO.getCode().substring(0,5)+"' and deal_year = '"+cur_year+"' and deal_month = '"+cur_month_int+"'";
+						pstmt = con.prepareStatement(sql);
+						rs2 = pstmt.executeQuery();
+						if(rs2.next()) {
+						//	System.out.println(rs2.getString(1));
+							dongCdVO.setCnt(rs2.getInt(1));
+						}
+					}else {
+						dongCdVO.setCnt(-1);
+					}
+					
+					dongCdList2.add(dongCdVO);
+					
 				}
+				
 			}
 			
-			// 대전
-			String[] arr_30000 = {"30170","30200","30230","30140","30110"};
-			for(int i=0; i<arr_30000.length; i++) {
-				sql = "select count(*) from apt_30000 where sgg_cd = '"+arr_30000[i]+"' and deal_year = '"+cur_year+"' and deal_month = '"+cur_month_int+"'";
-				pstmt = con.prepareStatement(sql);
-				rs = pstmt.executeQuery();
-				if(rs.next()) {
-					request.setAttribute("a"+arr_30000[i], rs.getInt(1));
-				}
-			}
+			request.setAttribute("dongCdList", dongCdList);
+			request.setAttribute("dongCdList2", dongCdList2);
+			
 			
 			request.setAttribute("cur_date", cur_year+cur_month);
 			
@@ -169,7 +231,7 @@ public class dataInsert extends HttpServlet {
 				if(nNode.getNodeType() == Node.ELEMENT_NODE){
 					Element eElement = (Element) nNode;
 					
-					String sql = "insert into apt_"+lawdCd.substring(0,2)+"000 (apt_nm,"
+					String sql = "insert into apt_"+lawdCd+" (apt_nm,"
 							+ "sgg_cd,"
 							+ "umd_cd,"
 							+ "land_cd,"

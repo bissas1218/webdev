@@ -5,7 +5,14 @@ public class DongCodeVO {
 	private String code;
 	private String name;
 	private String useYn;
+	private int cnt;
 	
+	public int getCnt() {
+		return cnt;
+	}
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
 	public String getCode() {
 		return code;
 	}
