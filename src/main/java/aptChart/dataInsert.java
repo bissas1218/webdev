@@ -215,6 +215,14 @@ public class dataInsert extends HttpServlet {
 		Connection con = dbconn.dbConn();
 		PreparedStatement pstmt = null;
 		
+		String tableNm = "";
+		
+		if(lawdCd.equals("36110")) {
+			tableNm = lawdCd;
+		}else {
+			tableNm = lawdCd.substring(0,2) + "000";
+		}
+		
 		try {
 			
 			String url = "https://apis.data.go.kr/1613000/RTMSDataSvcAptTradeDev/getRTMSDataSvcAptTradeDev?LAWD_CD="+lawdCd+"&DEAL_YMD="+dealYmd+"&pageNo=1&numOfRows=1000&serviceKey=2qUF4KecEbh1c3ZDyxLBSsqfF5MMNQhUh7mh%2FF3d8Lc3FhbTUgwz9N1iClExVzdhQ9GJNr%2B9uoI0ZiX0zExUnw%3D%3D";
@@ -231,7 +239,7 @@ public class dataInsert extends HttpServlet {
 				if(nNode.getNodeType() == Node.ELEMENT_NODE){
 					Element eElement = (Element) nNode;
 					
-					String sql = "insert into apt_"+lawdCd+" (apt_nm,"
+					String sql = "insert into apt_"+tableNm+" (apt_nm,"
 							+ "sgg_cd,"
 							+ "umd_cd,"
 							+ "land_cd,"
