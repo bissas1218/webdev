@@ -45,9 +45,10 @@ public class dongSelect extends HttpServlet {
 		ResultSet rs = null;
 		
 		List<DongCodeVO> aptList = new ArrayList<DongCodeVO>();
+		String dongCode = request.getParameter("dongCode");
 		String dongCode1 = request.getParameter("dongCode").substring(0,5);
 		String dongCode2 = request.getParameter("dongCode").substring(5,10);
-		//System.out.println(dongCode1);
+		//System.out.println(dongCode2.substring(2,5));
 		
 		String table_nm = "";
 		if(dongCode1.equals("36110")) {
@@ -56,19 +57,46 @@ public class dongSelect extends HttpServlet {
 			table_nm = dongCode1.substring(0,2)+"000";
 		}
 		
+		JSONObject jObj = new JSONObject();
+		
 		try {
-			String sql = "select apt_seq, apt_nm from apt_"+table_nm+" where sgg_cd = ? and umd_cd = ? group by apt_seq , apt_nm";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, dongCode1);
-			pstmt.setString(2, dongCode2);
-			rs = pstmt.executeQuery();
 			
-			while(rs.next()) {
-				//System.out.println(rs.getString(1));
-				DongCodeVO dongCdVO = new DongCodeVO();
-				dongCdVO.setCode(rs.getString(1));
-				dongCdVO.setName(rs.getString(2));
-				aptList.add(dongCdVO);
+			// 읍, 면일 경우 리 조회
+			if(dongCode2.substring(2,5).equals("000")) {
+				
+				List<DongCodeVO> leeList = new ArrayList<DongCodeVO>();
+				String sql = "select code, substring_index(name, ' ', -1) dong from dong_code where code like '"+dongCode.substring(0,7)+"%' and code != '"+dongCode+"' and use_yn = 'Y' order by dong";
+				//System.out.println(sql);
+				
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+				//	System.out.println(rs.getString(1));
+					DongCodeVO dongCdVO = new DongCodeVO();
+					dongCdVO.setCode(rs.getString(1));
+					dongCdVO.setName(rs.getString(2));
+					leeList.add(dongCdVO);
+				}
+				
+				jObj.put("leeList", leeList);
+				
+			}else {
+				String sql = "select apt_seq, apt_nm from apt_"+table_nm+" where sgg_cd = ? and umd_cd = ? group by apt_seq , apt_nm";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, dongCode1);
+				pstmt.setString(2, dongCode2);
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					//System.out.println(rs.getString(1));
+					DongCodeVO dongCdVO = new DongCodeVO();
+					dongCdVO.setCode(rs.getString(1));
+					dongCdVO.setName(rs.getString(2));
+					aptList.add(dongCdVO);
+				}
+				
+				jObj.put("aptList", aptList);
 			}
 			
 		}catch(SQLException e) {
@@ -88,9 +116,6 @@ public class dongSelect extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
-		JSONObject jObj = new JSONObject();
-		jObj.put("aptList", aptList);
 		
 		response.setContentType("application/x-json; charset=utf-8");
 		response.getWriter().print(jObj);

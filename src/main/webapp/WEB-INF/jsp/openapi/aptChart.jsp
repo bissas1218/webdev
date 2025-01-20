@@ -172,15 +172,68 @@
 			data : {dongCode:val},
 			success:function(data){
 				
-			//	console.log('success '+data.dongList);
+			//	console.log('success '+data.leeList.length);
+				
+				// 리가 존재할 경우
+				if(data.leeList != null){
+					
+					$("#leeCode").show();
+					
+					//console.log('success '+data.leeList.length);
+					$("select[name='leeCode'] option").remove();
+					$("#leeCode").append("<option value=''>==선택==</option>");
+					
+					$("select[name='aptList'] option").remove();
+					$("#aptList").append("<option value=''>==선택==</option>");
+					
+					for(var i=0; i<data.leeList.length; i++){
+				//		console.log(data.dongList[i].name);
+						$("#leeCode").append("<option value='"+data.leeList[i].code+"'>"+data.leeList[i].name+"</option>");
+					}
+			
+				}else{
+					
+					$("select[name='leeCode'] option").remove();
+					$("#leeCode").append("<option value=''>==선택==</option>");
+					$("#leeCode").hide();
+					
+					$("select[name='aptList'] option").remove();
+					$("#aptList").append("<option value=''>==선택==</option>");
+					
+					for(var i=0; i<data.aptList.length; i++){
+				//		console.log(data.dongList[i].name);
+						$("#aptList").append("<option value='"+data.aptList[i].code+"'>"+data.aptList[i].name+"</option>");
+					}
+				}
+				
+			},
+			error:function(request, status, error){
+				console.log('error!!!'+error);
+			}
+		})
+	}
+	
+	function leeChange(val){
+		console.log(val);
+		
+		deletedraw();
+		
+		$.ajax({
+			type: 'get',
+			url: '/dongSelect',
+			data : {dongCode:val},
+			success:function(data){
+				
 				$("select[name='aptList'] option").remove();
 				
 				$("#aptList").append("<option value=''>==선택==</option>");
 				
-				for(var i=0; i<data.aptList.length; i++){
-			//		console.log(data.dongList[i].name);
-					$("#aptList").append("<option value='"+data.aptList[i].code+"'>"+data.aptList[i].name+"</option>");
+				if(data.aptList != null){
+					for(var i=0; i<data.aptList.length; i++){
+						$("#aptList").append("<option value='"+data.aptList[i].code+"'>"+data.aptList[i].name+"</option>");
+					}
 				}
+				
 			},
 			error:function(request, status, error){
 				console.log('error!!!'+error);
@@ -286,6 +339,10 @@
 </select>
 
 <select name="dongCode" id="dongCode" onchange="dongChange(this.value);">
+<option value="">==선택==</option>
+</select>
+
+<select name="leeCode" id="leeCode" onchange="leeChange(this.value);" style="display:none;">
 <option value="">==선택==</option>
 </select>
 
