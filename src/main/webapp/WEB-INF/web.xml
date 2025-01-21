@@ -19,4 +19,14 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>dataInsertAll</display-name>
+    <servlet-name>dataInsertAll</servlet-name>
+    <servlet-class>aptChart.dataInsertAll</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>dataInsertAll</servlet-name>
+    <url-pattern>/dataInsertAll</url-pattern>
+  </servlet-mapping>
 </web-app>

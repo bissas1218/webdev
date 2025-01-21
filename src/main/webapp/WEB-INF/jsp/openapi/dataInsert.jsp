@@ -9,6 +9,21 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+<style type="text/css">
+
+html{
+	margin:0;
+	padding:0;
+}
+
+body{
+	font-size:10pt;
+	margin:0;
+	padding:0;
+}
+
+</style>
+
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
 <script type="text/javascript">
@@ -25,14 +40,18 @@ function submit(lawdCd){
 }
 
 function submitAll(lawdCd){
+	
 	var form = document.getElementById("dataInsertAllFrm");
 	var insertDate = document.getElementById("insertDate");
-	alert(insertDate.value+' '+lawdCd);
+	//alert(insertDate.value+' '+lawdCd);
 	
-	//form.dealYmd.value=insertDate.value;
-	//form.lawdCd.value=lawdCd;
+	form.dealYmd.value=insertDate.value;
+	form.lawdCd.value=lawdCd;
 	
-	//form.submit();	
+	form.submit();	
+	
+	$("#wrap").children().prop("disabled", true);
+	$("#wrap").children().children().prop("disabled", true);
 }
 
 function search(){
@@ -86,6 +105,8 @@ function next_month(){
 </head>
 <body>
 
+<div id="wrap">
+
 <input type="text" name="insertDate" id="insertDate" value="<c:out value="${cur_date}"  />" />
 <input type="button" onclick="search();" value="조회" />
 <input type="button" onclick="prev_month();" value="Prev" />
@@ -96,7 +117,7 @@ function next_month(){
 
 	<c:if test="${fn:substring(dongCdList.code, 2, 9) eq '0000000' or dongCdList.code eq '3611000000'}">
 	
-	<c:out value="${dongCdList.name }" />[<c:out value="${fn:substring(dongCdList.code, 0, 5)}" />]
+	<div style="font-weight:bold;"><c:out value="${dongCdList.name }" />[<c:out value="${fn:substring(dongCdList.code, 0, 5)}" />]
 	
 		<!-- 세종이 아닐경우 -->
 		<c:if test="${dongCdList.code ne '3611000000' }"> 
@@ -104,13 +125,19 @@ function next_month(){
 			type="button" value="삭제 후 저장" onclick="submitAll('<c:out value="${fn:substring(dongCdList.code,0,5) }" />');" />
 		</c:if>
 		
+		 
 		<!-- 세종일 경우 -->
 		<c:if test="${dongCdList.code eq '3611000000' }">
 			(<c:out value="${sejongCnt }"/>)
 			<c:if test="${sejongCnt eq '0'}">
 				<input type="button" value="저장" onclick="submit('<c:out value="${fn:substring(dongCdList.code,0,5) }" />');" />
 			</c:if>
+			<c:if test="${sejongCnt > 0}">
+				<input name="<c:out value="${fn:substring(dongCdList.code,0,2) }" />" id="<c:out value="${fn:substring(dongCdList.code,0,2) }" />" 
+					type="button" value="삭제 후 저장" onclick="submitAll('<c:out value="${fn:substring(dongCdList.code,0,5) }" />');" />
+			</c:if>
 		</c:if><br/>
+		</div>
 		
 		<!-- 군구 출력 -->
 		<c:set var="index" value="1" />
@@ -153,6 +180,8 @@ function next_month(){
 <input type="hidden" name="dealYmd" id="dealYmd" />
 <input type="hidden" name="lawdCd" id="lawdCd" />
 </form>
+
+</div>
 
 </body>
 </html>

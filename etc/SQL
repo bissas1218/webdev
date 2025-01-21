@@ -30,7 +30,11 @@ CREATE TABLE `apt_30000` (
   `apt_dong` varchar(400) DEFAULT NULL COMMENT '아파트 동명',
   `sler_gbn` varchar(100) DEFAULT NULL COMMENT '매도자',
   `buyer_gbn` varchar(100) DEFAULT NULL COMMENT '매수자',
-  `land_leasehold_gbn` varchar(1) DEFAULT NULL COMMENT '토지임대부 아파트 여부'
+  `land_leasehold_gbn` varchar(1) DEFAULT NULL COMMENT '토지임대부 아파트 여부',
+  KEY `apt_30000_sgg_cd_IDX` (`sgg_cd`) USING BTREE,
+  KEY `apt_30000_apt_seq_IDX` (`apt_seq`) USING BTREE,
+  KEY `apt_30000_deal_year_IDX` (`deal_year`) USING BTREE,
+  KEY `apt_30000_deal_month_IDX` (`deal_month`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 CREATE TABLE `dong_code` (
