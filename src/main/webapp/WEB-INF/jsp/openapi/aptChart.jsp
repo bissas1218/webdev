@@ -53,290 +53,451 @@
 	// 시도변경
 	function sidoChange(val){
 		
-		console.log( val );
+		//console.log( val );
 		
 		deletedraw();
 
-		// 구에 데이터삽입
-		$.ajax({
-			type: 'get',
-			url: '/sidoSelect',
-		//	dataType: 'text',
-			data : {sidoCode:val},
-			success:function(data){
-				
-				//console.log('success '+data.guList);
-				$("select[name='guCode'] option").remove();
-				$("select[name='dongCode'] option").remove();
-				$("select[name='aptList'] option").remove();
-				
-				$("#guCode").append("<option value=''>==선택==</option>");
-				$("#dongCode").append("<option value=''>==선택==</option>");
-				$("#aptList").append("<option value=''>==선택==</option>");
-				
-				
-				for(var i=0; i<data.guList.length; i++){
-					//console.log(data.guList[i].name);
-					$("#guCode").append("<option value='"+data.guList[i].code+"'>"+data.guList[i].name+"</option>");
-				}
-			},
-			error:function(request, status, error){
-				console.log('error!!!'+error);
-			}
-		});
-		
-		// 시도 거래금액 조회
-		$.ajax({
-			type: 'get',
-			url: '/sidoDealAmount',
-		//	dataType: 'text',
-			data : {sidoCode:val},
-			beforeSend:function(){
-				$('#loading_spinner').show();
-			},
-			success:function(data){
-				
-				// line chart
-				aptDealAmtLineChart.data.labels = data.dealDate2;
-				
-				const dataset2 = [{
-				      label: $("#sidoCode option:selected").text(),
-				      data: data.dealAmountSum,
-				      borderColor: 'rgb('+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+')',
-				      fill: false,
-				      tension: 0.4
-				    }];
-				
-				aptDealAmtLineChart.data.datasets = dataset2;
-				aptDealAmtLineChart.options.plugins.title.text = $("#sidoCode option:selected").text() + ' 아파트 실거래가';
-				aptDealAmtLineChart.update();
-				
-				/* bar chart */
-				aptDealCntChart.data.labels = data.dealDate2;
-				aptDealCntChart.data.datasets = [{
-				        label: $("#sidoCode option:selected").text() + ' 아파트 월별 거래량',
-				        data: data.monthDealCnt,
-				        borderWidth: 1
-				      }];
-				aptDealCntChart.update();
-				
-			},
-			error:function(request, status, error){
-				console.log('error!!!'+error);
-			},
-			complete:function(){
-				$('#loading_spinner').hide();
-			}
-		});
-	}
-	
-	// 구변경
-	function guChange(val){
-		console.log(val);
-		
-		deletedraw();
-		
-		$.ajax({
-			type: 'get',
-			url: '/guSelect',
-		//	dataType: 'text',
-			data : {guCode:val},
-			success:function(data){
-				
-			//	console.log('success '+data.dongList);
-				$("select[name='dongCode'] option").remove();
-				$("select[name='aptList'] option").remove();
-				
-				$("#dongCode").append("<option value=''>==선택==</option>");
-				$("#aptList").append("<option value=''>==선택==</option>");
-				
-				for(var i=0; i<data.dongList.length; i++){
-			//		console.log(data.dongList[i].name);
-					$("#dongCode").append("<option value='"+data.dongList[i].code+"'>"+data.dongList[i].name+"</option>");
-				}
-			},
-			error:function(request, status, error){
-				console.log('error!!!'+error);
-			}
-		});
-		
-		// 구 거래금액 조회
-		$.ajax({
-			type: 'get',
-			url: '/guDealAmount',
-		//	dataType: 'text',
-			data : {guCode:val},
-			beforeSend:function(){
-				$('#loading_spinner').show();
-			},
-			success:function(data){
-				
-				// line chart
-				aptDealAmtLineChart.data.labels = data.dealDate2;
-				
-				const dataset2 = [{
-				      label: $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text(),
-				      data: data.dealAmountSum,
-				      borderColor: 'rgb('+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+')',
-				      fill: false,
-				      tension: 0.4
-				    }];
-				
-				aptDealAmtLineChart.data.datasets = dataset2;
-				aptDealAmtLineChart.options.plugins.title.text = $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' 아파트 실거래가';
-				aptDealAmtLineChart.update();
-				
-				/* bar chart */
-				aptDealCntChart.data.labels = data.dealDate2;
-				aptDealCntChart.data.datasets = [{
-				        label: $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' 아파트 월별 거래량',
-				        data: data.monthDealCnt,
-				        borderWidth: 1
-				      }];
-				aptDealCntChart.update();
-				
-			},
-			error:function(request, status, error){
-				console.log('error!!!'+error);
-			},
-			complete:function(){
-				$('#loading_spinner').hide();
-			}
-		});
-	}
-	
-	function dongChange(val){
-		console.log(val);
-		
-		deletedraw();
-		//var dongList = null;
-		
-		$.ajax({
-			type: 'get',
-			url: '/dongSelect',
-			data : {dongCode:val},
-			success:function(data){
-				
-			//	console.log('success '+data.leeList.length);
-				
-				// 리가 존재할 경우
-				if(data.leeList != null){
-					
-					$("#leeCode").show();
-					
-					//console.log('success '+data.leeList.length);
-					$("select[name='leeCode'] option").remove();
-					$("#leeCode").append("<option value=''>==선택==</option>");
-					
-					$("select[name='aptList'] option").remove();
-					$("#aptList").append("<option value=''>==선택==</option>");
-					
-					for(var i=0; i<data.leeList.length; i++){
-				//		console.log(data.dongList[i].name);
-						$("#leeCode").append("<option value='"+data.leeList[i].code+"'>"+data.leeList[i].name+"</option>");
-					}
+		if(val == ''){
 			
-				}else{
+			$("select[name='guCode'] option").remove();
+			$("select[name='dongCode'] option").remove();
+			$("select[name='aptList'] option").remove();
+			
+			$("#guCode").append("<option value=''>==선택==</option>");
+			$("#dongCode").append("<option value=''>==선택==</option>");
+			$("#aptList").append("<option value=''>==선택==</option>");
+			
+			$("select[name='leeCode'] option").remove();
+			$("#leeCode").append("<option value=''>==선택==</option>");
+			$("#leeCode").hide();
+			
+		}else{
+			
+			// 구에 데이터삽입
+			$.ajax({
+				type: 'get',
+				url: '/sidoSelect',
+			//	dataType: 'text',
+				data : {sidoCode:val},
+				success:function(data){
+					
+					//console.log('success '+data.guList);
+					$("select[name='guCode'] option").remove();
+					$("select[name='dongCode'] option").remove();
+					$("select[name='aptList'] option").remove();
+					
+					$("#guCode").append("<option value=''>==선택==</option>");
+					$("#dongCode").append("<option value=''>==선택==</option>");
+					$("#aptList").append("<option value=''>==선택==</option>");
 					
 					$("select[name='leeCode'] option").remove();
 					$("#leeCode").append("<option value=''>==선택==</option>");
 					$("#leeCode").hide();
 					
-					$("select[name='aptList'] option").remove();
-					$("#aptList").append("<option value=''>==선택==</option>");
-					
-					for(var i=0; i<data.aptList.length; i++){
-				//		console.log(data.dongList[i].name);
-						$("#aptList").append("<option value='"+data.aptList[i].code+"'>"+data.aptList[i].name+"</option>");
+					for(var i=0; i<data.guList.length; i++){
+						//console.log(data.guList[i].name);
+						$("#guCode").append("<option value='"+data.guList[i].code+"'>"+data.guList[i].name+"</option>");
 					}
+				},
+				error:function(request, status, error){
+					console.log('error!!!'+error);
 				}
-				
-			},
-			error:function(request, status, error){
-				console.log('error!!!'+error);
-			}
-		})
+			});
+			
+			// 시도 거래금액 조회
+			$.ajax({
+				type: 'get',
+				url: '/sidoDealAmount',
+			//	dataType: 'text',
+				data : {sidoCode:val},
+				beforeSend:function(){
+					$('#loading_spinner').show();
+				},
+				success:function(data){
+					
+					// line chart
+					aptDealAmtLineChart.data.labels = data.dealDate2;
+					
+					const dataset2 = [{
+					      label: $("#sidoCode option:selected").text(),
+					      data: data.dealAmountSum,
+					      borderColor: 'rgb('+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+')',
+					      fill: false,
+					      tension: 0.4
+					    }];
+					
+					aptDealAmtLineChart.data.datasets = dataset2;
+					aptDealAmtLineChart.options.plugins.title.text = $("#sidoCode option:selected").text() + ' 아파트 실거래가';
+					aptDealAmtLineChart.update();
+					
+					/* bar chart */
+					aptDealCntChart.data.labels = data.dealDate2;
+					aptDealCntChart.data.datasets = [{
+					        label: $("#sidoCode option:selected").text() + ' 아파트 월별 거래량',
+					        data: data.monthDealCnt,
+					        borderWidth: 1
+					      }];
+					aptDealCntChart.update();
+					
+				},
+				error:function(request, status, error){
+					console.log('error!!!'+error);
+				},
+				complete:function(){
+					$('#loading_spinner').hide();
+				}
+			});
+			
+		}
+		
 	}
 	
-	function leeChange(val){
-		console.log(val);
+	// 구변경
+	function guChange(val){
+		//console.log(val);
 		
 		deletedraw();
 		
-		$.ajax({
-			type: 'get',
-			url: '/dongSelect',
-			data : {dongCode:val},
-			success:function(data){
-				
-				$("select[name='aptList'] option").remove();
-				
-				$("#aptList").append("<option value=''>==선택==</option>");
-				
-				if(data.aptList != null){
-					for(var i=0; i<data.aptList.length; i++){
-						$("#aptList").append("<option value='"+data.aptList[i].code+"'>"+data.aptList[i].name+"</option>");
+		if(val == ''){
+			
+			$("select[name='dongCode'] option").remove();
+			$("select[name='aptList'] option").remove();
+			
+			$("#dongCode").append("<option value=''>==선택==</option>");
+			$("#aptList").append("<option value=''>==선택==</option>");
+			
+			$("select[name='leeCode'] option").remove();
+			$("#leeCode").append("<option value=''>==선택==</option>");
+			$("#leeCode").hide();
+			
+		}else{
+			
+			$.ajax({
+				type: 'get',
+				url: '/guSelect',
+			//	dataType: 'text',
+				data : {guCode:val},
+				success:function(data){
+					
+				//	console.log('success '+data.dongList);
+					$("select[name='dongCode'] option").remove();
+					$("select[name='aptList'] option").remove();
+					
+					$("#dongCode").append("<option value=''>==선택==</option>");
+					$("#aptList").append("<option value=''>==선택==</option>");
+					
+					$("select[name='leeCode'] option").remove();
+					$("#leeCode").append("<option value=''>==선택==</option>");
+					$("#leeCode").hide();
+					
+					for(var i=0; i<data.dongList.length; i++){
+				//		console.log(data.dongList[i].name);
+						$("#dongCode").append("<option value='"+data.dongList[i].code+"'>"+data.dongList[i].name+"</option>");
 					}
+				},
+				error:function(request, status, error){
+					console.log('error!!!'+error);
 				}
+			});
+			
+			// 구 거래금액 조회
+			$.ajax({
+				type: 'get',
+				url: '/guDealAmount',
+			//	dataType: 'text',
+				data : {guCode:val},
+				beforeSend:function(){
+					$('#loading_spinner').show();
+				},
+				success:function(data){
+					
+					// line chart
+					aptDealAmtLineChart.data.labels = data.dealDate2;
+					
+					const dataset2 = [{
+					      label: $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text(),
+					      data: data.dealAmountSum,
+					      borderColor: 'rgb('+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+')',
+					      fill: false,
+					      tension: 0.4
+					    }];
+					
+					aptDealAmtLineChart.data.datasets = dataset2;
+					aptDealAmtLineChart.options.plugins.title.text = $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' 아파트 실거래가';
+					aptDealAmtLineChart.update();
+					
+					/* bar chart */
+					aptDealCntChart.data.labels = data.dealDate2;
+					aptDealCntChart.data.datasets = [{
+					        label: $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' 아파트 월별 거래량',
+					        data: data.monthDealCnt,
+					        borderWidth: 1
+					      }];
+					aptDealCntChart.update();
+					
+				},
+				error:function(request, status, error){
+					console.log('error!!!'+error);
+				},
+				complete:function(){
+					$('#loading_spinner').hide();
+				}
+			});
+			
+		}
+	}
+	
+	// 동선택
+	function dongChange(val){
+		//console.log(val+', '+$("#dongCode option:selected").text());
+		
+		deletedraw();
+		//var dongList = null;
+		
+		if(val == ''){
+			
+			$("select[name='aptList'] option").remove();
+			$("#aptList").append("<option value=''>==선택==</option>");
+			
+			$("select[name='leeCode'] option").remove();
+			$("#leeCode").append("<option value=''>==선택==</option>");
+			$("#leeCode").hide();
+			
+		}else{
+			
+			$.ajax({
+				type: 'get',
+				url: '/dongSelect',
+				data : {dongCode:val, dongNm:$("#dongCode option:selected").text()},
+				success:function(data){
+					
+				//	console.log('success '+data.leeList.length);
+					
+					// 리가 존재할 경우
+					if(data.leeList != null){
+						
+						$("#leeCode").show();
+						
+						//console.log('success '+data.leeList.length);
+						$("select[name='leeCode'] option").remove();
+						$("#leeCode").append("<option value=''>==선택==</option>");
+						
+						$("select[name='aptList'] option").remove();
+						$("#aptList").append("<option value=''>==선택==</option>");
+						
+						for(var i=0; i<data.leeList.length; i++){
+					//		console.log(data.dongList[i].name);
+							$("#leeCode").append("<option value='"+data.leeList[i].code+"'>"+data.leeList[i].name+"</option>");
+						}
 				
-			},
-			error:function(request, status, error){
-				console.log('error!!!'+error);
-			}
-		})
+						// 읍,면 거래금액 조회
+						$.ajax({
+							type: 'get',
+							url: '/eupDealAmount',
+							data : {eupCode:val},
+							beforeSend:function(){
+								$('#loading_spinner').show();
+							},
+							success:function(data){
+								
+								console.log(data);
+								
+								/* line chart*/
+								aptDealAmtLineChart.data.labels = data.dealDate2;
+								
+								const dataset2 = [{
+								      label: $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' ' + $("#dongCode option:selected").text(),
+								      data: data.dealAmountSum,
+								      borderColor: 'rgb('+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+')',
+								      fill: false,
+								      tension: 0.4
+								    }];
+								
+								aptDealAmtLineChart.data.datasets = dataset2;
+								aptDealAmtLineChart.options.plugins.title.text = $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' ' + $("#dongCode option:selected").text() + ' 아파트 실거래가';
+								aptDealAmtLineChart.update(); 
+								
+								/* bar chart */
+								aptDealCntChart.data.labels = data.dealDate2;
+								aptDealCntChart.data.datasets = [{
+								        label: $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' ' + $("#dongCode option:selected").text() + ' 아파트 월별 거래량',
+								        data: data.monthDealCnt,
+								        borderWidth: 1
+								      }];
+								aptDealCntChart.update();
+								
+							},
+							error:function(request, status, error){
+								console.log('error!!!'+error);
+							},
+							complete:function(){
+								$('#loading_spinner').hide();
+							}
+						});
+						
+					}else{
+						
+						$("select[name='leeCode'] option").remove();
+						$("#leeCode").append("<option value=''>==선택==</option>");
+						$("#leeCode").hide();
+						
+						$("select[name='aptList'] option").remove();
+						$("#aptList").append("<option value=''>==선택==</option>");
+						
+						for(var i=0; i<data.aptList.length; i++){
+					//		console.log(data.dongList[i].name);
+							$("#aptList").append("<option value='"+data.aptList[i].code+"'>"+data.aptList[i].name+"</option>");
+						}
+						
+						// 동 거래금액 조회
+						$.ajax({
+							type: 'get',
+							url: '/dongDealAmount',
+							data : {dongCode:val},
+							beforeSend:function(){
+								$('#loading_spinner').show();
+							},
+							success:function(data){
+								
+								console.log(data);
+								
+								/* line chart*/
+								aptDealAmtLineChart.data.labels = data.dealDate2;
+								
+								const dataset2 = [{
+								      label: $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' ' + $("#dongCode option:selected").text(),
+								      data: data.dealAmountSum,
+								      borderColor: 'rgb('+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+')',
+								      fill: false,
+								      tension: 0.4
+								    }];
+								
+								aptDealAmtLineChart.data.datasets = dataset2;
+								aptDealAmtLineChart.options.plugins.title.text = $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' ' + $("#dongCode option:selected").text() + ' 아파트 실거래가';
+								aptDealAmtLineChart.update(); 
+								
+								/* bar chart */
+								aptDealCntChart.data.labels = data.dealDate2;
+								aptDealCntChart.data.datasets = [{
+								        label: $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' ' + $("#dongCode option:selected").text() + ' 아파트 월별 거래량',
+								        data: data.monthDealCnt,
+								        borderWidth: 1
+								      }];
+								aptDealCntChart.update();
+								
+							},
+							error:function(request, status, error){
+								console.log('error!!!'+error);
+							},
+							complete:function(){
+								$('#loading_spinner').hide();
+							}
+						});
+					}
+					
+				},
+				error:function(request, status, error){
+					console.log('error!!!'+error);
+				}
+			});
+			
+		}
+		
+	}
+	
+	function leeChange(val){
+		//console.log(val);
+		
+		deletedraw();
+		
+		if(val == ''){
+			
+			$("select[name='aptList'] option").remove();
+			$("#aptList").append("<option value=''>==선택==</option>");
+			
+		}else{
+			
+			$.ajax({
+				type: 'get',
+				url: '/dongSelect',
+				data : {dongCode:val},
+				success:function(data){
+					
+					$("select[name='aptList'] option").remove();
+					
+					$("#aptList").append("<option value=''>==선택==</option>");
+					
+					if(data.aptList != null){
+						for(var i=0; i<data.aptList.length; i++){
+							$("#aptList").append("<option value='"+data.aptList[i].code+"'>"+data.aptList[i].name+"</option>");
+						}
+					}
+					
+				},
+				error:function(request, status, error){
+					console.log('error!!!'+error);
+				}
+			});
+		}
+		
 	}
 	
 	function aptChange(val){
 
 		deletedraw();
 		
-		$.ajax({
-			type: 'get',
-			url: '/aptDealAmountList',
-			data : {aptSeq:val},
-			beforeSend:function(){
-				$('#loading_spinner').show();
-			},
-			success:function(data){
-				
-				// line chart
-				aptDealAmtLineChart.data.labels = data.dealDate2;
-				
-				const dataset2 = [];
-				
-				for(var i=0; i<data.excluUseAr.length; i++){
+		if(val == ''){
+			
+		}else{
+			
+			$.ajax({
+				type: 'get',
+				url: '/aptDealAmountList',
+				data : {aptSeq:val},
+				beforeSend:function(){
+					$('#loading_spinner').show();
+				},
+				success:function(data){
 					
-					dataset2.push({
-					      label: data.excluUseAr[i] + '㎡ (' + Math.floor(data.excluUseAr[i]/3.3) + '평)',
-					      data: data.dealAmount[i],
-					      borderColor: 'rgb('+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+')',
-					      fill: false,
-					      tension: 0.9
-					    });
+					// line chart
+					aptDealAmtLineChart.data.labels = data.dealDate2;
+					
+					const dataset2 = [];
+					
+					for(var i=0; i<data.excluUseAr.length; i++){
+						
+						dataset2.push({
+						      label: data.excluUseAr[i] + '㎡ (' + Math.floor(data.excluUseAr[i]/3.3) + '평)',
+						      data: data.dealAmount[i],
+						      borderColor: 'rgb('+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+')',
+						      fill: false,
+						      tension: 0.9
+						    });
+					}
+						
+					aptDealAmtLineChart.data.datasets = dataset2;
+					aptDealAmtLineChart.options.plugins.title.text = $("#aptList option:selected").text() + ' 아파트 실거래가';
+					aptDealAmtLineChart.update();
+					
+					// bar chart
+					aptDealCntChart.data.labels = data.dealDate2;
+					aptDealCntChart.data.datasets = [{
+					        label: $("#aptList option:selected").text() + ' 아파트 월별 거래량',
+					        data: data.monthDealCnt,
+					        borderWidth: 1
+					      }];
+					aptDealCntChart.update();
+					
+				},
+				error:function(request, status, error){ 
+					console.log('error!!!'+error);
+				},
+				complete:function(){
+					$('#loading_spinner').hide();
 				}
-					
-				aptDealAmtLineChart.data.datasets = dataset2;
-				aptDealAmtLineChart.options.plugins.title.text = $("#aptList option:selected").text() + ' 아파트 실거래가';
-				aptDealAmtLineChart.update();
-				
-				// bar chart
-				aptDealCntChart.data.labels = data.dealDate2;
-				aptDealCntChart.data.datasets = [{
-				        label: $("#aptList option:selected").text() + ' 아파트 월별 거래량',
-				        data: data.monthDealCnt,
-				        borderWidth: 1
-				      }];
-				aptDealCntChart.update();
-				
-			},
-			error:function(request, status, error){ 
-				console.log('error!!!'+error);
-			},
-			complete:function(){
-				$('#loading_spinner').hide();
-			}
-		})
-		
+			});
+			
+		}
 		
 	}
 	

@@ -20,14 +20,14 @@ import org.json.JSONObject;
 /**
  * Servlet implementation class sidoDealAmount
  */
-@WebServlet("/guDealAmount")
-public class guDealAmount extends HttpServlet {
+@WebServlet("/dongDealAmount")
+public class dongDealAmount extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public guDealAmount() {
+    public dongDealAmount() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,7 +42,11 @@ public class guDealAmount extends HttpServlet {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String guCode = request.getParameter("guCode").substring(0,5);
+		
+		String guCode = request.getParameter("dongCode").substring(0,5);
+		String dongCode = request.getParameter("dongCode").substring(5,10);
+		//System.out.println(request.getParameter("dongCode")+", "+guCode+", "+dongCode);
+		
 		JSONObject jObj = new JSONObject();
 		
 		String table_nm = "";
@@ -55,10 +59,11 @@ public class guDealAmount extends HttpServlet {
 		try {
 			
 			// 기간구하기
-			String sql = "select deal_year , deal_month from apt_"+table_nm+" where sgg_cd = ? group by deal_year , deal_month order by cast(deal_year as unsigned) asc, cast(deal_month as unsigned) asc";
-			//System.out.println(table_nm+", "+guCode);
+			String sql = "select deal_year , deal_month from apt_"+table_nm+" where sgg_cd = ? and umd_cd = ? group by deal_year , deal_month order by cast(deal_year as unsigned) asc, cast(deal_month as unsigned) asc";
+			//System.out.println(table_nm+", "+dongCode);
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, guCode);
+			pstmt.setString(2, dongCode);
 			rs = pstmt.executeQuery();
 			
 			List<String> dealDate = new ArrayList<String>();
@@ -98,11 +103,12 @@ public class guDealAmount extends HttpServlet {
 			for(int s=0; s<dealDate.size(); s++) {
 				//System.out.println(dealDate.get(s));
 				
-				sql = "select sum(replace(deal_amount,',','')) sum_deal_amt from apt_"+table_nm+" where sgg_cd = ? and deal_year = ? and deal_month = ?";
+				sql = "select sum(replace(deal_amount,',','')) sum_deal_amt from apt_"+table_nm+" where sgg_cd = ? and umd_cd = ? and deal_year = ? and deal_month = ?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, guCode);
-				pstmt.setString(2, dealDate.get(s).substring(0,4));
-				pstmt.setInt(3, Integer.parseInt(dealDate.get(s).substring(4,6)));
+				pstmt.setString(2, dongCode);
+				pstmt.setString(3, dealDate.get(s).substring(0,4));
+				pstmt.setInt(4, Integer.parseInt(dealDate.get(s).substring(4,6)));
 				rs = pstmt.executeQuery();
 				rs.next();
 				//System.out.println(dealDate.get(s).substring(0,4)+", "+Integer.parseInt(dealDate.get(s).substring(4,6)));
@@ -116,11 +122,12 @@ public class guDealAmount extends HttpServlet {
 			for(int s=0; s<dealDate.size(); s++) {
 				//System.out.println(dealDate.get(s));
 				
-				sql = "select count(*) from apt_"+table_nm+" where sgg_cd = ? and deal_year = ? and deal_month = ?";
+				sql = "select count(*) from apt_"+table_nm+" where sgg_cd = ? and umd_cd = ? and deal_year = ? and deal_month = ?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, guCode);
-				pstmt.setString(2, dealDate.get(s).substring(0,4));
-				pstmt.setInt(3, Integer.parseInt(dealDate.get(s).substring(4,6)));
+				pstmt.setString(2, dongCode);
+				pstmt.setString(3, dealDate.get(s).substring(0,4));
+				pstmt.setInt(4, Integer.parseInt(dealDate.get(s).substring(4,6)));
 				rs = pstmt.executeQuery();
 				rs.next();
 				//System.out.println(rs.getString(1));

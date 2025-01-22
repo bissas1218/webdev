@@ -37,7 +37,7 @@ public class dongSelect extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		//System.out.println(request.getParameter("dongCode").substring(0,5)+" "+request.getParameter("dongCode").substring(5,10));
+		//System.out.println(request.getParameter("dongNm")+",, "+request.getParameter("dongCode").substring(0,5)+" "+request.getParameter("dongCode").substring(5,10));
 		
 		DBConnection dbconn = new DBConnection();
 		Connection con = dbconn.dbConn();
@@ -46,6 +46,7 @@ public class dongSelect extends HttpServlet {
 		
 		List<DongCodeVO> aptList = new ArrayList<DongCodeVO>();
 		String dongCode = request.getParameter("dongCode");
+		String dongNm = request.getParameter("dongNm");
 		String dongCode1 = request.getParameter("dongCode").substring(0,5);
 		String dongCode2 = request.getParameter("dongCode").substring(5,10);
 		//System.out.println(dongCode2.substring(2,5));
@@ -60,9 +61,10 @@ public class dongSelect extends HttpServlet {
 		JSONObject jObj = new JSONObject();
 		
 		try {
+		//	System.out.println(dongNm.length()+", "+dongNm.substring(dongNm.length()-1));
 			
 			// 읍, 면일 경우 리 조회
-			if(dongCode2.substring(2,5).equals("000")) {
+			if(dongNm != null && ( dongNm.substring(dongNm.length()-1).equals("읍") || dongNm.substring(dongNm.length()-1).equals("면"))) { 
 				
 				List<DongCodeVO> leeList = new ArrayList<DongCodeVO>();
 				String sql = "select code, substring_index(name, ' ', -1) dong from dong_code where code like '"+dongCode.substring(0,7)+"%' and code != '"+dongCode+"' and use_yn = 'Y' order by dong";
