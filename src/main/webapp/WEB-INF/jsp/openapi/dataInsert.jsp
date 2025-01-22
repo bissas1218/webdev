@@ -117,7 +117,7 @@ function next_month(){
 
 	<c:if test="${fn:substring(dongCdList.code, 2, 9) eq '0000000' or dongCdList.code eq '3611000000'}">
 	
-	<div style="font-weight:bold;"><c:out value="${dongCdList.name }" />[<c:out value="${fn:substring(dongCdList.code, 0, 5)}" />]
+	<div style="font-weight:bold;" id="sidoNm"><c:out value="${dongCdList.name }" />[<c:out value="${fn:substring(dongCdList.code, 0, 5)}" />]
 	
 		<!-- 세종이 아닐경우 -->
 		<c:if test="${dongCdList.code ne '3611000000' }"> 
@@ -154,7 +154,7 @@ function next_month(){
 				[<c:out value="${fn:substring(dongCdList2.code,0,5) }" />]
 				(<c:out value="${dongCdList2.cnt }" />)
 				<c:if test="${dongCdList2.cnt eq -1 }">
-				<script>$("#"+${fn:substring(dongCdList2.code,0,2)}).hide();</script>
+				<script> $("#"+${fn:substring(dongCdList2.code,0,2)}).hide(); </script>
 				</c:if>
 				<c:if test="${dongCdList2.cnt eq '0'}">
 				<input type="button" value="저장" onclick="submit('<c:out value="${fn:substring(dongCdList2.code,0,5) }" />');" />

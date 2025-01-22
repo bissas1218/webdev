@@ -130,6 +130,7 @@
 		});
 	}
 	
+	// 구변경
 	function guChange(val){
 		console.log(val);
 		
@@ -157,7 +158,51 @@
 			error:function(request, status, error){
 				console.log('error!!!'+error);
 			}
-		})
+		});
+		
+		// 구 거래금액 조회
+		$.ajax({
+			type: 'get',
+			url: '/guDealAmount',
+		//	dataType: 'text',
+			data : {guCode:val},
+			beforeSend:function(){
+				$('#loading_spinner').show();
+			},
+			success:function(data){
+				
+				// line chart
+				aptDealAmtLineChart.data.labels = data.dealDate2;
+				
+				const dataset2 = [{
+				      label: $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text(),
+				      data: data.dealAmountSum,
+				      borderColor: 'rgb('+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+')',
+				      fill: false,
+				      tension: 0.4
+				    }];
+				
+				aptDealAmtLineChart.data.datasets = dataset2;
+				aptDealAmtLineChart.options.plugins.title.text = $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' 아파트 실거래가';
+				aptDealAmtLineChart.update();
+				
+				/* bar chart */
+				aptDealCntChart.data.labels = data.dealDate2;
+				aptDealCntChart.data.datasets = [{
+				        label: $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' 아파트 월별 거래량',
+				        data: data.monthDealCnt,
+				        borderWidth: 1
+				      }];
+				aptDealCntChart.update();
+				
+			},
+			error:function(request, status, error){
+				console.log('error!!!'+error);
+			},
+			complete:function(){
+				$('#loading_spinner').hide();
+			}
+		});
 	}
 	
 	function dongChange(val){
