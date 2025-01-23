@@ -45,6 +45,16 @@ public class aptDealAmountList extends HttpServlet {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
+		String searchStartYear = request.getParameter("searchStartYear");
+		String searchStartMonth = request.getParameter("searchStartMonth");
+		String searchEndYear = request.getParameter("searchEndYear");
+		String searchEndMonth = request.getParameter("searchEndMonth");
+		if(searchStartMonth.length()==1) {
+			searchStartMonth = "0"+searchStartMonth;
+		}
+		if(searchEndMonth.length()==1) {
+			searchEndMonth = "0"+searchEndMonth;
+		}
 		
 		JSONObject jObj = new JSONObject();
 		
@@ -59,9 +69,15 @@ public class aptDealAmountList extends HttpServlet {
 		try {
 			
 			// 면적구하기 ㎡
-			String sql = "select exclu_use_ar from apt_"+table_nm+" where apt_seq = ? group by exclu_use_ar order by cast(exclu_use_ar as unsigned) asc";
+			String sql = "select exclu_use_ar from apt_"+table_nm+" where apt_seq = ? "
+					+ "and date(concat(deal_year, if(length(deal_month) = 1, concat('0', deal_month), deal_month), '01')) between concat(?,'-',?,'-01') and concat(?,'-',?,'-01') "
+					+ "group by exclu_use_ar order by cast(exclu_use_ar as unsigned) asc";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, aptSeq);
+			pstmt.setString(2, searchStartYear);
+			pstmt.setString(3, searchStartMonth);
+			pstmt.setString(4, searchEndYear);
+			pstmt.setString(5, searchEndMonth);
 			rs = pstmt.executeQuery();
 			
 			List<String> excluUseAr = new ArrayList<String>();
@@ -73,9 +89,15 @@ public class aptDealAmountList extends HttpServlet {
 			jObj.put("excluUseAr", excluUseAr);
 			
 			// 기간구하기
-			sql = "select deal_year , deal_month from apt_"+table_nm+" where apt_seq = ? group by deal_year , deal_month order by cast(deal_year as unsigned) asc, cast(deal_month as unsigned) asc";
+			sql = "select deal_year , deal_month from apt_"+table_nm+" where apt_seq = ? "
+					+ "and date(concat(deal_year, if(length(deal_month) = 1, concat('0', deal_month), deal_month), '01')) between concat(?,'-',?,'-01') and concat(?,'-',?,'-01') "
+					+ "group by deal_year , deal_month order by cast(deal_year as unsigned) asc, cast(deal_month as unsigned) asc";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, aptSeq);
+			pstmt.setString(2, searchStartYear);
+			pstmt.setString(3, searchStartMonth);
+			pstmt.setString(4, searchEndYear);
+			pstmt.setString(5, searchEndMonth);
 			rs = pstmt.executeQuery();
 			
 			List<String> dealDate = new ArrayList<String>();
@@ -119,7 +141,8 @@ public class aptDealAmountList extends HttpServlet {
 				
 				for(int j=0; j<dealDate.size(); j++) {
 					
-					sql = "select avg(replace(deal_amount,',','')) avg_deal_amt from apt_"+table_nm+" where apt_seq = ? and deal_year = ? and deal_month = ? and exclu_use_ar = ?";
+					sql = "select avg(replace(deal_amount,',','')) avg_deal_amt from apt_"+table_nm+" "
+							+ "where apt_seq = ? and deal_year = ? and deal_month = ? and exclu_use_ar = ?";
 					pstmt = con.prepareStatement(sql);
 					pstmt.setString(1, aptSeq);
 					pstmt.setString(2, dealDate.get(j).substring(0,4));

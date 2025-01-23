@@ -14,6 +14,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,17 +57,33 @@ public class aptChart extends HttpServlet {
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
-			List<DongCodeVO> dongCdList = new ArrayList<DongCodeVO>();
+			List<DongCodeVO> sidoCdList = new ArrayList<DongCodeVO>();
 			
 			while(rs.next()) {
 				//System.out.println(rs.getString(1)+" "+rs.getString(2));
 				DongCodeVO dongCdVO = new DongCodeVO();
 				dongCdVO.setCode(rs.getString(1));
 				dongCdVO.setName(rs.getString(2));
-				dongCdList.add(dongCdVO);
+				sidoCdList.add(dongCdVO);
 			}
 			
-			request.setAttribute("dongCdList", dongCdList);
+			request.setAttribute("sidoCdList", sidoCdList);
+			
+			// 현재 날짜 구하기 (시스템 시계, 시스템 타임존)        
+			LocalDate now = LocalDate.now();         
+			
+			// 현재 날짜 구하기(Paris)        
+			//LocalDate parisNow = LocalDate.now(ZoneId.of("Asia/Seoul"));         
+			
+			// 결과 출력        
+			ArrayList<Integer> yearList = new ArrayList<Integer>();
+			for(int i=0; i<20; i++) {
+				yearList.add(now.getYear());
+				now = now.minusYears(1);
+				//System.out.println(now.getYear());      // 2021-06-17      
+			}
+			
+			request.setAttribute("yearList", yearList);
 			
 		}catch(SQLException e) {
 			

@@ -43,8 +43,19 @@ public class sidoDealAmount extends HttpServlet {
 		ResultSet rs = null;
 		
 		String sidoCode = request.getParameter("sidoCode");
+		String searchStartYear = request.getParameter("searchStartYear");
+		String searchStartMonth = request.getParameter("searchStartMonth");
+		String searchEndYear = request.getParameter("searchEndYear");
+		String searchEndMonth = request.getParameter("searchEndMonth");
+		if(searchStartMonth.length()==1) {
+			searchStartMonth = "0"+searchStartMonth;
+		}
+		if(searchEndMonth.length()==1) {
+			searchEndMonth = "0"+searchEndMonth;
+		}
+		
 		JSONObject jObj = new JSONObject();
-		System.out.println(sidoCode);
+		//System.out.println(searchStartYear+searchStartMonth+"~"+searchEndYear+searchEndMonth);
 		
 		String table_nm = "";
 		if(sidoCode.substring(0,5).equals("36110")) {
@@ -56,8 +67,14 @@ public class sidoDealAmount extends HttpServlet {
 		try {
 			
 			// 기간구하기
-			String sql = "select deal_year , deal_month from apt_"+table_nm+" group by deal_year , deal_month order by cast(deal_year as unsigned) asc, cast(deal_month as unsigned) asc";
+			String sql = "select deal_year , deal_month from apt_"+table_nm+" "
+					+ "where date(concat(deal_year, if(length(deal_month) = 1, concat('0', deal_month), deal_month), '01')) between concat(?,'-',?,'-01') and concat(?,'-',?,'-01') "
+					+ "group by deal_year , deal_month order by cast(deal_year as unsigned) asc, cast(deal_month as unsigned) asc";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, searchStartYear);
+			pstmt.setString(2, searchStartMonth);
+			pstmt.setString(3, searchEndYear);
+			pstmt.setString(4, searchEndMonth);
 			rs = pstmt.executeQuery();
 			
 			List<String> dealDate = new ArrayList<String>();

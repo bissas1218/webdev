@@ -109,7 +109,10 @@
 				type: 'get',
 				url: '/sidoDealAmount',
 			//	dataType: 'text',
-				data : {sidoCode:val},
+				data : {sidoCode:val, searchStartYear:$("#searchStartYear option:selected").val()
+					, searchStartMonth:$("#searchStartMonth option:selected").val()
+					, searchEndYear:$("#searchEndYear option:selected").val()
+					, searchEndMonth:$("#searchEndMonth option:selected").val()},
 				beforeSend:function(){
 					$('#loading_spinner').show();
 				},
@@ -175,7 +178,6 @@
 			$.ajax({
 				type: 'get',
 				url: '/guSelect',
-			//	dataType: 'text',
 				data : {guCode:val},
 				success:function(data){
 					
@@ -205,7 +207,10 @@
 				type: 'get',
 				url: '/guDealAmount',
 			//	dataType: 'text',
-				data : {guCode:val},
+				data : {guCode:val, searchStartYear:$("#searchStartYear option:selected").val()
+					, searchStartMonth:$("#searchStartMonth option:selected").val()
+					, searchEndYear:$("#searchEndYear option:selected").val()
+					, searchEndMonth:$("#searchEndMonth option:selected").val()},
 				beforeSend:function(){
 					$('#loading_spinner').show();
 				},
@@ -353,7 +358,11 @@
 						$.ajax({
 							type: 'get',
 							url: '/dongDealAmount',
-							data : {dongCode:val},
+							data : {dongCode:val
+								, searchStartYear:$("#searchStartYear option:selected").val()
+								, searchStartMonth:$("#searchStartMonth option:selected").val()
+								, searchEndYear:$("#searchEndYear option:selected").val()
+								, searchEndMonth:$("#searchEndMonth option:selected").val()},
 							beforeSend:function(){
 								$('#loading_spinner').show();
 							},
@@ -453,7 +462,10 @@
 			$.ajax({
 				type: 'get',
 				url: '/aptDealAmountList',
-				data : {aptSeq:val},
+				data : {aptSeq:val, searchStartYear:$("#searchStartYear option:selected").val()
+					, searchStartMonth:$("#searchStartMonth option:selected").val()
+					, searchEndYear:$("#searchEndYear option:selected").val()
+					, searchEndMonth:$("#searchEndMonth option:selected").val()},
 				beforeSend:function(){
 					$('#loading_spinner').show();
 				},
@@ -522,6 +534,21 @@
 		
 	}
 	
+	function search_apt_deal(){
+		//alert( $("#sidoCode option:selected").val() );
+		if( $("#sidoCode option:selected").val() == '' ){
+			alert('시도를 선택하세요!');
+		}else if( $("#guCode option:selected").val() != '' && $("#dongCode option:selected").val() == ''){
+			guChange($("#guCode option:selected").val());
+		}else if( $("#dongCode option:selected").val() != '' && $("#aptList option:selected").val() == ''){
+			dongChange($("#dongCode option:selected").val());
+		}else if( $("#aptList option:selected").val() != ''){
+			aptChange($("#aptList option:selected").val());
+		}else{
+			sidoChange($("#sidoCode option:selected").val());
+		}
+	}
+	
 </script>
 
 </head>
@@ -533,10 +560,11 @@
     </div>
 </div>
 
+지역선택
 <select name="sidoCode" id="sidoCode" onchange="sidoChange(this.value);">
 	<option value="">==선택==</option>
-	<c:forEach items="${dongCdList}" var="dongCdList">
-	<option value="<c:out value="${dongCdList.code }" />"><c:out value="${dongCdList.name }" /></option>
+	<c:forEach items="${sidoCdList}" var="sidoCdList">
+	<option value="<c:out value="${sidoCdList.code }" />"><c:out value="${sidoCdList.name }" /></option>
 	</c:forEach>
 </select>
 
@@ -555,7 +583,54 @@
 <select name="aptList" id="aptList" onchange="aptChange(this.value);">
 <option value="">==선택==</option>
 </select>
+&nbsp;&nbsp;&nbsp;&nbsp;
 
+조회기간
+<select name="searchStartYear" id="searchStartYear">
+<c:forEach var="yearList" items="${yearList }" varStatus="test">
+	<option value="<c:out value="${yearList }"/>" <c:if test="${test.index eq 1 }">selected</c:if>><c:out value="${yearList }"/></option>
+</c:forEach>	
+</select>
+<select name="searchStartMonth" id="searchStartMonth">
+	<option value="1">1</option>
+	<option value="2">2</option>
+	<option value="3">3</option>
+	<option value="4">4</option>
+	<option value="5">5</option>
+	<option value="6">6</option>
+	<option value="7">7</option>
+	<option value="8">8</option>
+	<option value="9">9</option>
+	<option value="10">10</option>
+	<option value="11">11</option>
+	<option value="12">12</option>
+</select>
+~
+<select name="searchEndYear" id="searchEndYear">
+<c:forEach var="yearList" items="${yearList }">
+	<option value="<c:out value="${yearList }"/>"><c:out value="${yearList }"/></option>
+</c:forEach>
+</select>
+<select name="searchEndMonth" id="searchEndMonth">
+	<option value="1">1</option>
+	<option value="2">2</option>
+	<option value="3">3</option>
+	<option value="4">4</option>
+	<option value="5">5</option>
+	<option value="6">6</option>
+	<option value="7">7</option>
+	<option value="8">8</option>
+	<option value="9">9</option>
+	<option value="10">10</option>
+	<option value="11">11</option>
+	<option value="12">12</option>
+</select>
+
+<label id="aaa">
+<input type="checkbox" value="" name="" id="" class="aaa" />전체
+</label>
+
+<input type="button" onclick="search_apt_deal();" value="조회" />
 
 <canvas id="lineChart" height="70%"></canvas>
 

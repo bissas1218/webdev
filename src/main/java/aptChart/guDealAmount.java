@@ -43,6 +43,17 @@ public class guDealAmount extends HttpServlet {
 		ResultSet rs = null;
 		
 		String guCode = request.getParameter("guCode").substring(0,5);
+		String searchStartYear = request.getParameter("searchStartYear");
+		String searchStartMonth = request.getParameter("searchStartMonth");
+		String searchEndYear = request.getParameter("searchEndYear");
+		String searchEndMonth = request.getParameter("searchEndMonth");
+		if(searchStartMonth.length()==1) {
+			searchStartMonth = "0"+searchStartMonth;
+		}
+		if(searchEndMonth.length()==1) {
+			searchEndMonth = "0"+searchEndMonth;
+		}
+		
 		JSONObject jObj = new JSONObject();
 		
 		String table_nm = "";
@@ -55,10 +66,17 @@ public class guDealAmount extends HttpServlet {
 		try {
 			
 			// 기간구하기
-			String sql = "select deal_year , deal_month from apt_"+table_nm+" where sgg_cd = ? group by deal_year , deal_month order by cast(deal_year as unsigned) asc, cast(deal_month as unsigned) asc";
+			String sql = "select deal_year , deal_month from apt_"+table_nm+" "
+					+ "where sgg_cd = ? "
+					+ "and date(concat(deal_year, if(length(deal_month) = 1, concat('0', deal_month), deal_month), '01')) between concat(?,'-',?,'-01') and concat(?,'-',?,'-01') "
+					+ "group by deal_year , deal_month order by cast(deal_year as unsigned) asc, cast(deal_month as unsigned) asc";
 			//System.out.println(table_nm+", "+guCode);
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, guCode);
+			pstmt.setString(2, searchStartYear);
+			pstmt.setString(3, searchStartMonth);
+			pstmt.setString(4, searchEndYear);
+			pstmt.setString(5, searchEndMonth);
 			rs = pstmt.executeQuery();
 			
 			List<String> dealDate = new ArrayList<String>();
