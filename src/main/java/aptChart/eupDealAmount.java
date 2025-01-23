@@ -45,7 +45,7 @@ public class eupDealAmount extends HttpServlet {
 		
 		String guCode = request.getParameter("eupCode").substring(0,5);
 		String dongCode = request.getParameter("eupCode").substring(5,10);
-		System.out.println(request.getParameter("eupCode")+", "+guCode+", "+dongCode);
+		//System.out.println(request.getParameter("eupCode")+", "+guCode+", "+dongCode);
 		
 		JSONObject jObj = new JSONObject();
 		

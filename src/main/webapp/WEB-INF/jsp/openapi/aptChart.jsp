@@ -178,7 +178,10 @@
 			$.ajax({
 				type: 'get',
 				url: '/guSelect',
-				data : {guCode:val},
+				data : {guCode:val, searchStartYear:$("#searchStartYear option:selected").val()
+					, searchStartMonth:$("#searchStartMonth option:selected").val()
+					, searchEndYear:$("#searchEndYear option:selected").val()
+					, searchEndMonth:$("#searchEndMonth option:selected").val()},
 				success:function(data){
 					
 				//	console.log('success '+data.dongList);
@@ -194,7 +197,7 @@
 					
 					for(var i=0; i<data.dongList.length; i++){
 				//		console.log(data.dongList[i].name);
-						$("#dongCode").append("<option value='"+data.dongList[i].code+"'>"+data.dongList[i].name+"</option>");
+						$("#dongCode").append("<option value='"+data.dongList[i].code+"'>"+data.dongList[i].name+"</option>");//'('+data.dongList[i].cnt+"건)</option>");
 					}
 				},
 				error:function(request, status, error){
