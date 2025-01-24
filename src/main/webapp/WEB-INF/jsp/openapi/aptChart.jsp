@@ -115,6 +115,7 @@
 					, searchEndMonth:$("#searchEndMonth option:selected").val()},
 				beforeSend:function(){
 					$('#loading_spinner').show();
+					searchWrapDisabled();
 				},
 				success:function(data){
 					
@@ -148,6 +149,7 @@
 				},
 				complete:function(){
 					$('#loading_spinner').hide();
+					searchWrapActive();
 				}
 			});
 			
@@ -216,6 +218,7 @@
 					, searchEndMonth:$("#searchEndMonth option:selected").val()},
 				beforeSend:function(){
 					$('#loading_spinner').show();
+					searchWrapDisabled();
 				},
 				success:function(data){
 					
@@ -249,6 +252,7 @@
 				},
 				complete:function(){
 					$('#loading_spinner').hide();
+					searchWrapActive();
 				}
 			});
 			
@@ -305,6 +309,7 @@
 							data : {eupCode:val},
 							beforeSend:function(){
 								$('#loading_spinner').show();
+								searchWrapDisabled();
 							},
 							success:function(data){
 								
@@ -340,6 +345,7 @@
 							},
 							complete:function(){
 								$('#loading_spinner').hide();
+								searchWrapActive();
 							}
 						});
 						
@@ -368,6 +374,7 @@
 								, searchEndMonth:$("#searchEndMonth option:selected").val()},
 							beforeSend:function(){
 								$('#loading_spinner').show();
+								searchWrapDisabled();
 							},
 							success:function(data){
 								
@@ -403,6 +410,7 @@
 							},
 							complete:function(){
 								$('#loading_spinner').hide();
+								searchWrapActive();
 							}
 						});
 					}
@@ -471,6 +479,7 @@
 					, searchEndMonth:$("#searchEndMonth option:selected").val()},
 				beforeSend:function(){
 					$('#loading_spinner').show();
+					searchWrapDisabled();
 				},
 				success:function(data){
 					
@@ -509,6 +518,7 @@
 				},
 				complete:function(){
 					$('#loading_spinner').hide();
+					searchWrapActive();
 				}
 			});
 			
@@ -552,6 +562,14 @@
 		}
 	}
 	
+	function searchWrapDisabled(){
+		$("#search_wrap").children().prop("disabled", true);
+	}
+	
+	function searchWrapActive(){
+		$("#search_wrap").children().prop("disabled", false);
+	}
+	
 </script>
 
 </head>
@@ -563,77 +581,78 @@
     </div>
 </div>
 
-지역선택
-<select name="sidoCode" id="sidoCode" onchange="sidoChange(this.value);">
+<div id="search_wrap">
+	
+	지역선택
+	<select name="sidoCode" id="sidoCode" onchange="sidoChange(this.value);">
+		<option value="">==선택==</option>
+		<c:forEach items="${sidoCdList}" var="sidoCdList">
+		<option value="<c:out value="${sidoCdList.code }" />"><c:out value="${sidoCdList.name }" /></option>
+		</c:forEach>
+	</select>
+	
+	<select name="guCode" id="guCode" onchange="guChange(this.value);">
 	<option value="">==선택==</option>
-	<c:forEach items="${sidoCdList}" var="sidoCdList">
-	<option value="<c:out value="${sidoCdList.code }" />"><c:out value="${sidoCdList.name }" /></option>
+	</select>
+	
+	<select name="dongCode" id="dongCode" onchange="dongChange(this.value);">
+	<option value="">==선택==</option>
+	</select>
+	
+	<select name="leeCode" id="leeCode" onchange="leeChange(this.value);" style="display:none;">
+	<option value="">==선택==</option>
+	</select>
+	
+	<select name="aptList" id="aptList" onchange="aptChange(this.value);">
+	<option value="">==선택==</option>
+	</select>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	
+	조회기간
+	<select name="searchStartYear" id="searchStartYear">
+	<c:forEach var="yearList" items="${yearList }" varStatus="test">
+		<option value="<c:out value="${yearList }"/>" <c:if test="${test.index eq 1 }">selected</c:if>><c:out value="${yearList }"/></option>
+	</c:forEach>	
+	</select>
+	<select name="searchStartMonth" id="searchStartMonth">
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+		<option value="7">7</option>
+		<option value="8">8</option>
+		<option value="9">9</option>
+		<option value="10">10</option>
+		<option value="11">11</option>
+		<option value="12">12</option>
+	</select>
+	~
+	<select name="searchEndYear" id="searchEndYear">
+	<c:forEach var="yearList" items="${yearList }">
+		<option value="<c:out value="${yearList }"/>"><c:out value="${yearList }"/></option>
 	</c:forEach>
-</select>
+	</select>
+	<select name="searchEndMonth" id="searchEndMonth">
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+		<option value="7">7</option>
+		<option value="8">8</option>
+		<option value="9">9</option>
+		<option value="10">10</option>
+		<option value="11">11</option>
+		<option value="12">12</option>
+	</select>
+	
+	
+	<input type="button" onclick="search_apt_deal();" value="조회" />
 
-<select name="guCode" id="guCode" onchange="guChange(this.value);">
-<option value="">==선택==</option>
-</select>
-
-<select name="dongCode" id="dongCode" onchange="dongChange(this.value);">
-<option value="">==선택==</option>
-</select>
-
-<select name="leeCode" id="leeCode" onchange="leeChange(this.value);" style="display:none;">
-<option value="">==선택==</option>
-</select>
-
-<select name="aptList" id="aptList" onchange="aptChange(this.value);">
-<option value="">==선택==</option>
-</select>
-&nbsp;&nbsp;&nbsp;&nbsp;
-
-조회기간
-<select name="searchStartYear" id="searchStartYear">
-<c:forEach var="yearList" items="${yearList }" varStatus="test">
-	<option value="<c:out value="${yearList }"/>" <c:if test="${test.index eq 1 }">selected</c:if>><c:out value="${yearList }"/></option>
-</c:forEach>	
-</select>
-<select name="searchStartMonth" id="searchStartMonth">
-	<option value="1">1</option>
-	<option value="2">2</option>
-	<option value="3">3</option>
-	<option value="4">4</option>
-	<option value="5">5</option>
-	<option value="6">6</option>
-	<option value="7">7</option>
-	<option value="8">8</option>
-	<option value="9">9</option>
-	<option value="10">10</option>
-	<option value="11">11</option>
-	<option value="12">12</option>
-</select>
-~
-<select name="searchEndYear" id="searchEndYear">
-<c:forEach var="yearList" items="${yearList }">
-	<option value="<c:out value="${yearList }"/>"><c:out value="${yearList }"/></option>
-</c:forEach>
-</select>
-<select name="searchEndMonth" id="searchEndMonth">
-	<option value="1">1</option>
-	<option value="2">2</option>
-	<option value="3">3</option>
-	<option value="4">4</option>
-	<option value="5">5</option>
-	<option value="6">6</option>
-	<option value="7">7</option>
-	<option value="8">8</option>
-	<option value="9">9</option>
-	<option value="10">10</option>
-	<option value="11">11</option>
-	<option value="12">12</option>
-</select>
-
-<label id="aaa">
-<input type="checkbox" value="" name="" id="" class="aaa" />전체
-</label>
-
-<input type="button" onclick="search_apt_deal();" value="조회" />
+</div>
 
 <canvas id="lineChart" height="70%"></canvas>
 
