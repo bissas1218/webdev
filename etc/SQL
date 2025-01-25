@@ -1,5 +1,6 @@
+
 CREATE TABLE `apt_30000` (
-  `apt_nm` varchar(100) DEFAULT NULL,
+  `apt_nm` varchar(100) DEFAULT NULL COMMENT '아파트명',
   `sgg_cd` varchar(5) DEFAULT NULL COMMENT '법정동시군구코드',
   `umd_cd` varchar(5) DEFAULT NULL COMMENT '법정동읍면코드',
   `land_cd` varchar(1) DEFAULT NULL COMMENT '법정동지번코드',
@@ -32,7 +33,28 @@ CREATE TABLE `apt_30000` (
   `buyer_gbn` varchar(100) DEFAULT NULL COMMENT '매수자',
   `land_leasehold_gbn` varchar(1) DEFAULT NULL COMMENT '토지임대부 아파트 여부',
   KEY `apt_30000_sgg_cd_IDX` (`sgg_cd`,`deal_year`,`deal_month`,`deal_amount`,`apt_seq`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+
+CREATE TABLE `apt_rent_30000` (
+  `sgg_cd` varchar(5) DEFAULT NULL COMMENT '지역코드',
+  `umd_nm` varchar(30) DEFAULT NULL COMMENT '법정동',
+  `apt_nm` varchar(100) DEFAULT NULL COMMENT '아파트명',
+  `jibun` varchar(20) DEFAULT NULL COMMENT '지번',
+  `exclu_use_ar` varchar(22) DEFAULT NULL COMMENT '전용면적',
+  `deal_year` varchar(4) DEFAULT NULL COMMENT '계약년도',
+  `deal_month` varchar(2) DEFAULT NULL COMMENT '계약월',
+  `deal_day` varchar(2) DEFAULT NULL COMMENT '계약일',
+  `deposit` varchar(40) DEFAULT NULL COMMENT '보증금액(만원)',
+  `monthly_rent` varchar(40) DEFAULT NULL COMMENT '월세금액(만원)',
+  `floor` varchar(10) DEFAULT NULL COMMENT '층',
+  `build_year` varchar(4) DEFAULT NULL COMMENT '건축년도',
+  `contract_term` varchar(12) DEFAULT NULL COMMENT '계약기간',
+  `contract_type` varchar(4) DEFAULT NULL COMMENT '계약구분',
+  `use_rrr_right` varchar(4) DEFAULT NULL COMMENT '갱신요구권사용',
+  `pre_deposit` varchar(40) DEFAULT NULL COMMENT '종전계약보증금',
+  `pre_monthly_rent` varchar(40) DEFAULT NULL COMMENT '종전계약월세',
+  KEY `apt_rent_30000_sgg_cd_IDX` (`sgg_cd`,`deal_year`,`deal_month`,`deposit`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 CREATE TABLE `dong_code` (
   `code` varchar(11) DEFAULT NULL,

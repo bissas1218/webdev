@@ -30,8 +30,8 @@ import org.w3c.dom.NodeList;
 /**
  * Servlet implementation class test
  */
-@WebServlet("/dataInsert")
-public class dataInsert extends HttpServlet {
+@WebServlet("/aptDataInsert")
+public class aptDataInsert extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	private static String getTagValue(String tag, Element eElement){
@@ -52,7 +52,7 @@ public class dataInsert extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public dataInsert() {
+    public aptDataInsert() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -194,7 +194,7 @@ public class dataInsert extends HttpServlet {
 		}
 		
 		response.setContentType("text/html; charset=utf-8");
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/openapi/dataInsert.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/openapi/aptDataInsert.jsp");
 
 		rd.forward(request, response);
 	}
@@ -203,7 +203,7 @@ public class dataInsert extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println(request.getParameter("dealYmd")+ " "+request.getParameter("lawdCd"));
+		//System.out.println(request.getParameter("dealYmd")+ " "+request.getParameter("lawdCd"));
 		
 		String dealYmd = request.getParameter("dealYmd");
 		String lawdCd = request.getParameter("lawdCd");
@@ -332,7 +332,7 @@ public class dataInsert extends HttpServlet {
 		
 		response.setContentType("text/html; charset=utf-8");
 		//PrintWriter out = response.getWriter();
-		response.sendRedirect("/dataInsert?dealYmd="+dealYmd);
+		response.sendRedirect("/aptDataInsert?dealYmd="+dealYmd);
 	}
 
 }

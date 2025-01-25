@@ -58,6 +58,8 @@ public class dongDealAmount extends HttpServlet {
 			searchEndMonth = "0"+searchEndMonth;
 		}
 		
+		String searchDongNm = request.getParameter("searchDongNm");
+		
 		JSONObject jObj = new JSONObject();
 		
 		String table_nm = "";
@@ -74,7 +76,7 @@ public class dongDealAmount extends HttpServlet {
 					+ "where sgg_cd = ? and umd_cd = ? "
 					+ "and date(concat(deal_year, if(length(deal_month) = 1, concat('0', deal_month), deal_month), '01')) between concat(?,'-',?,'-01') and concat(?,'-',?,'-01') "
 					+ "group by deal_year , deal_month order by cast(deal_year as unsigned) asc, cast(deal_month as unsigned) asc";
-			//System.out.println(table_nm+", "+dongCode);
+			//System.out.println(searchDongNm);
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, guCode);
 			pstmt.setString(2, dongCode);
@@ -118,6 +120,8 @@ public class dongDealAmount extends HttpServlet {
 			
 			// 실거래가 구하기
 			ArrayList<String> dealAmountSum = new ArrayList<String>();
+			// 전월세 보증금 구하기
+			ArrayList<String> rentAmountSum = new ArrayList<String>();
 			for(int s=0; s<dealDate.size(); s++) {
 				//System.out.println(dealDate.get(s));
 				
@@ -131,12 +135,26 @@ public class dongDealAmount extends HttpServlet {
 				rs.next();
 				//System.out.println(dealDate.get(s).substring(0,4)+", "+Integer.parseInt(dealDate.get(s).substring(4,6)));
 				dealAmountSum.add(rs.getString(1));
+				
+				sql = "select sum(replace(deposit,',','')) sum_rent_amt from apt_rent_"+table_nm+" where sgg_cd = ? and umd_nm = ? and deal_year = ? and deal_month = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, guCode);
+				pstmt.setString(2, searchDongNm);
+				pstmt.setString(3, dealDate.get(s).substring(0,4));
+				pstmt.setInt(4, Integer.parseInt(dealDate.get(s).substring(4,6)));
+				rs = pstmt.executeQuery();
+				rs.next();
+				//System.out.println(dealDate.get(s).substring(0,4)+", "+Integer.parseInt(dealDate.get(s).substring(4,6)));
+				rentAmountSum.add(rs.getString(1));
 			}
 			
 			jObj.put("dealAmountSum", dealAmountSum);
+			jObj.put("rentAmountSum", rentAmountSum);
 			
 			// 월별 거래량 구하기
 			ArrayList<String> monthDealCnt = new ArrayList<String>();
+			// 월별 전월세 거래량
+			ArrayList<String> monthRentCnt = new ArrayList<String>();
 			for(int s=0; s<dealDate.size(); s++) {
 				//System.out.println(dealDate.get(s));
 				
@@ -149,10 +167,32 @@ public class dongDealAmount extends HttpServlet {
 				rs = pstmt.executeQuery();
 				rs.next();
 				//System.out.println(rs.getString(1));
-				monthDealCnt.add(rs.getString(1));
+				if(rs.getInt(1) > 0) {
+					monthDealCnt.add(rs.getString(1));
+				}else {
+					monthDealCnt.add(null);
+				}
+				
+				
+				sql = "select count(*) from apt_rent_"+table_nm+" where sgg_cd = ? and umd_nm = ? and deal_year = ? and deal_month = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, guCode);
+				pstmt.setString(2, searchDongNm);
+				pstmt.setString(3, dealDate.get(s).substring(0,4));
+				pstmt.setInt(4, Integer.parseInt(dealDate.get(s).substring(4,6)));
+				rs = pstmt.executeQuery();
+				rs.next();
+				//System.out.println(rs.getString(1));
+				if(rs.getInt(1) > 0) {
+					monthRentCnt.add(rs.getString(1));
+				}else {
+					monthRentCnt.add(null);
+				}
+				
 			}
 			
 			jObj.put("monthDealCnt", monthDealCnt);
+			jObj.put("monthRentCnt", monthRentCnt);
 			
 		}catch(SQLException e) {
 			

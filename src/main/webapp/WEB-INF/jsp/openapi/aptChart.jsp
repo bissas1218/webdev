@@ -119,29 +119,59 @@
 				},
 				success:function(data){
 					
-					// line chart
+					// 아파트 거래금액 line chart
 					aptDealAmtLineChart.data.labels = data.dealDate2;
 					
 					const dataset2 = [{
-					      label: $("#sidoCode option:selected").text(),
+					      label: $("#sidoCode option:selected").text()+' 매매가',
 					      data: data.dealAmountSum,
 					      borderColor: 'rgb('+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+')',
 					      fill: false,
 					      tension: 0.4
 					    }];
 					
+					dataset2.push({
+					      label: $("#sidoCode option:selected").text()+' 전월세보증금',
+					      data: data.rentAmountSum,
+					      borderColor: 'rgb('+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+')',
+					      fill: false,
+					      tension: 0.4
+					    });
+
 					aptDealAmtLineChart.data.datasets = dataset2;
 					aptDealAmtLineChart.options.plugins.title.text = $("#sidoCode option:selected").text() + ' 아파트 실거래가';
 					aptDealAmtLineChart.update();
 					
-					/* bar chart */
+					/* 아파트 거래건수 line chart
 					aptDealCntChart.data.labels = data.dealDate2;
 					aptDealCntChart.data.datasets = [{
 					        label: $("#sidoCode option:selected").text() + ' 아파트 월별 거래량',
 					        data: data.monthDealCnt,
 					        borderWidth: 1
 					      }];
-					aptDealCntChart.update();
+					aptDealCntChart.update(); */
+					
+					aptDealCntLineChart.data.labels = data.dealDate2;
+					
+					const dataset3 = [{
+					      label: $("#sidoCode option:selected").text()+' 매매 거래량',
+					      data: data.monthDealCnt,
+					      borderColor: 'rgb('+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+')',
+					      fill: false,
+					      tension: 0.4
+					    }];
+					/**/
+					dataset3.push({
+					      label: $("#sidoCode option:selected").text()+' 전월세 거래량',
+					      data: data.monthRentCnt,
+					      borderColor: 'rgb('+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+')',
+					      fill: false,
+					      tension: 0.4
+					    }); 
+
+					aptDealCntLineChart.data.datasets = dataset3;
+					aptDealCntLineChart.options.plugins.title.text = $("#sidoCode option:selected").text() + ' 아파트 거래량';
+					aptDealCntLineChart.update();
 					
 				},
 				error:function(request, status, error){
@@ -226,18 +256,26 @@
 					aptDealAmtLineChart.data.labels = data.dealDate2;
 					
 					const dataset2 = [{
-					      label: $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text(),
+					      label: $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' 매매금액',
 					      data: data.dealAmountSum,
 					      borderColor: 'rgb('+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+')',
 					      fill: false,
 					      tension: 0.4
 					    }];
 					
+					dataset2.push({
+					      label: $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' 전월세보증금',
+					      data: data.rentAmountSum,
+					      borderColor: 'rgb('+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+')',
+					      fill: false,
+					      tension: 0.4
+					    });
+					
 					aptDealAmtLineChart.data.datasets = dataset2;
 					aptDealAmtLineChart.options.plugins.title.text = $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' 아파트 실거래가';
 					aptDealAmtLineChart.update();
 					
-					/* bar chart */
+					/* bar chart 
 					aptDealCntChart.data.labels = data.dealDate2;
 					aptDealCntChart.data.datasets = [{
 					        label: $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' 아파트 월별 거래량',
@@ -245,6 +283,28 @@
 					        borderWidth: 1
 					      }];
 					aptDealCntChart.update();
+					*/
+					aptDealCntLineChart.data.labels = data.dealDate2;
+					
+					const dataset3 = [{
+					      label: $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' 매매 거래량',
+					      data: data.monthDealCnt,
+					      borderColor: 'rgb('+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+')',
+					      fill: false,
+					      tension: 0.4
+					    }];
+					
+					dataset3.push({
+					      label: $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' 전월세 거래량',
+					      data: data.monthRentCnt,
+					      borderColor: 'rgb('+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+')',
+					      fill: false,
+					      tension: 0.4
+					    });
+					
+					aptDealCntLineChart.data.datasets = dataset3;
+					aptDealCntLineChart.options.plugins.title.text = $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' 아파트 거래량';
+					aptDealCntLineChart.update();
 					
 				},
 				error:function(request, status, error){
@@ -306,7 +366,7 @@
 						$.ajax({
 							type: 'get',
 							url: '/eupDealAmount',
-							data : {eupCode:val},
+							data : {eupCode:val, searchEupNm:$("#dongCode option:selected").text()},
 							beforeSend:function(){
 								$('#loading_spinner').show();
 								searchWrapDisabled();
@@ -319,18 +379,26 @@
 								aptDealAmtLineChart.data.labels = data.dealDate2;
 								
 								const dataset2 = [{
-								      label: $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' ' + $("#dongCode option:selected").text(),
+								      label: $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' ' + $("#dongCode option:selected").text() + ' 매매금액',
 								      data: data.dealAmountSum,
 								      borderColor: 'rgb('+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+')',
 								      fill: false,
 								      tension: 0.4
 								    }];
 								
+								dataset2.push({
+								      label: $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' ' + $("#dongCode option:selected").text() + ' 전월세보증금',
+								      data: data.rentAmountSum,
+								      borderColor: 'rgb('+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+')',
+								      fill: false,
+								      tension: 0.4
+								    });
+								
 								aptDealAmtLineChart.data.datasets = dataset2;
 								aptDealAmtLineChart.options.plugins.title.text = $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' ' + $("#dongCode option:selected").text() + ' 아파트 실거래가';
 								aptDealAmtLineChart.update(); 
 								
-								/* bar chart */
+								/* bar chart 
 								aptDealCntChart.data.labels = data.dealDate2;
 								aptDealCntChart.data.datasets = [{
 								        label: $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' ' + $("#dongCode option:selected").text() + ' 아파트 월별 거래량',
@@ -338,7 +406,29 @@
 								        borderWidth: 1
 								      }];
 								aptDealCntChart.update();
+								*/
 								
+								aptDealCntLineChart.data.labels = data.dealDate2;
+								
+								const dataset3 = [{
+								      label: $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' ' + $("#dongCode option:selected").text() + ' 매매건수',
+								      data: data.monthDealCnt,
+								      borderColor: 'rgb('+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+')',
+								      fill: false,
+								      tension: 0.4
+								    }];
+								
+								dataset3.push({
+								      label: $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' ' + $("#dongCode option:selected").text() + ' 전월세건수',
+								      data: data.monthRentCnt,
+								      borderColor: 'rgb('+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+')',
+								      fill: false,
+								      tension: 0.4
+								    });
+								
+								aptDealCntLineChart.data.datasets = dataset3;
+								aptDealCntLineChart.options.plugins.title.text = $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' ' + $("#dongCode option:selected").text() + ' 아파트 거래량';
+								aptDealCntLineChart.update(); 
 							},
 							error:function(request, status, error){
 								console.log('error!!!'+error);
@@ -371,7 +461,8 @@
 								, searchStartYear:$("#searchStartYear option:selected").val()
 								, searchStartMonth:$("#searchStartMonth option:selected").val()
 								, searchEndYear:$("#searchEndYear option:selected").val()
-								, searchEndMonth:$("#searchEndMonth option:selected").val()},
+								, searchEndMonth:$("#searchEndMonth option:selected").val()
+								, searchDongNm:$("#dongCode option:selected").text()},
 							beforeSend:function(){
 								$('#loading_spinner').show();
 								searchWrapDisabled();
@@ -384,18 +475,26 @@
 								aptDealAmtLineChart.data.labels = data.dealDate2;
 								
 								const dataset2 = [{
-								      label: $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' ' + $("#dongCode option:selected").text(),
+								      label: $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' ' + $("#dongCode option:selected").text() + ' 매매금액',
 								      data: data.dealAmountSum,
 								      borderColor: 'rgb('+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+')',
 								      fill: false,
 								      tension: 0.4
 								    }];
 								
+								dataset2.push({
+								      label: $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' ' + $("#dongCode option:selected").text() + ' 전월세 보증금',
+								      data: data.rentAmountSum,
+								      borderColor: 'rgb('+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+')',
+								      fill: false,
+								      tension: 0.4
+								    });
+								
 								aptDealAmtLineChart.data.datasets = dataset2;
 								aptDealAmtLineChart.options.plugins.title.text = $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' ' + $("#dongCode option:selected").text() + ' 아파트 실거래가';
 								aptDealAmtLineChart.update(); 
 								
-								/* bar chart */
+								/* bar chart 
 								aptDealCntChart.data.labels = data.dealDate2;
 								aptDealCntChart.data.datasets = [{
 								        label: $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' ' + $("#dongCode option:selected").text() + ' 아파트 월별 거래량',
@@ -403,7 +502,29 @@
 								        borderWidth: 1
 								      }];
 								aptDealCntChart.update();
+								*/
 								
+								aptDealCntLineChart.data.labels = data.dealDate2;
+								
+								const dataset3 = [{
+								      label: $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' ' + $("#dongCode option:selected").text() + ' 매매 거래량',
+								      data: data.monthDealCnt,
+								      borderColor: 'rgb('+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+')',
+								      fill: false,
+								      tension: 0.4
+								    }];
+								
+								dataset3.push({
+								      label: $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' ' + $("#dongCode option:selected").text() + ' 전월세 거래량',
+								      data: data.monthRentCnt,
+								      borderColor: 'rgb('+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+')',
+								      fill: false,
+								      tension: 0.4
+								    });
+								
+								aptDealCntLineChart.data.datasets = dataset3;
+								aptDealCntLineChart.options.plugins.title.text = $("#sidoCode option:selected").text() + ' ' + $("#guCode option:selected").text() + ' ' + $("#dongCode option:selected").text() + ' 아파트 거래량';
+								aptDealCntLineChart.update(); 
 							},
 							error:function(request, status, error){
 								console.log('error!!!'+error);
@@ -503,7 +624,7 @@
 					aptDealAmtLineChart.options.plugins.title.text = $("#aptList option:selected").text() + ' 아파트 실거래가';
 					aptDealAmtLineChart.update();
 					
-					// bar chart
+					/* bar chart
 					aptDealCntChart.data.labels = data.dealDate2;
 					aptDealCntChart.data.datasets = [{
 					        label: $("#aptList option:selected").text() + ' 아파트 월별 거래량',
@@ -511,6 +632,21 @@
 					        borderWidth: 1
 					      }];
 					aptDealCntChart.update();
+					*/
+					
+					aptDealCntLineChart.data.labels = data.dealDate2;
+					
+					const dataset3 = [({
+					      label: $("#aptList option:selected").text(),
+					      data: data.monthDealCnt,
+					      borderColor: 'rgb('+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+', '+Math.floor(Math.random() * 250)+')',
+					      fill: false,
+					      tension: 0.9
+					    })];
+					
+					aptDealCntLineChart.data.datasets = dataset3;
+					aptDealCntLineChart.options.plugins.title.text = $("#aptList option:selected").text() + ' 아파트 거래량';
+					aptDealCntLineChart.update();
 					
 				},
 				error:function(request, status, error){ 
@@ -539,11 +675,19 @@
 		
 		
 		
-		aptDealCntChart.data.labels = [];
+		//aptDealCntLineChart.data.labels = [];
 		
-		aptDealCntChart.data.datasets = [{label:'아파트 월별 거래량', data:[], borderWidth:1}];
+		//aptDealCntLineChart.data.datasets = [{label:'아파트 월별 거래량', data:[], borderWidth:1}];
 		
-		aptDealCntChart.update();
+		//aptDealCntLineChart.update();
+		
+		aptDealCntLineChart.options.plugins.title.text = '아파트 거래량';
+		
+		aptDealCntLineChart.data.labels = [];
+		
+		aptDealCntLineChart.data.datasets = [];
+		
+		aptDealCntLineChart.update();
 		
 	}
 	
@@ -654,14 +798,16 @@
 
 </div>
 
-<canvas id="lineChart" height="70%"></canvas>
+<canvas id="aptDealAmtChart" height="70%"></canvas>
 
-<canvas id="barChart" height="70%"></canvas>
+<canvas id="aptDealCntChart" height="70%"></canvas>
 
 			<script>
-			const lineChart = document.getElementById('lineChart');
 			
-			const aptDealAmtLineChart = new Chart(lineChart, {
+			// 아파트 실거래 차트
+			const aptDealAmtChart = document.getElementById('aptDealAmtChart');
+			
+			const aptDealAmtLineChart = new Chart(aptDealAmtChart, {
 			    type: 'line',
 			    data: {
 			    	  labels: [],
@@ -701,26 +847,69 @@
 			
 		//	redraw(aptDealAmtLineChart);
 			
+			// 아파트 거래건수 차트
+			const aptDealCntChart = document.getElementById('aptDealCntChart');
+			
+			const aptDealCntLineChart = new Chart(aptDealCntChart, {
+			    type: 'line',
+			    data: {
+			    	  labels: [],
+			    	  datasets: []
+			    	}
+			    ,
+			    options: {
+			        responsive: true,
+			        plugins: {
+			          title: {
+			            display: true,
+			            text: '아파트 거래량'
+			          },
+			        },
+			        interaction: {
+			          intersect: false,
+			        },
+			        scales: {
+			          x: {
+			            display: true,
+			            title: {
+			              display: true
+			            }
+			          },
+			          y: {
+			            display: true,
+			            title: {
+			              display: true,
+			              text: '건'
+			            },
+			            suggestedMin: 0,
+			            suggestedMax: 10
+			          }
+			        }
+			      }
+			  });
+			
 			</script>
 			
 			
 			<script>
-  const ctx = document.getElementById('barChart');
-
-  const aptDealCntChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: [],
-      datasets: [{label:'아파트 월별 거래량', data:[], borderWidth:1}]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
-</script>			
+			/*
+			  const ctx = document.getElementById('aptDealCntChart');
+			
+			  const aptDealCntChart = new Chart(ctx, {
+			    type: 'bar',
+			    data: {
+			      labels: [],
+			      datasets: [{label:'아파트 월별 거래량', data:[], borderWidth:1}]
+			    },
+			    options: {
+			      scales: {
+			        y: {
+			          beginAtZero: true
+			        }
+			      }
+			    }
+			  });
+			  */
+		</script>			
 </body>
 </html>

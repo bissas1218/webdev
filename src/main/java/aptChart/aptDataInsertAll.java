@@ -26,7 +26,8 @@ import org.w3c.dom.NodeList;
 /**
  * Servlet implementation class dataInsertAll
  */
-public class dataInsertAll extends HttpServlet {
+@WebServlet("/aptDataInsertAll")
+public class aptDataInsertAll extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	private static String getTagValue(String tag, Element eElement){
@@ -47,7 +48,7 @@ public class dataInsertAll extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public dataInsertAll() {
+    public aptDataInsertAll() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -57,8 +58,16 @@ public class dataInsertAll extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-	//	System.out.println(request.getParameter("dealYmd")+ " "+request.getParameter("lawdCd"));
+	
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+//		System.out.println(request.getParameter("dealYmd")+ " "+request.getParameter("lawdCd"));
+	
 		String dealYmd = request.getParameter("dealYmd");
 		String sidoCode = request.getParameter("lawdCd");
 		
@@ -194,15 +203,7 @@ public class dataInsertAll extends HttpServlet {
 		}
 		
 		response.setContentType("text/html; charset=utf-8");
-		response.sendRedirect("/dataInsert?dealYmd="+dealYmd);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		response.sendRedirect("/aptDataInsert?dealYmd="+dealYmd);
 	}
 
 }

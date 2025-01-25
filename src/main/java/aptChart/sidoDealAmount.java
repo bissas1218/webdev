@@ -111,9 +111,13 @@ public class sidoDealAmount extends HttpServlet {
 			
 			// 실거래가 구하기
 			ArrayList<String> dealAmountSum = new ArrayList<String>();
+			// 전세가 구하기
+			ArrayList<String> rentAmountSum = new ArrayList<String>();
+			
 			for(int s=0; s<dealDate.size(); s++) {
 				//System.out.println(dealDate.get(s));
 				
+				// 매매가
 				sql = "select sum(replace(deal_amount,',','')) sum_deal_amt from apt_"+table_nm+" where deal_year = ? and deal_month = ?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, dealDate.get(s).substring(0,4));
@@ -122,15 +126,35 @@ public class sidoDealAmount extends HttpServlet {
 				rs.next();
 				//System.out.println(rs.getString(1));
 				dealAmountSum.add(rs.getString(1));
+				
+				// 전월세 보증금
+				sql = "select sum(replace(deposit,',','')) sum_rent_amt from apt_rent_"+table_nm+" where deal_year = ? and deal_month = ?";// and monthly_rent = 0";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, dealDate.get(s).substring(0,4));
+				pstmt.setInt(2, Integer.parseInt(dealDate.get(s).substring(4,6)));
+				rs = pstmt.executeQuery();
+				rs.next();
+			//	System.out.println(rs.getString(1));
+				if(rs.getString(1)!=null) {
+					rentAmountSum.add(rs.getString(1));
+				}else {
+					rentAmountSum.add(null);
+				}
+				
 			}
 			
 			jObj.put("dealAmountSum", dealAmountSum);
+			jObj.put("rentAmountSum", rentAmountSum);
 			
-			// 월별 거래량 구하기
+			// 월별 매매 거래량 구하기
 			ArrayList<String> monthDealCnt = new ArrayList<String>();
+			// 월별 전월세 거래량 구하기
+			ArrayList<String> monthRentCnt = new ArrayList<String>();
+			
 			for(int s=0; s<dealDate.size(); s++) {
 				//System.out.println(dealDate.get(s));
 				
+				// 매매건수
 				sql = "select count(*) from apt_"+table_nm+" where deal_year = ? and deal_month = ?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, dealDate.get(s).substring(0,4));
@@ -139,9 +163,24 @@ public class sidoDealAmount extends HttpServlet {
 				rs.next();
 				//System.out.println(rs.getString(1));
 				monthDealCnt.add(rs.getString(1));
+				
+				// 전월세 건수
+				sql = "select count(*) from apt_rent_"+table_nm+" where deal_year = ? and deal_month = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, dealDate.get(s).substring(0,4));
+				pstmt.setInt(2, Integer.parseInt(dealDate.get(s).substring(4,6)));
+				rs = pstmt.executeQuery();
+				rs.next();
+				//System.out.println(rs.getString(1));
+				if(rs.getInt(1)>0) {
+					monthRentCnt.add(rs.getString(1));
+				}else {
+					monthRentCnt.add(null);
+				}
 			}
 			
 			jObj.put("monthDealCnt", monthDealCnt);
+			jObj.put("monthRentCnt", monthRentCnt);
 			
 		}catch(SQLException e) {
 			

@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>아파트 실거래가 데이터삽입</title>
 
 <style type="text/css">
 
@@ -29,7 +29,7 @@ body{
 <script type="text/javascript">
 
 function submit(lawdCd){
-	var form = document.getElementById("dataInsertFrm");
+	var form = document.getElementById("aptDataInsertFrm");
 	var insertDate = document.getElementById("insertDate");
 	//alert(insertDate.value+' '+lawdCd);
 	
@@ -41,7 +41,7 @@ function submit(lawdCd){
 
 function submitAll(lawdCd){
 	
-	var form = document.getElementById("dataInsertAllFrm");
+	var form = document.getElementById("aptDataInsertAllFrm");
 	var insertDate = document.getElementById("insertDate");
 	//alert(insertDate.value+' '+lawdCd);
 	
@@ -56,7 +56,7 @@ function submitAll(lawdCd){
 
 function search(){
 	var insertDate = document.getElementById("insertDate");
-	location.href = '/dataInsert?dealYmd=' + insertDate.value;
+	location.href = '/aptDataInsert?dealYmd=' + insertDate.value;
 }
 
 
@@ -171,12 +171,12 @@ function next_month(){
 </c:forEach>
 
 
-<form name="dataInsertFrm" id="dataInsertFrm" action="/dataInsert" method="post" >
+<form name="aptDataInsertFrm" id="aptDataInsertFrm" action="/aptDataInsert" method="post" >
 <input type="hidden" name="dealYmd" id="dealYmd" />
 <input type="hidden" name="lawdCd" id="lawdCd" />
 </form>
 
-<form name="dataInsertAllFrm" id="dataInsertAllFrm" action="/dataInsertAll" method="post" >
+<form name="aptDataInsertAllFrm" id="aptDataInsertAllFrm" action="/aptDataInsertAll" method="post" >
 <input type="hidden" name="dealYmd" id="dealYmd" />
 <input type="hidden" name="lawdCd" id="lawdCd" />
 </form>
