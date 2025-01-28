@@ -62,7 +62,7 @@ public class guSelect extends HttpServlet {
 					+ "from (select code, substring_index(name, ' ', -1) dong, substr(code,1,5) code1, substr(code,6,10) code2 "
 					+ "from dong_code where code like ? and code != concat(?,'00000') "
 					+ "and use_yn = 'Y') A order by A.dong";
-			//System.out.println(sql);
+		//	System.out.println(sql);
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, guCode+"%");

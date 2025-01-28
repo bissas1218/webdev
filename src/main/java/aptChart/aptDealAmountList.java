@@ -37,7 +37,7 @@ public class aptDealAmountList extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-	//	System.out.println(request.getParameter("aptSeq"));
+	//	System.out.println(request.getParameter("sggCd"));
 		String aptSeq = request.getParameter("aptSeq");
 		
 		DBConnection dbconn = new DBConnection();
@@ -55,6 +55,8 @@ public class aptDealAmountList extends HttpServlet {
 		if(searchEndMonth.length()==1) {
 			searchEndMonth = "0"+searchEndMonth;
 		}
+		String aptNm = request.getParameter("aptNm");
+		String sggCd = request.getParameter("sggCd");
 		
 		JSONObject jObj = new JSONObject();
 		
@@ -132,12 +134,16 @@ public class aptDealAmountList extends HttpServlet {
 			jObj.put("dealDate2", dealDate2);
 			jObj.put("dealDate", dealDate);
 			
-			// 실거래가 구하기
+			// 매매 실거래가 구하기
 			ArrayList<String>[] dealAmount = new ArrayList[excluUseAr.size()];
+			// 전월세 보증금 구하기
+			ArrayList<String>[] rentAmount = new ArrayList[excluUseAr.size()];
+			
 			for(int i=0; i<excluUseAr.size(); i++) {
 				//System.out.println(excluUseAr.get(i));
 				
 				dealAmount[i] = new ArrayList<String>();
+				rentAmount[i] = new ArrayList<String>();
 				
 				for(int j=0; j<dealDate.size(); j++) {
 					
@@ -152,16 +158,35 @@ public class aptDealAmountList extends HttpServlet {
 					rs.next();
 					
 					dealAmount[i].add(rs.getString(1)); 
+					
+				//	System.out.println(sggCd.substring(0,5)+", "+aptNm);
+					sql = "select avg(replace(deposit,',','')) avg_rent_amt from apt_rent_"+table_nm+" "
+							+ "where sgg_cd = ? and apt_nm = ? and deal_year = ? and deal_month = ? and exclu_use_ar = ?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, sggCd.substring(0,5));
+					pstmt.setString(2, aptNm);
+					pstmt.setString(3, dealDate.get(j).substring(0,4));
+					pstmt.setInt(4, Integer.parseInt(dealDate.get(j).substring(4,6)));
+					pstmt.setString(5, excluUseAr.get(i));
+					rs = pstmt.executeQuery();
+					rs.next();
+					
+					rentAmount[i].add(rs.getString(1)); 
 				}
 			}
 			
 			jObj.put("dealAmount", dealAmount);
+			jObj.put("rentAmount", rentAmount);
 			
-			// 월별 거래량 구하기
+			// 월별 매매 거래량 구하기
 			ArrayList<String> monthDealCnt = new ArrayList<String>();
+			// 월별 전월세 거래량 구하기
+			ArrayList<String> monthRentCnt = new ArrayList<String>();
+			
 			for(int s=0; s<dealDate.size(); s++) {
 				//System.out.println(dealDate.get(s));
 				
+				// 월별 매매 거래량 구하기
 				sql = "select count(*) from apt_"+table_nm+" where apt_seq = ? and deal_year = ? and deal_month = ?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, aptSeq);
@@ -169,11 +194,33 @@ public class aptDealAmountList extends HttpServlet {
 				pstmt.setInt(3, Integer.parseInt(dealDate.get(s).substring(4,6)));
 				rs = pstmt.executeQuery();
 				rs.next();
-				System.out.println(rs.getString(1));
-				monthDealCnt.add(rs.getString(1));
+			//	System.out.println(rs.getString(1));
+				if(rs.getInt(1) > 0) {
+					monthDealCnt.add(rs.getString(1));
+				}else {
+					monthDealCnt.add(null);
+				}
+				
+				
+				// 월별 전월세 거래량 구하기
+				sql = "select count(*) from apt_rent_"+table_nm+" where apt_nm = ? and deal_year = ? and deal_month = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, aptNm);
+				pstmt.setString(2, dealDate.get(s).substring(0,4));
+				pstmt.setInt(3, Integer.parseInt(dealDate.get(s).substring(4,6)));
+				rs = pstmt.executeQuery();
+				rs.next();
+			//	System.out.println(aptNm);
+				if(rs.getInt(1) > 0) {
+					monthRentCnt.add(rs.getString(1));
+				}else {
+					monthRentCnt.add(null);
+				}
+				
 			}
 			
 			jObj.put("monthDealCnt", monthDealCnt);
+			jObj.put("monthRentCnt", monthRentCnt);
 			
 		}catch(SQLException e) {
 			
