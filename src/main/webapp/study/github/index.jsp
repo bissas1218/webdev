@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-    
 <!DOCTYPE HTML>
 <!--
 	Minimaxing by HTML5 UP
@@ -11,10 +8,10 @@
 -->
 <html>
 	<head>
-		<title>Minimaxing by HTML5 UP</title>
+		<title>Two Column 1 - Minimaxing by HTML5 UP</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="/assets/css/main.css" />
 	</head>
 	<body>
 		<div id="page-wrapper">
@@ -25,22 +22,12 @@
 						<div class="row">
 							<div class="col-12">
 
-								<jsp:include page="/header-menu.jsp"></jsp:include>
+								<jsp:include page="/header-menu.jsp">
+									<jsp:param name="menu" value="study" />
+								</jsp:include>
 
 							</div>
 						</div>
-					</div>
-				</div>
-
-			<!-- Banner -->
-				<div id="banner-wrapper">
-					<div class="container">
-
-						<div id="banner">
-							<h2>Put something cool here!</h2>
-							<span>And put something almost as cool here, but a bit longer ...</span>
-						</div>
-
 					</div>
 				</div>
 
@@ -48,38 +35,72 @@
 				<div id="main">
 					<div class="container">
 						<div class="row main-row">
-							<div class="col-4 col-12-medium">
+							<div class="col-8 col-12-medium">
 
 								<section>
-									<h2>Welcome to Minimaxing!</h2>
-									<p>This is <strong>Minimaxing</strong>, a fully responsive HTML5 site template designed by <a href="http://twitter.com/ajlkn">AJ</a> and released for free by <a href="http://html5up.net">HTML5 UP</a>. It features
-									a simple, lightweight design, solid HTML5 and CSS3 code, and full responsive support for desktop, tablet, and small displays.</p>
-									<footer class="controls">
-										<a href="http://html5up.net" class="button">More cool designs ...</a>
-									</footer>
+									<h2>Github 접속하기</h2>
+									<p>
+									Github에 접속하고 로그인한다. https://github.com	bissas@naver.com / qusehd#82로 로그인한다.
+									</p>
+				
+									<h2>Github 신규프로젝트 만들기</h2>
+									<p>
+										Dashboard의 New버튼을 클릭한다. New repository에서 신규 Repository명을 입력한다. Create repository클릭.<br/>
+										생성된 Repository의 주소를 복사한다. https://github.com/bissas1218/webdev.git<br/>
+									</p>
+				
+				<p id="sub_title">Github 토큰생성하기</p>
+				<hr>
+				<p>Settings > Developer settings > Personal access tokens > Fine-grained tokens에서 신규토큰 생성</p>
+				<p>토큰의 Repository access, Permisions을 설정한다. 모든 권한을 Read and Write로 변경한다.</p>
+				<p>github에 커밋시 소스에서 토큰정보는 삭제한다(별도보관)</p>
+				
+				<p id="sub_title">이클립스 신규 프로젝트 Github에 올리기</p>
+				<hr>
+				<p>이클립스 프로젝트 Team > Share Project... > Git Repository Type 선택</p>
+				<p>Use or create repository in parent folder of project체크</p>
+				<p>목록에서 프로젝트 선택 후 Create Repository버튼 클릭 후 Finish</p>
+				<p>Git Repositories에서 commit > Staged Changes이동(이동 안될시 이클립스 재기동) 후 Commit and Push</p>
+				<p>Can't connect to any repository: 접속 에러 발생 Push HEAD...클릭 > 접속정보 입력 후 커밋 완료</p>
+				<p>소스 수정 후 Staged Changes이동 후 Commit and Push</p>
+				
+				<p id="sub_title">이클립스에서 Github Repository불러오기</p>
+				<hr>
+				<p>이클립스 실행 후 Import projects... > Git > Projects from Git > Next > Clone URI > Next > URI, User, Password입력 후 Next > master Next > workspace로 Directory변경
+> Next > Import existing Eclipse projects > Next > Finish</p>
+				<p>프로젝트 import 후 에러발생 
+Java > Installed JREs > jdk-21.0.5추가 후 체크 
+Java > Compiler > Compiler compiance level: 21로 변경
+프로젝트 우클릭 Build Path > Configure Build Path... > Java Compiler, Project Facets에서 Java 버젼 확인
+톰캣 10.1 설치 후 jdk-21로 설정</p>
+				<p>Window > Show View > Other... > Git > Git Repositories > Open</p>
+				
+				<p id="sub_title">이클립스에서 소스관리하기</p>
+				<hr>
+				<p>커밋하기 : Team > Commit... > Unstaged Changes -> Add to index > Commit Message 입력 > Commit and Push</p>
+				<p>이클립스에서 git-receive-pack not permitted on 에러 발생시 토큰의 권한부여 후 Push HEAD...</p>
+				<p>불러오기 : Team > Pull</p>
+				
 								</section>
 
 							</div>
-							<div class="col-4 col-6-medium col-12-small">
+							<div class="col-4 col-12-medium">
 
 								<section>
 									<h2>Who are you guys?</h2>
 									<ul class="small-image-list">
 										<li>
-											<a href="#"><img src="images/pic2.jpg" alt="" class="left" /></a>
+											<a href="#"><img src="/images/pic2.jpg" alt="" class="left" /></a>
 											<h4>Jane Anderson</h4>
 											<p>Varius nibh. Suspendisse vitae magna eget et amet mollis justo facilisis amet quis.</p>
 										</li>
 										<li>
-											<a href="#"><img src="images/pic1.jpg" alt="" class="left" /></a>
+											<a href="#"><img src="/images/pic1.jpg" alt="" class="left" /></a>
 											<h4>James Doe</h4>
 											<p>Vitae magna eget odio amet mollis justo facilisis amet quis. Sed sagittis consequat.</p>
 										</li>
 									</ul>
 								</section>
-
-							</div>
-							<div class="col-4 col-6-medium col-12-small">
 
 								<section>
 									<h2>How about some links?</h2>
@@ -106,65 +127,6 @@
 										</div>
 									</div>
 								</section>
-
-							</div>
-							<div class="col-6 col-12-medium">
-
-								<section>
-									<h2>An assortment of pictures and text</h2>
-									<p>Duis neque nisi, dapibus sed mattis quis, rutrum et accumsan.
-									Suspendisse nibh. Suspendisse vitae magna eget odio amet mollis
-									justo facilisis quis. Sed sagittis mauris amet tellus gravida
-									lorem ipsum dolor sit amet consequat blandit lorem ipsum dolor
-									sit amet consequat sed dolore.</p>
-									<ul class="big-image-list">
-										<li>
-											<a href="#"><img src="images/pic3.jpg" alt="" class="left" /></a>
-											<h3>Magna Gravida Dolore</h3>
-											<p>Varius nibh. Suspendisse vitae magna eget et amet mollis justo
-											facilisis amet quis consectetur in, sollicitudin vitae justo. Cras
-											Maecenas eu arcu purus, phasellus fermentum elit.</p>
-										</li>
-										<li>
-											<a href="#"><img src="images/pic4.jpg" alt="" class="left" /></a>
-											<h3>Magna Gravida Dolore</h3>
-											<p>Varius nibh. Suspendisse vitae magna eget et amet mollis justo
-											facilisis amet quis consectetur in, sollicitudin vitae justo. Cras
-											Maecenas eu arcu purus, phasellus fermentum elit.</p>
-										</li>
-										<li>
-											<a href="#"><img src="images/pic5.jpg" alt="" class="left" /></a>
-											<h3>Magna Gravida Dolore</h3>
-											<p>Varius nibh. Suspendisse vitae magna eget et amet mollis justo
-											facilisis amet quis consectetur in, sollicitudin vitae justo. Cras
-											Maecenas eu arcu purus, phasellus fermentum elit.</p>
-										</li>
-									</ul>
-								</section>
-
-							</div>
-							<div class="col-6 col-12-medium">
-
-								<article class="blog-post">
-									<h2>Just another blog post</h2>
-									<a class="comments" href="#">33 comments</a>
-									<a href="#"><img src="images/pic6.jpg" alt="" class="top blog-post-image" /></a>
-									<h3>Magna Gravida Dolore</h3>
-									<p>Aenean non massa sapien. In hac habitasse platea dictumst.
-									Maecenas sodales purus et nulla sodales aliquam. Aenean ac
-									porttitor metus. In hac habitasse platea dictumst. Phasellus
-									blandit turpis in leo scelerisque mollis. Nulla venenatis
-									ipsum nec est porta rhoncus. Mauris sodales sed pharetra
-									nisi nec consectetur. Cras elit magna, hendrerit nec
-									consectetur in, sollicitudin vitae justo. Cras amet aliquet
-									Aliquam ligula turpis, feugiat id fermentum malesuada,
-									rutrum eget turpis. Mauris sodales sed pharetra nisi nec
-									consectetur. Cras elit magna, hendrerit nec consectetur
-									in sollicitudin vitae.</p>
-									<footer class="controls">
-										<a href="#" class="button">Continue Reading</a>
-									</footer>
-								</article>
 
 							</div>
 						</div>
@@ -252,11 +214,11 @@
 		</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/browser.min.js"></script>
+			<script src="/assets/js/breakpoints.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<script src="/assets/js/main.js"></script>
 
 	</body>
 </html>

@@ -2,11 +2,19 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-<!DOCTYPE html>
+<!DOCTYPE HTML>
+<!--
+	Minimaxing by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<head>
+		<title>아파트 실거래가 차트보기</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
@@ -728,9 +736,36 @@
 	
 </script>
 
-</head>
-<body>
+		
+	</head>
+	<body>
+		<div id="page-wrapper">
 
+			<!-- Header -->
+				<div id="header-wrapper">
+					<div class="container">
+						<div class="row">
+							<div class="col-12">
+
+								<jsp:include page="/header-menu.jsp">
+									<jsp:param name="menu" value="openapi" />
+								</jsp:include>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			<!-- Main -->
+				<div id="main">
+					<div class="container">
+						<div class="row main-row">
+							<div class="col-12">
+
+								<section>
+									<h2>아파트 실거래가 차트보기</h2>
+									
+									
 <div id="loading_spinner">
     <div class="cv_spinner">
         <span class="spinner"></span>
@@ -739,7 +774,7 @@
 
 <div id="search_wrap">
 	
-	지역선택
+	지역선택:
 	<select name="sidoCode" id="sidoCode" onchange="sidoChange(this.value);">
 		<option value="">==선택==</option>
 		<c:forEach items="${sidoCdList}" var="sidoCdList">
@@ -764,7 +799,7 @@
 	</select>
 	&nbsp;&nbsp;&nbsp;&nbsp;
 	
-	조회기간
+	조회기간:
 	<select name="searchStartYear" id="searchStartYear">
 	<c:forEach var="yearList" items="${yearList }" varStatus="test">
 		<option value="<c:out value="${yearList }"/>" <c:if test="${test.index eq 1 }">selected</c:if>><c:out value="${yearList }"/></option>
@@ -806,15 +841,27 @@
 	</select>
 	
 	
-	<input type="button" onclick="search_apt_deal();" value="조회" />
+	<input type="button" class="button-normal" onclick="search_apt_deal();" value="조회" />
 
 </div>
 
-<canvas id="aptDealAmtChart" height="70%"></canvas>
 
-<canvas id="aptDealCntChart" height="70%"></canvas>
 
-			<script>
+								</section>
+
+							</div>
+						</div>
+						
+
+					</div>
+					
+					<canvas id="aptDealAmtChart" height="70%"></canvas>
+
+					<canvas id="aptDealCntChart" height="70%"></canvas>
+
+				</div>
+
+<script>
 			
 			// 아파트 실거래 차트
 			const aptDealAmtChart = document.getElementById('aptDealAmtChart');
@@ -922,6 +969,94 @@
 			    }
 			  });
 			  */
-		</script>			
-</body>
+		</script>	
+		
+			<!-- Footer -->
+				<div id="footer-wrapper">
+					<div class="container">
+						<div class="row">
+							<div class="col-8 col-12-medium">
+
+								<section>
+									<h2>How about a truckload of links?</h2>
+									<div>
+										<div class="row">
+											<div class="col-3 col-6-medium col-12-small">
+												<ul class="link-list">
+													<li><a href="#">Sed neque nisi consequat</a></li>
+													<li><a href="#">Dapibus sed mattis blandit</a></li>
+													<li><a href="#">Quis accumsan lorem</a></li>
+													<li><a href="#">Suspendisse varius ipsum</a></li>
+													<li><a href="#">Eget et amet consequat</a></li>
+												</ul>
+											</div>
+											<div class="col-3 col-6-medium col-12-small">
+												<ul class="link-list">
+													<li><a href="#">Quis accumsan lorem</a></li>
+													<li><a href="#">Sed neque nisi consequat</a></li>
+													<li><a href="#">Eget et amet consequat</a></li>
+													<li><a href="#">Dapibus sed mattis blandit</a></li>
+													<li><a href="#">Vitae magna sed dolore</a></li>
+												</ul>
+											</div>
+											<div class="col-3 col-6-medium col-12-small">
+												<ul class="link-list">
+													<li><a href="#">Sed neque nisi consequat</a></li>
+													<li><a href="#">Dapibus sed mattis blandit</a></li>
+													<li><a href="#">Quis accumsan lorem</a></li>
+													<li><a href="#">Suspendisse varius ipsum</a></li>
+													<li><a href="#">Eget et amet consequat</a></li>
+												</ul>
+											</div>
+											<div class="col-3 col-6-medium col-12-small">
+												<ul class="link-list">
+													<li><a href="#">Quis accumsan lorem</a></li>
+													<li><a href="#">Sed neque nisi consequat</a></li>
+													<li><a href="#">Eget et amet consequat</a></li>
+													<li><a href="#">Dapibus sed mattis blandit</a></li>
+													<li><a href="#">Vitae magna sed dolore</a></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</section>
+
+							</div>
+							<div class="col-4 col-12-medium">
+
+								<section>
+									<h2>Something of interest</h2>
+									<p>Duis neque nisi, dapibus sed mattis quis, rutrum accumsan sed.
+									Suspendisse eu varius nibh. Suspendisse vitae magna eget odio amet
+									mollis justo facilisis quis. Sed sagittis mauris amet tellus gravida
+									lorem ipsum dolor sit blandit.</p>
+									<footer class="controls">
+										<a href="#" class="button">Oh, please continue ....</a>
+									</footer>
+								</section>
+
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12">
+
+								<div id="copyright">
+									&copy; Untitled. All rights reserved. | Design: <a href="http://html5up.net">HTML5 UP</a>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
 </html>

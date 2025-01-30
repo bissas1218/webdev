@@ -104,7 +104,9 @@ function next_month(){
 						<div class="row">
 							<div class="col-12">
 
-								<jsp:include page="/header-menu.jsp"></jsp:include>
+								<jsp:include page="/header-menu.jsp">
+									<jsp:param name="menu" value="openapi" />
+								</jsp:include>
 
 							</div>
 						</div>

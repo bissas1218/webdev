@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-    
 <!DOCTYPE HTML>
 <!--
 	Minimaxing by HTML5 UP
@@ -11,10 +8,10 @@
 -->
 <html>
 	<head>
-		<title>Minimaxing by HTML5 UP</title>
+		<title>Two Column 1 - Minimaxing by HTML5 UP</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="/assets/css/main.css" />
 	</head>
 	<body>
 		<div id="page-wrapper">
@@ -25,22 +22,12 @@
 						<div class="row">
 							<div class="col-12">
 
-								<jsp:include page="/header-menu.jsp"></jsp:include>
+								<jsp:include page="/header-menu.jsp">
+									<jsp:param name="menu" value="study" />
+								</jsp:include>
 
 							</div>
 						</div>
-					</div>
-				</div>
-
-			<!-- Banner -->
-				<div id="banner-wrapper">
-					<div class="container">
-
-						<div id="banner">
-							<h2>Put something cool here!</h2>
-							<span>And put something almost as cool here, but a bit longer ...</span>
-						</div>
-
 					</div>
 				</div>
 
@@ -48,38 +35,33 @@
 				<div id="main">
 					<div class="container">
 						<div class="row main-row">
-							<div class="col-4 col-12-medium">
+							<div class="col-8 col-12-medium">
 
 								<section>
-									<h2>Welcome to Minimaxing!</h2>
-									<p>This is <strong>Minimaxing</strong>, a fully responsive HTML5 site template designed by <a href="http://twitter.com/ajlkn">AJ</a> and released for free by <a href="http://html5up.net">HTML5 UP</a>. It features
-									a simple, lightweight design, solid HTML5 and CSS3 code, and full responsive support for desktop, tablet, and small displays.</p>
-									<footer class="controls">
-										<a href="http://html5up.net" class="button">More cool designs ...</a>
-									</footer>
+									<h2>Two Column #1 (right-hand sidebar)</h2>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ante ante, viverra a ornare sed, convallis sed est. Proin felis sapien, adipiscing quis eleifend vel, sodales vitae sapien. Donec vel lacus leo, eu convallis metus. Cras egestas feugiat tortor, vitae interdum augue aliquam a. Sed nec augue id orci egestas commodo in eget magna. Nunc eleifend diam non odio laoreet placerat gravida nulla bibendum. Phasellus tempus imperdiet suscipit.</p>
+									<p>Mauris risus nulla, pulvinar vitae sagittis a, pharetra nec tellus. Suspendisse varius enim ac felis mattis aliquam. Aenean et justo quis ipsum gravida lacinia. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia bibendum cursus. Nullam nec pellentesque lacus. In porta erat in tortor rhoncus quis accumsan magna pretium. Nulla posuere magna eget mauris lacinia in mollis sem fermentum. Donec mollis adipiscing mauris, ut posuere enim rhoncus ut. Nunc commodo vestibulum orci vel placerat. Cras sed risus libero. Donec ac lacus vitae lectus mattis commodo id vitae libero. Etiam lorem odio, volutpat nec pulvinar sit amet, tincidunt ut lacus. Pellentesque consequat arcu vel nisi lobortis in pellentesque orci sollicitudin. Cras gravida lacus turpis, consectetur porttitor lectus. Cras malesuada tortor id neque porta ut semper quam iaculis.</p>
+									<p>Nulla ut tortor quam, a luctus nunc. Nulla condimentum diam porttitor arcu placerat tincidunt. Nunc non augue ipsum. Nulla facilisi. Phasellus feugiat augue in ipsum egestas semper. Suspendisse blandit, nisl ullamcorper blandit sollicitudin, sem leo auctor lectus, et volutpat mauris elit et odio. Ut elementum risus in metus mollis tristique vulputate nulla interdum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae orci dui, ut facilisis dui.</p>
 								</section>
 
 							</div>
-							<div class="col-4 col-6-medium col-12-small">
+							<div class="col-4 col-12-medium">
 
 								<section>
 									<h2>Who are you guys?</h2>
 									<ul class="small-image-list">
 										<li>
-											<a href="#"><img src="images/pic2.jpg" alt="" class="left" /></a>
+											<a href="#"><img src="/images/pic2.jpg" alt="" class="left" /></a>
 											<h4>Jane Anderson</h4>
 											<p>Varius nibh. Suspendisse vitae magna eget et amet mollis justo facilisis amet quis.</p>
 										</li>
 										<li>
-											<a href="#"><img src="images/pic1.jpg" alt="" class="left" /></a>
+											<a href="#"><img src="/images/pic1.jpg" alt="" class="left" /></a>
 											<h4>James Doe</h4>
 											<p>Vitae magna eget odio amet mollis justo facilisis amet quis. Sed sagittis consequat.</p>
 										</li>
 									</ul>
 								</section>
-
-							</div>
-							<div class="col-4 col-6-medium col-12-small">
 
 								<section>
 									<h2>How about some links?</h2>
@@ -106,65 +88,6 @@
 										</div>
 									</div>
 								</section>
-
-							</div>
-							<div class="col-6 col-12-medium">
-
-								<section>
-									<h2>An assortment of pictures and text</h2>
-									<p>Duis neque nisi, dapibus sed mattis quis, rutrum et accumsan.
-									Suspendisse nibh. Suspendisse vitae magna eget odio amet mollis
-									justo facilisis quis. Sed sagittis mauris amet tellus gravida
-									lorem ipsum dolor sit amet consequat blandit lorem ipsum dolor
-									sit amet consequat sed dolore.</p>
-									<ul class="big-image-list">
-										<li>
-											<a href="#"><img src="images/pic3.jpg" alt="" class="left" /></a>
-											<h3>Magna Gravida Dolore</h3>
-											<p>Varius nibh. Suspendisse vitae magna eget et amet mollis justo
-											facilisis amet quis consectetur in, sollicitudin vitae justo. Cras
-											Maecenas eu arcu purus, phasellus fermentum elit.</p>
-										</li>
-										<li>
-											<a href="#"><img src="images/pic4.jpg" alt="" class="left" /></a>
-											<h3>Magna Gravida Dolore</h3>
-											<p>Varius nibh. Suspendisse vitae magna eget et amet mollis justo
-											facilisis amet quis consectetur in, sollicitudin vitae justo. Cras
-											Maecenas eu arcu purus, phasellus fermentum elit.</p>
-										</li>
-										<li>
-											<a href="#"><img src="images/pic5.jpg" alt="" class="left" /></a>
-											<h3>Magna Gravida Dolore</h3>
-											<p>Varius nibh. Suspendisse vitae magna eget et amet mollis justo
-											facilisis amet quis consectetur in, sollicitudin vitae justo. Cras
-											Maecenas eu arcu purus, phasellus fermentum elit.</p>
-										</li>
-									</ul>
-								</section>
-
-							</div>
-							<div class="col-6 col-12-medium">
-
-								<article class="blog-post">
-									<h2>Just another blog post</h2>
-									<a class="comments" href="#">33 comments</a>
-									<a href="#"><img src="images/pic6.jpg" alt="" class="top blog-post-image" /></a>
-									<h3>Magna Gravida Dolore</h3>
-									<p>Aenean non massa sapien. In hac habitasse platea dictumst.
-									Maecenas sodales purus et nulla sodales aliquam. Aenean ac
-									porttitor metus. In hac habitasse platea dictumst. Phasellus
-									blandit turpis in leo scelerisque mollis. Nulla venenatis
-									ipsum nec est porta rhoncus. Mauris sodales sed pharetra
-									nisi nec consectetur. Cras elit magna, hendrerit nec
-									consectetur in, sollicitudin vitae justo. Cras amet aliquet
-									Aliquam ligula turpis, feugiat id fermentum malesuada,
-									rutrum eget turpis. Mauris sodales sed pharetra nisi nec
-									consectetur. Cras elit magna, hendrerit nec consectetur
-									in sollicitudin vitae.</p>
-									<footer class="controls">
-										<a href="#" class="button">Continue Reading</a>
-									</footer>
-								</article>
 
 							</div>
 						</div>
@@ -252,11 +175,11 @@
 		</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/browser.min.js"></script>
+			<script src="/assets/js/breakpoints.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<script src="/assets/js/main.js"></script>
 
 	</body>
 </html>
