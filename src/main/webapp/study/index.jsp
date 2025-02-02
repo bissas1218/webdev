@@ -41,7 +41,7 @@
 							<div class="col-3 col-12-medium">
 
 								<section>
-									<h2>개발언어</h2>
+									<h2>Language</h2>
 									<ul class="link-list">
 										<li><a href="#">React</a></li>
 										<li><a href="#">Sed neque nisi consequat</a></li>
@@ -54,7 +54,7 @@
 								</section>
 
 								<section>
-									<h2>개발도구</h2>
+									<h2>Dev tools</h2>
 									<ul class="link-list">
 										<li><a href="/study/eclipse/index.jsp">이클립스</a></li>
 										<li><a href="/study/github/index.jsp">Github</a></li>
@@ -88,6 +88,30 @@
 							<div class="col-3 col-12-medium">
 
 								<section>
+									<h2>Database</h2>
+									<ul class="link-list">
+										<li><a href="/study/oracle/index.jsp">Oracle</a></li>
+										<li><a href="/study/github/index.jsp">Github</a></li>
+									</ul>
+								</section>
+								
+								<section>
+									<h2>ETC</h2>
+									<ul class="link-list">
+										<li><a href="/study/oracle/index.jsp">ckeditor</a></li>
+										<li><a href="/study/github/index.jsp">jschart</a></li>
+										<li><a href="#">jstree</a></li>
+									</ul>
+								</section>
+								
+								<section>
+									<h2>HTML,CSS</h2>
+									<ul class="link-list">
+										<li><a href="/study/html5up/index.jsp">Html5Up</a></li>
+									</ul>
+								</section>
+								
+								<section>
 									<h2>Who are you guys?</h2>
 									<ul class="small-image-list">
 										<li>
@@ -103,16 +127,6 @@
 									</ul>
 								</section>
 
-								<section>
-									<h2>HTML,CSS</h2>
-									<ul class="link-list">
-										<li><a href="/study/html5up/index.jsp">Html5Up</a></li>
-										<li><a href="#">Sed neque nisi consequat</a></li>
-										<li><a href="#">Eget et amet consequat</a></li>
-										<li><a href="#">Dapibus sed mattis blandit</a></li>
-										<li><a href="#">Vitae magna sed dolore</a></li>
-									</ul>
-								</section>
 
 							</div>
 						</div>

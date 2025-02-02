@@ -130,7 +130,8 @@ select:focus {
 		text-transform: lowercase;
 		font-size: 1.6em;
 		letter-spacing: -1px;
-		margin-bottom: 1em;
+		margin-top: 0.5em;
+		margin-bottom: 0.2em;
 	}
 
 	h3, h4 {
