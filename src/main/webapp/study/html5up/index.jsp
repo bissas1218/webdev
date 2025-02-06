@@ -47,9 +47,9 @@
 	<li><a href="/study/html5up/html5up-txt/index.html" target="_blank">txt</a></li>
 	<li><a href="/study/html5up/html5up-miniport/index.html" target="_blank">miniport</a></li>
 	<li><a href="/study/html5up/html5up-dopetrope/index.html" target="_blank">dopetrope</a></li>
-	<li><a href="/study/html5up/html5up-dimension/index.html" target="_blank">dimension</a></li>
-	<li><a href="/study/html5up/html5up-paradigm-shift/index.html" target="_blank">paradigm-shift</a></li>
-	<li><a href="/study/html5up/html5up-massively/index.html" target="_blank">massively</a></li>
+	<li><a href="/study/html5up/html5up-dimension/index.html" target="_blank">dimension(소개페이지)</a></li>
+	<li><a href="/study/html5up/html5up-paradigm-shift/index.html" target="_blank">paradigm-shift(소개페이지)</a></li>
+	<li><a href="/study/html5up/html5up-massively/index.html" target="_blank">massively(목록,버튼,입력창)</a></li>
 	<li><a href="/study/html5up/html5up-ethereal/index.html" target="_blank">ethereal</a></li>
 	<li><a href="/study/html5up/html5up-forty/index.html" target="_blank">forty</a></li>
 	<li><a href="/study/html5up/html5up-eventually/index.html" target="_blank">eventually</a></li>
@@ -85,6 +85,25 @@
 </ul>
 								</section>
 
+								<section>
+									<h2>Header샘플</h2>
+									<ul>
+										<li><a href="/study/html5up/test/minimaxing.html" target="_blank">Minimaxing</a></li>
+										<li><a href="/study/html5up/test/arcana.html" target="_blank">Arcana</a></li>
+										<li><a href="/study/html5up/test/txt.html" target="_blank">Txt</a></li>
+									</ul>
+									
+									<h2>본문샘플</h2>
+									
+									<h2>입력창</h2>
+									<ul>
+										<li><a href="/study/html5up/test/elements.html" target="_blank">Elements</a>
+									</ul>
+									
+									<h2>Footer샘플</h2>
+									
+								</section>
+								
 							</div>
 						</div>
 					</div>
