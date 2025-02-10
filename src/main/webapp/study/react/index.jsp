@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-    
 <!DOCTYPE HTML>
 <!--
 	Minimaxing by HTML5 UP
@@ -11,7 +8,7 @@
 -->
 <html>
 	<head>
-		<title>Three Column - Minimaxing by HTML5 UP</title>
+		<title>Two Column 1 - Minimaxing by HTML5 UP</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="/assets/css/main.css" />
@@ -38,79 +35,18 @@
 				<div id="main">
 					<div class="container">
 						<div class="row main-row">
-							<div class="col-3 col-12-medium">
+							<div class="col-8 col-12-medium">
 
 								<section>
-									<h2>Language</h2>
-									<ul class="link-list">
-										<li><a href="/study/react/index.jsp">React</a></li>
-										<li><a href="#">Sed neque nisi consequat</a></li>
-										<li><a href="#">Eget et amet consequat</a></li>
-										<li><a href="#">Dapibus sed mattis blandit</a></li>
-										<li><a href="#">Vitae magna sed dolore</a></li>
-										<li><a href="#">Eget et amet consequat</a></li>
-										<li><a href="#">Dapibus sed mattis blandit</a></li>
-									</ul>
-								</section>
-
-								<section>
-									<h2>Dev tools</h2>
-									<ul class="link-list">
-										<li><a href="/study/eclipse/index.jsp">이클립스</a></li>
-										<li><a href="/study/github/index.jsp">Github</a></li>
-										<li><a href="#">Eget et amet consequat</a></li>
-										<li><a href="#">Dapibus sed mattis blandit</a></li>
-										<li><a href="#">Vitae magna sed dolore</a></li>
-										<li><a href="#">Eget et amet consequat</a></li>
-										<li><a href="#">Dapibus sed mattis blandit</a></li>
-									</ul>
-								</section>
-								
-								<section>
-									<h2>Something profound</h2>
-									<p>Duis neque sed nisi, dapibus sed mattis rutrum accumsan sed.
-									Suspendisse eu varius amet nibh. Suspendisse vitae magna eget odio amet
-									mollis justo facilisis quis. Sed sagittis mauris amet tellus gravida
-									lorem ipsum dolor consequat blandit tempus ipsum dolor lorem sit amet.</p>
-								</section>
-
-							</div>
-							<div class="col-6 col-12-medium imp-medium">
-
-								<section class="middle-content">
-									<h2>Three Column (two sidebars)</h2>
+									<h2>React 설치하기</h2>
 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ante ante, viverra a ornare sed, convallis sed est. Proin felis sapien, adipiscing quis eleifend vel, sodales vitae sapien. Donec vel lacus leo, eu convallis metus. Cras egestas feugiat tortor, vitae interdum augue aliquam a. Sed nec augue id orci egestas commodo in eget magna. Nunc eleifend diam non odio laoreet placerat gravida nulla bibendum. Phasellus tempus imperdiet suscipit.</p>
 									<p>Mauris risus nulla, pulvinar vitae sagittis a, pharetra nec tellus. Suspendisse varius enim ac felis mattis aliquam. Aenean et justo quis ipsum gravida lacinia. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia bibendum cursus. Nullam nec pellentesque lacus. In porta erat in tortor rhoncus quis accumsan magna pretium. Nulla posuere magna eget mauris lacinia in mollis sem fermentum. Donec mollis adipiscing mauris, ut posuere enim rhoncus ut. Nunc commodo vestibulum orci vel placerat. Cras sed risus libero. Donec ac lacus vitae lectus mattis commodo id vitae libero. Etiam lorem odio, volutpat nec pulvinar sit amet, tincidunt ut lacus. Pellentesque consequat arcu vel nisi lobortis in pellentesque orci sollicitudin. Cras gravida lacus turpis, consectetur porttitor lectus. Cras malesuada tortor id neque porta ut semper quam iaculis.</p>
 									<p>Nulla ut tortor quam, a luctus nunc. Nulla condimentum diam porttitor arcu placerat tincidunt. Nunc non augue ipsum. Nulla facilisi. Phasellus feugiat augue in ipsum egestas semper. Suspendisse blandit, nisl ullamcorper blandit sollicitudin, sem leo auctor lectus, et volutpat mauris elit et odio. Ut elementum risus in metus mollis tristique vulputate nulla interdum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae orci dui, ut facilisis dui.</p>
 								</section>
 
 							</div>
-							<div class="col-3 col-12-medium">
+							<div class="col-4 col-12-medium">
 
-								<section>
-									<h2>Database</h2>
-									<ul class="link-list">
-										<li><a href="/study/oracle/index.jsp">Oracle</a></li>
-										<li><a href="/study/github/index.jsp">Github</a></li>
-									</ul>
-								</section>
-								
-								<section>
-									<h2>ETC</h2>
-									<ul class="link-list">
-										<li><a href="/study/oracle/index.jsp">ckeditor</a></li>
-										<li><a href="/study/github/index.jsp">jschart</a></li>
-										<li><a href="#">jstree</a></li>
-									</ul>
-								</section>
-								
-								<section>
-									<h2>HTML,CSS</h2>
-									<ul class="link-list">
-										<li><a href="/study/html5up/index.jsp">Html5Up</a></li>
-									</ul>
-								</section>
-								
 								<section>
 									<h2>Who are you guys?</h2>
 									<ul class="small-image-list">
@@ -127,6 +63,31 @@
 									</ul>
 								</section>
 
+								<section>
+									<h2>How about some links?</h2>
+									<div>
+										<div class="row">
+											<div class="col-6 col-12-small">
+												<ul class="link-list">
+													<li><a href="#">Sed neque nisi consequat</a></li>
+													<li><a href="#">Dapibus sed mattis blandit</a></li>
+													<li><a href="#">Quis accumsan lorem</a></li>
+													<li><a href="#">Suspendisse varius ipsum</a></li>
+													<li><a href="#">Eget et amet consequat</a></li>
+												</ul>
+											</div>
+											<div class="col-6 col-12-small">
+												<ul class="link-list">
+													<li><a href="#">Quis accumsan lorem</a></li>
+													<li><a href="#">Sed neque nisi consequat</a></li>
+													<li><a href="#">Eget et amet consequat</a></li>
+													<li><a href="#">Dapibus sed mattis blandit</a></li>
+													<li><a href="#">Vitae magna sed dolore</a></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</section>
 
 							</div>
 						</div>
