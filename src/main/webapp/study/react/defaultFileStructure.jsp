@@ -38,39 +38,73 @@
 							<div class="col-8 col-12-medium">
 
 								<section>
-									<h2>React 설치하기</h2>
-									<p>React는 사용자 인터페이스(UI)를 만들 때 많이 사용되는 JavaScript 라이브러리입니다. React를 처음 설치하고, 간단한 컴포넌트를 만들어보자.</p>
 									
-									<h2>Node.js 설치</h2>
-									<p>React를 사용하기 위해서는 먼저 Node.js를 설치해야 합니다. Node.js는 Javascript런타임으로, React개발환경을 구축할 때 필수적으로 필요합니다.</p>
-									<p>https://nodejs.org/en/download/ 접속하여 node-v22.14.0-x64.msi 파일 다운로드 및 설치</p>
-									<p>설치가 완료되면 터미널을 열고 다음 명령어로 Node.js와 NPM(Node Package Manager)이 잘 설치되었는지 확인할 수 있습니다.</p>
-									
+									<h2>기본 파일 구조</h2>
+									<p>프로젝트 생성 후 기본 파일 구조는 다음과 같습니다.</p>
+									<p>● src/App.js: 주요 React컴포넌트를 작성하고 수정하는 파일입니다.</p>
+									<p>● src/index.js: 애플리케이션의 진입점 파일로, 여기서 App.js를 가져와 브라우저에 렌터링합니다.</p>
+				
+									<h2>React컴포넌트 이해하기</h2>	
+									<p>React의 핵심은 컴포넌트입니다. 컴포넌트는 독립적인 UI조각을 의미하며, 이러한 컴포넌트를 조합해 복잡한 UI를 구성할 수 있습니다.</p>
+				
+									<h2>기본 함수형 컴포넌트 작성</h2>
+									<p>React 컴포넌트는 함수형 컴포넌트와 클래스형 컴포넌트로 나눌 수 있지만, 최근에는 함수형 컴포넌트가 주로 사용됩니다. 기본적인 함수형 컴포넌트를 작성해 보겠습니다.</p>
+									<p>src/App.js 파일을 열고 아래 코드로 변경합니다.</p>
 									<pre class="code">
-C:\Users\PC>node -v
-v22.14.0
+import React from 'react';
 
-C:\Users\PC>npm -v
-10.9.2
+function App() {
+  return (
+    &lt;div&gt;
+	&lt;h1&gt;Hello, React!&lt;/h1&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default App;
 									</pre>
-									
-									<h2>React프로젝트 생성</h2>
-									<p>이제 React프로젝트를 쉽게 시작할 수 있는 Create React App 도구를 사용해 보겠습니다. 터미널에서 아래 명령어를 실행해 React 애플리케이션을 만들어 주세요.</p>
-									
+				
+									<p>이 코드는 div요소 안에 h1 태그로 "Hello, React!"라는 문구를 출력하는 간단한 컴포넌트입니다.</p>
+				
+									<h2>JSX문법</h2>
+									<p>React에서 사용하는 특별한 문법인 JSX는 JavaScript 코드 안에서 HTML과 유사한 코드를 작성할 수 있게 도와줍니다. JSX의 기본 규칙은 다음과 같습니다.</p>
+									<p>● 닫는 태그: 모든 태그는 반드시 닫아야 합니다. 예를 들어 &lt;img/&gt;, &lt;br/&gt;와 같은 자주 쓰이는 태그도 반드시 닫아야 합니다.</p>
+									<p>● 하나의 부모 요소: JSX 코드에서는 반드시 하나의 부모 요소로 모든 내용을 감싸야 합니다. 여러 요소가 있을 경우 &lt;div&gt;로 감싸는 것이 일반적입니다.</p>
+				
+									<h2>다중컴포넌트 사용</h2>
+									<p>React에서는 여러 컴포넌트를 조합해 더 큰 UI를 만들 수 있습니다. 이번에는 간단한 Header 컴포넌트를 추가해 보겠습니다.</p>
+									<p>src/Header.js 파일을 생성한 뒤, 아래처럼 작성합니다.</p>
 									<pre class="code">
-npx create-react-app 앱이름									
+import React from 'react';
+
+function Header() {
+	return (
+		&lt;header&gt;
+			&lt;h2&gt;This is the Header&lt;/h2&gt;
+		&lt;/header&gt;
+	)
+}
+export default Header;
 									</pre>
-									<p>npx: Node.js와 함께 설치된 명령어 실행 도구입니다.</p>
-									
-									<h2>프로젝트 실행</h2>
-									<p>프로젝트 생성이 완료되면, 해당 디렉터리로 이동해 React개발 서버를 실행합니다.</p>
+			
+									<p>이제 App.js에서 Header 컴포넌트를 가져와 함께 사용해 보겠습니다.</p>
 									<pre class="code">
-cd 앱이름
-npm start									
+import React from 'react';
+import Header from './Header';
+
+function App() {
+	return (
+		&lt;div&gt;
+			&lt;Header/&gt;
+			&lt;h1&gt;Hello, React!&lt;/h1&gt;
+		&lt;/div&gt;
+	)
+}
+export default Header;									
 									</pre>
-									<p>reportWebVitals.js 에러가 발생할 경우 npm install web-vitals실행</p>
-									
-									<p>브라우저에 http://localhost:3000 을 열면 기본적으로 설정된 React애플리케이션이 실행되는 것을 확인할 수 있습니다.</p>
+				
+									<p>위 코드를 실행하면, Header와 App 컴포넌트가 함께 화면에 렌더링됩니다.</p>
+								</section>
 
 							</div>
 							<div class="col-4 col-12-medium">
