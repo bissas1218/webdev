@@ -8,11 +8,13 @@
 				<div class="col-6 col-12-small">
 					<ul class="link-list">
 						<li><a href="/study/react/index.jsp">설치하기</a></li>
+						<li><a href="/study/react/jsxIntro.jsp">JSX소개</a></li>
 					</ul>
 				</div>
 				<div class="col-6 col-12-small">
 					<ul class="link-list">
 						<li><a href="/study/react/defaultFileStructure.jsp">기본파일구조</a></li>
+						<li><a href="/study/react/elementRendering.jsp">엘리먼트렌더링</a></li>
 					</ul>
 				</div>
 			</div>
