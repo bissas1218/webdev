@@ -40,7 +40,24 @@
 								<section>
 									
 									<h2>엘리먼트 렌더링</h2>
-							
+									<p>엘리먼트는 React 앱의 가장 작은 단위입니다. 앨리먼트는 화면에 표시할 내용을 기술합니다.</p>
+									<pre class="code">
+const element = &lt;h1&gt;Hello, world&lt;/h1&gt;;									
+									</pre>
+									<p>브라우저 DOM 엘리먼트와 달리 React 엘리먼트는 일반 객체이며(plain object) 쉽게 생성할 수 있습니다. React DOM은 React 엘리먼트와 일치하도록 DOM을 업데이트합니다.</p>
+									
+									<h3>주의</h3>
+									<blockquote>더 널리 알려진 개념인 “컴포넌트”와 엘리먼트를 혼동할 수 있습니다. 다음 장에서 컴포넌트에 대해 소개할 예정입니다. 엘리먼트는 컴포넌트의 “구성 요소”이므로 이번 장을 읽고 나서 다음 장으로 넘어갈 것을 권합니다.</blockquote>
+								
+									<h2>DOM에 엘리먼트 렌더링하기</h2>
+									<p>HTML 파일 어딘가에 &lt;div&gt;가 있다고 가정해 봅시다.</p>
+									<pre class="code">
+&lt;div id="root"&gt;&lt;/div&gt;									
+									</pre>
+									<p>이 안에 들어가는 모든 엘리먼트를 React DOM에서 관리하기 때문에 이것을 “루트(root)” DOM 노드라고 부릅니다.</p>
+									<p>React로 구현된 애플리케이션은 일반적으로 하나의 루트 DOM 노드가 있습니다. React를 기존 앱에 통합하려는 경우 원하는 만큼 많은 수의 독립된 루트 DOM 노드가 있을 수 있습니다.</p>
+									<p>React 엘리먼트를 렌더링 하기 위해서는 우선 DOM 엘리먼트를 ReactDOM.createRoot()에 전달한 다음, React 엘리먼트를 root.render()에 전달해야 합니다.</p>
+									
 								</section>
 
 							</div>

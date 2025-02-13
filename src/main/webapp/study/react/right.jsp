@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
     <section>
-		<h2>그다음 배울것들</h2>
+		<h2>주요개념</h2>
 		<div>
 			<div class="row">
 				<div class="col-6 col-12-small">

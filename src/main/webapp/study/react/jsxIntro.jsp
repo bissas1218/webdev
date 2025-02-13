@@ -95,7 +95,7 @@ const element = &lt;img src={user.avatarUrl}&gt;&lt;/img&gt;;
 									</pre>
 									<p>어트리뷰트에 JavaScript 표현식을 삽입할 때 중괄호 주변에 따옴표를 입력하지 마세요. 따옴표(문자열 값에 사용) 또는 중괄호(표현식에 사용) 중 하나만 사용하고, 동일한 어트리뷰트에 두 가지를 동시에 사용하면 안 됩니다.</p>
 									
-									<h2>경고</h2>
+									<h3>경고</h3>
 									<blockquote>JSX는 HTML보다는 JavaScript에 가깝기 때문에, React DOM은 HTML 어트리뷰트 이름 대신 camelCase 프로퍼티 명명 규칙을 사용합니다. 
 									예를 들어, JSX에서 class는 className가 되고 tabindex는 tabIndex가 됩니다.</blockquote>
 	
