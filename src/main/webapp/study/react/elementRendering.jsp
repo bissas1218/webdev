@@ -58,6 +58,41 @@ const element = &lt;h1&gt;Hello, world&lt;/h1&gt;;
 									<p>React로 구현된 애플리케이션은 일반적으로 하나의 루트 DOM 노드가 있습니다. React를 기존 앱에 통합하려는 경우 원하는 만큼 많은 수의 독립된 루트 DOM 노드가 있을 수 있습니다.</p>
 									<p>React 엘리먼트를 렌더링 하기 위해서는 우선 DOM 엘리먼트를 ReactDOM.createRoot()에 전달한 다음, React 엘리먼트를 root.render()에 전달해야 합니다.</p>
 									
+									<pre class="code">
+const root = ReactDOM.createRoot(
+  document.getElementById('root')
+);
+const element = &lt;h1&gt;Hello, world&lt;/h1&gt;;
+root.render(element);									
+									</pre>
+									<p>위 코드를 실행하면 화면에 “Hello, world”가 보일 겁니다.</p>
+									
+									<h2>렌더링 된 엘리먼트 업데이트하기</h2>
+									<p>React 엘리먼트는 불변객체입니다. 엘리먼트를 생성한 이후에는 해당 엘리먼트의 자식이나 속성을 변경할 수 없습니다. 엘리먼트는 영화에서 하나의 프레임과 같이 특정 시점의 UI를 보여줍니다.</p>
+									<p>지금까지 소개한 내용을 바탕으로 하면 UI를 업데이트하는 유일한 방법은 새로운 엘리먼트를 생성하고 이를 root.render()로 전달하는 것입니다.</p>
+									<p>예시로 똑딱거리는 시계를 살펴보겠습니다.</p>
+									
+									<pre class="code">
+const root = ReactDOM.createRoot(
+  document.getElementById('root')
+);
+
+function tick() {
+  const element = (
+    &lt;div&gt;
+      &lt;h1&gt;Hello, world!&lt;/h1&gt;
+      &lt;h2&gt;It is {new Date().toLocaleTimeString()}.&lt;/h2&gt;
+    &lt;/div&gt;
+  );
+  root.render(element);
+}
+
+setInterval(tick, 1000);									
+									</pre>
+									<p>위 함수는 setInterval() 콜백을 이용해 초마다 root.render()를 호출합니다.</p>
+									
+									<h3>주의</h3>
+									<blockquote>실제로 대부분의 React 앱은 root.render()를 한 번만 호출합니다. 다음 장에서는 이와 같은 코드가 유상태 컴포넌트에 어떻게 캡슐화되는지 설명합니다.</blockquote>
 								</section>
 
 							</div>
