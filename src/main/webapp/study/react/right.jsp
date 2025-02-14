@@ -9,6 +9,7 @@
 					<ul class="link-list">
 						<li><a href="/study/react/index.jsp">설치하기</a></li>
 						<li><a href="/study/react/jsxIntro.jsp">JSX소개</a></li>
+						<li><a href="/study/react/componentsProps.jsp">Components와 Props</a></li>
 					</ul>
 				</div>
 				<div class="col-6 col-12-small">

@@ -39,67 +39,82 @@
 
 								<section>
 									
-									<h2>엘리먼트 렌더링</h2>
-									<p>엘리먼트는 React 앱의 가장 작은 단위입니다. 앨리먼트는 화면에 표시할 내용을 기술합니다.</p>
+									<h2>Components와 Props</h2>
+									<p>컴포넌트를 통해 UI를 재사용 가능한 개별적인 여러 조각으로 나누고, 각 조각을 개별적으로 살펴볼 수 있습니다. 이 페이지에서는 컴포넌트의 개념을 소개합니다. 자세한 컴포넌트 API 레퍼런스는 여기에서 확인할 수 있습니다.</p>
+									<p>개념적으로 컴포넌트는 JavaScript 함수와 유사합니다. “props”라고 하는 임의의 입력을 받은 후, 화면에 어떻게 표시되는지를 기술하는 React 엘리먼트를 반환합니다.</p>
+									
+									<h2>함수 컴포넌트와 클래스 컴포넌트</h2>
+									<p>컴포넌트를 정의하는 가장 간단한 방법은 JavaScript 함수를 작성하는 것입니다.</p>
 									<pre class="code">
-const element = &lt;h1&gt;Hello, world&lt;/h1&gt;;									
+function Welcome(props) {
+  return &lt;h1&gt;Hello, {props.name}&lt;/h1&gt;;
+}									
 									</pre>
-									<p>브라우저 DOM 엘리먼트와 달리 React 엘리먼트는 일반 객체이며(plain object) 쉽게 생성할 수 있습니다. React DOM은 React 엘리먼트와 일치하도록 DOM을 업데이트합니다.</p>
-									
-									<h3>주의</h3>
-									<blockquote>더 널리 알려진 개념인 “컴포넌트”와 엘리먼트를 혼동할 수 있습니다. 다음 장에서 컴포넌트에 대해 소개할 예정입니다. 엘리먼트는 컴포넌트의 “구성 요소”이므로 이번 장을 읽고 나서 다음 장으로 넘어갈 것을 권합니다.</blockquote>
-								
-									<h2>DOM에 엘리먼트 렌더링하기</h2>
-									<p>HTML 파일 어딘가에 &lt;div&gt;가 있다고 가정해 봅시다.</p>
+									<p>이 함수는 데이터를 가진 하나의 “props” (props는 속성을 나타내는 데이터입니다) 객체 인자를 받은 후 React 엘리먼트를 반환하므로 유효한 React 컴포넌트입니다. 이러한 컴포넌트는 JavaScript 함수이기 때문에 말 그대로 “함수 컴포넌트”라고 호칭합니다.</p>
+									<p>또한 ES6 class를 사용하여 컴포넌트를 정의할 수 있습니다.</p>
 									<pre class="code">
-&lt;div id="root"&gt;&lt;/div&gt;									
+class Welcome extends React.Component {
+  render() {
+    return &lt;h1&gt;Hello, {this.props.name}&lt;/h1&gt;;
+  }
+}									
 									</pre>
-									<p>이 안에 들어가는 모든 엘리먼트를 React DOM에서 관리하기 때문에 이것을 “루트(root)” DOM 노드라고 부릅니다.</p>
-									<p>React로 구현된 애플리케이션은 일반적으로 하나의 루트 DOM 노드가 있습니다. React를 기존 앱에 통합하려는 경우 원하는 만큼 많은 수의 독립된 루트 DOM 노드가 있을 수 있습니다.</p>
-									<p>React 엘리먼트를 렌더링 하기 위해서는 우선 DOM 엘리먼트를 ReactDOM.createRoot()에 전달한 다음, React 엘리먼트를 root.render()에 전달해야 합니다.</p>
+									<p>React의 관점에서 볼 때 위 두 가지 유형의 컴포넌트는 동일합니다.</p>
+									<p>class는 몇 가지 추가 기능이 있으며 이에 대해서는 다음 장에서 설명합니다. 그때까지는 간결성을 위해 함수 컴포넌트를 사용하겠습니다. 함수 컴포넌트와 클래스 컴포넌트 둘 다 몇 가지 추가 기능이 있으며 이에 대해서는 다음 장에서 설명합니다.</p>
 									
+									<h2>컴포넌트 렌더링</h2>
+									<p>이전까지는 DOM 태그만을 사용해 React 엘리먼트를 나타냈습니다.</p>
 									<pre class="code">
-const root = ReactDOM.createRoot(
-  document.getElementById('root')
-);
-const element = &lt;h1&gt;Hello, world&lt;/h1&gt;;
-root.render(element);									
+const element = &lt;div /&gt;;										
 									</pre>
-									<p>위 코드를 실행하면 화면에 “Hello, world”가 보일 겁니다.</p>
-									
-									<h2>렌더링 된 엘리먼트 업데이트하기</h2>
-									<p>React 엘리먼트는 불변객체입니다. 엘리먼트를 생성한 이후에는 해당 엘리먼트의 자식이나 속성을 변경할 수 없습니다. 엘리먼트는 영화에서 하나의 프레임과 같이 특정 시점의 UI를 보여줍니다.</p>
-									<p>지금까지 소개한 내용을 바탕으로 하면 UI를 업데이트하는 유일한 방법은 새로운 엘리먼트를 생성하고 이를 root.render()로 전달하는 것입니다.</p>
-									<p>예시로 똑딱거리는 시계를 살펴보겠습니다.</p>
-									
+									<p>React 엘리먼트는 사용자 정의 컴포넌트로도 나타낼 수 있습니다.</p>
 									<pre class="code">
-const root = ReactDOM.createRoot(
-  document.getElementById('root')
-);
-
-function tick() {
-  const element = (
-    &lt;div&gt;
-      &lt;h1&gt;Hello, world!&lt;/h1&gt;
-      &lt;h2&gt;It is {new Date().toLocaleTimeString()}.&lt;/h2&gt;
-    &lt;/div&gt;
-  );
-  root.render(element);
+const element = &lt;Welcome name="Sara" /&gt;;									
+									</pre>
+									<p>React가 사용자 정의 컴포넌트로 작성한 엘리먼트를 발견하면 JSX 어트리뷰트와 자식을 해당 컴포넌트에 단일 객체로 전달합니다. 이 객체를 “props”라고 합니다.</p>
+									<p>다음은 페이지에 “Hello, Sara”를 렌더링하는 예시입니다.</p>
+									<pre class="code">
+function Welcome(props) {
+  return &lt;h1&gt;Hello, {props.name}&lt;/h1&gt;;
 }
 
-setInterval(tick, 1000);									
+const root = ReactDOM.createRoot(document.getElementById('root'));
+const element = &lt;Welcome name="Sara" /&gt;;
+root.render(element);									
 									</pre>
-									<p>위 함수는 setInterval() 콜백을 이용해 초마다 root.render()를 호출합니다.</p>
+									<p>이 예시에서는 다음과 같은 일들이 일어납니다.</p>
+									<ol>
+										<li>&lt;Welcome name="Sara" /&gt; 엘리먼트로 root.render()를 호출합니다.</li>
+										<li>React는 {name: 'Sara'}를 props로 하여 Welcome 컴포넌트를 호출합니다.</li>
+										<li>Welcome 컴포넌트는 결과적으로 &lt;h1&gt;Hello, Sara&lt;/h1&gt; 엘리먼트를 반환합니다.</li>
+										<li>React DOM은 &lt;h1&gt;Hello, Sara&lt;/h1&gt; 엘리먼트와 일치하도록 DOM을 효율적으로 업데이트합니다.</li>
+									</ol>
 									
-									<h3>주의</h3>
-									<blockquote>실제로 대부분의 React 앱은 root.render()를 한 번만 호출합니다. 다음 장에서는 이와 같은 코드가 유상태 컴포넌트에 어떻게 캡슐화되는지 설명합니다.</blockquote>
+									<blockquote>
+										<p style="color:red;">주의: 컴포넌트의 이름은 항상 대문자로 시작합니다.</p>
+										<p>React는 소문자로 시작하는 컴포넌트를 DOM 태그로 처리합니다. 예를 들어 &lt;div /&gt;는 HTML div 태그를 나타내지만, &lt;Welcome /&gt;은 컴포넌트를 나타내며 범위 안에 Welcome이 있어야 합니다.</p>
+										<p>이 규칙에 대한 자세한 내용은 여기에서 확인할 수 있습니다.</p>
+									</blockquote>
 									
-									<h2>변경된 부분만 업데이트하기</h2>
-									<p>React DOM은 해당 엘리먼트와 그 자식 엘리먼트를 이전의 엘리먼트와 비교하고 DOM을 원하는 상태로 만드는데 필요한 경우에만 DOM을 업데이트합니다.</p>
-									<p>개발자 도구를 이용해 마지막 예시를 살펴보면 이를 확인할 수 있습니다.</p>
-									<img src="/study/react/images/granular-dom-updates.gif" />
-									<p>매초 전체 UI를 다시 그리도록 엘리먼트를 만들었지만 React DOM은 내용이 변경된 텍스트 노드만 업데이트했습니다.</p>
-									<p>경험에 비추어 볼 때 특정 시점에 UI가 어떻게 보일지 고민하는 이런 접근법은 시간의 변화에 따라 UI가 어떻게 변화할지 고민하는 것보다 더 많은 수의 버그를 없앨 수 있습니다.</p>
+									<h2>컴포넌트 합성</h2>
+									<p>컴포넌트는 자신의 출력에 다른 컴포넌트를 참조할 수 있습니다. 이는 모든 세부 단계에서 동일한 추상 컴포넌트를 사용할 수 있음을 의미합니다. React 앱에서는 버튼, 폼, 다이얼로그, 화면 등의 모든 것들이 흔히 컴포넌트로 표현됩니다.</p>
+									<p>예를 들어 Welcome을 여러 번 렌더링하는 App 컴포넌트를 만들 수 있습니다.</p>
+									<pre class="code">
+function Welcome(props) {
+  return &lt;h1&gt;Hello, {props.name}&lt;/h1&gt;;
+}
+
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;Welcome name="Sara" /&gt;
+      &lt;Welcome name="Cahal" /&gt;
+      &lt;Welcome name="Edite" /&gt;
+    &lt;/div&gt;
+  );
+}									
+									</pre>
+									<p>일반적으로 새 React 앱은 최상위에 단일 App 컴포넌트를 가지고 있습니다. 하지만 기존 앱에 React를 통합하는 경우에는 Button과 같은 작은 컴포넌트부터 시작해서 뷰 계층의 상단으로 올라가면서 점진적으로 작업해야 할 수 있습니다.</p>
 									
 								</section>
 

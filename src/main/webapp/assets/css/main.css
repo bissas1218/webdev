@@ -104,14 +104,26 @@ select:focus {
 
 .code {
 	border: solid 2px;
-		font-family: "Courier New", monospace;
-		font-size: 0.9rem;
-		margin: 0 0.2rem 0.25rem 0;
-		padding: 0.5rem 0.25rem 0 0.5rem;
-		background: rgba(220, 220, 220, 0.25);
-		border-color: #eeeeee;
+	font-family: "Courier New", monospace;
+	font-size: 1.0rem;
+	margin: 0 0.2rem 0.25rem 0;
+	padding: 1.0rem 0.25rem 0 0.5rem;
+	background: rgba(220, 220, 220, 0.25);
+	border-color: #eeeeee;
 }
 	
+/* List */	
+ol {
+		list-style: decimal;
+		margin: 0 0 2rem 0;
+		padding-left: 1.25rem;
+	}
+
+		ol li {
+			padding-left: 0.25rem;
+			margin-bottom: 1.25rem;
+		}
+			
 /* Basic */
 
 	html {
@@ -167,7 +179,8 @@ select:focus {
 	}
 
 	p, ul {
-		margin-bottom: 1.25em;
+		margin-top: 1.25em;
+		margin-bottom: 0.75em;
 	}
 
 	p {
