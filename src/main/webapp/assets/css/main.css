@@ -160,8 +160,8 @@ ol {
 	/*	text-transform: lowercase;*/
 		font-size: 1.6em;
 		letter-spacing: -1px;
-		margin-top: 0.5em;
-		margin-bottom: 0.2em;
+		margin-top: 1.0em;
+		margin-bottom: 0em;
 	}
 
 	h3, h4 {

@@ -116,6 +116,36 @@ function App() {
 									</pre>
 									<p>일반적으로 새 React 앱은 최상위에 단일 App 컴포넌트를 가지고 있습니다. 하지만 기존 앱에 React를 통합하는 경우에는 Button과 같은 작은 컴포넌트부터 시작해서 뷰 계층의 상단으로 올라가면서 점진적으로 작업해야 할 수 있습니다.</p>
 									
+									<h2>컴포넌트 추출</h2>
+									<p>컴포넌트를 여러 개의 작은 컴포넌트로 나누는 것을 두려워하지 마세요.</p>
+									<p>다음 Comment 컴포넌트를 살펴봅시다.</p>
+									<pre class="code">
+function Comment(props) {
+  return (
+    &lt;div className="Comment"&gt;
+      &lt;div className="UserInfo"&gt;
+        &lt;img className="Avatar"
+          src={props.author.avatarUrl}
+          alt={props.author.name}
+        /&gt;
+        &lt;div className="UserInfo-name"&gt;
+          {props.author.name}
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div className="Comment-text"&gt;
+        {props.text}
+      &lt;/div&gt;
+      &lt;div className="Comment-date"&gt;
+        {formatDate(props.date)}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}									
+									</pre>
+									<p>이 컴포넌트는 author(객체), text(문자열) 및 date(날짜)를 props로 받은 후 소셜 미디어 웹 사이트의 코멘트를 나타냅니다.</p>
+									<p>이 컴포넌트는 구성요소들이 모두 중첩 구조로 이루어져 있어서 변경하기 어려울 수 있으며, 각 구성요소를 개별적으로 재사용하기도 힘듭니다. 이 컴포넌트에서 몇 가지 컴포넌트를 추출하겠습니다.</p>
+									<p>먼저 Avatar를 추출하겠습니다.</p>
+									
 								</section>
 
 							</div>
