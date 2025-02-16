@@ -35,47 +35,51 @@
 				<div id="main">
 					<div class="container">
 						<div class="row main-row">
-							<div class="col-10 col-12-medium">
+							<div class="col-8 col-12-medium">
 
 								<section>
-									<h2>React 설치하기</h2>
-									<p>React는 사용자 인터페이스(UI)를 만들 때 많이 사용되는 JavaScript 라이브러리입니다. React를 처음 설치하고, 간단한 컴포넌트를 만들어보자.</p>
 									
-									<h2>Node.js 설치</h2>
-									<p>React를 사용하기 위해서는 먼저 Node.js를 설치해야 합니다. Node.js는 Javascript런타임으로, React개발환경을 구축할 때 필수적으로 필요합니다.</p>
-									<p>https://nodejs.org/en/download/ 접속하여 node-v22.14.0-x64.msi 파일 다운로드 및 설치</p>
-									<p>설치가 완료되면 터미널을 열고 다음 명령어로 Node.js와 NPM(Node Package Manager)이 잘 설치되었는지 확인할 수 있습니다.</p>
-									
+									<h2>State and Lifecycle</h2>
+									<p>이 페이지는 React 컴포넌트 안의 state와 생명주기에 대한 개념을 소개해 줍니다. 자세한 컴포넌트 API 레퍼런스는 여기에서 찾을 수 있습니다.</p>
+									<p>이전 섹션에서 다뤄본 째깍거리는 시계 예시를 다시 살펴보겠습니다. 엘리먼트 렌더링에서는 UI를 업데이트하는 한 가지 방법만 배웠으며, 렌더링 된 출력값을 변경하기 위해 root.render()를 호출했습니다.</p>
 									<pre class="code">
-C:\Users\PC>node -v
-v22.14.0
+const root = ReactDOM.createRoot(document.getElementById('root'));
+  
+function tick() {
+  const element = (
+    &lt;div&gt;
+      &lt;h1&gt;Hello, world!&lt;/h1&gt;
+      &lt;h2&gt;It is {new Date().toLocaleTimeString()}.&lt;/h2&gt;
+    &lt;/div&gt;
+  );
+  root.render(element);
+}
 
-C:\Users\PC>npm -v
-10.9.2
+setInterval(tick, 1000);									
 									</pre>
-									
-									<h2>React프로젝트 생성</h2>
-									<p>이제 React프로젝트를 쉽게 시작할 수 있는 Create React App 도구를 사용해 보겠습니다. 터미널에서 아래 명령어를 실행해 React 애플리케이션을 만들어 주세요.</p>
-									
-									<pre class="code">
-npx create-react-app 앱이름									
-									</pre>
-									<p>npx: Node.js와 함께 설치된 명령어 실행 도구입니다.</p>
-									
-									<h2>프로젝트 실행</h2>
-									<p>프로젝트 생성이 완료되면, 해당 디렉터리로 이동해 React개발 서버를 실행합니다.</p>
-									<pre class="code">
-cd 앱이름
-npm start									
-									</pre>
-									<p>reportWebVitals.js 에러가 발생할 경우 npm install web-vitals실행</p>
-									
-									<p>브라우저에 http://localhost:3000 을 열면 기본적으로 설정된 React애플리케이션이 실행되는 것을 확인할 수 있습니다.</p>
+								</section>
 
 							</div>
-							<div class="col-2 col-12-medium">
+							<div class="col-4 col-12-medium">
 
 								<jsp:include page="/study/react/right.jsp"></jsp:include>
+								
+								<section>
+									<h2>Who are you guys?</h2>
+									<ul class="small-image-list">
+										<li>
+											<a href="#"><img src="/images/pic2.jpg" alt="" class="left" /></a>
+											<h4>Jane Anderson</h4>
+											<p>Varius nibh. Suspendisse vitae magna eget et amet mollis justo facilisis amet quis.</p>
+										</li>
+										<li>
+											<a href="#"><img src="/images/pic1.jpg" alt="" class="left" /></a>
+											<h4>James Doe</h4>
+											<p>Vitae magna eget odio amet mollis justo facilisis amet quis. Sed sagittis consequat.</p>
+										</li>
+									</ul>
+								</section>
+
 								
 
 							</div>

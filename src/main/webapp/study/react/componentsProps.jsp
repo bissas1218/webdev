@@ -146,6 +146,88 @@ function Comment(props) {
 									<p>이 컴포넌트는 구성요소들이 모두 중첩 구조로 이루어져 있어서 변경하기 어려울 수 있으며, 각 구성요소를 개별적으로 재사용하기도 힘듭니다. 이 컴포넌트에서 몇 가지 컴포넌트를 추출하겠습니다.</p>
 									<p>먼저 Avatar를 추출하겠습니다.</p>
 									
+									<pre class="code">
+function Avatar(props) {
+  return (
+    &lt;img className="Avatar"
+      src={props.user.avatarUrl}
+      alt={props.user.name}
+    /&gt;
+  );
+}									
+									</pre>
+									<p>Avatar 는 자신이 Comment 내에서 렌더링 된다는 것을 알 필요가 없습니다. 따라서 props의 이름을 author에서 더욱 일반화된 user로 변경하였습니다.</p>
+									<p>props의 이름은 사용될 context가 아닌 컴포넌트 자체의 관점에서 짓는 것을 권장합니다.</p>
+									<p>이제 Comment 가 살짝 단순해졌습니다.</p>
+									<pre class="code">
+function Comment(props) {
+  return (
+    &lt;div className="Comment"&gt;
+      &lt;div className="UserInfo"&gt;
+        &lt;Avatar user={props.author} /&gt;
+        &lt;div className="UserInfo-name"&gt;
+          {props.author.name}
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div className="Comment-text"&gt;
+        {props.text}
+      &lt;/div&gt;
+      &lt;div className="Comment-date"&gt;
+        {formatDate(props.date)}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}									
+									</pre>
+									<p>다음으로 Avatar 옆에 사용자의 이름을 렌더링하는 UserInfo 컴포넌트를 추출하겠습니다.</p>
+									<pre class="code">
+function UserInfo(props) {
+  return (
+    &lt;div className="UserInfo"&gt;
+      &lt;Avatar user={props.user} /&gt;
+      &lt;div className="UserInfo-name"&gt;
+        {props.user.name}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}									
+									</pre>
+									<p>Comment 가 더욱 단순해졌습니다.</p>
+									<pre class="code">
+function Comment(props) {
+  return (
+    &lt;div className="Comment"&gt;
+      &lt;UserInfo user={props.author} /&gt;
+      &lt;div className="Comment-text"&gt;
+        {props.text}
+      &lt;/div&gt;
+      &lt;div className="Comment-date"&gt;
+        {formatDate(props.date)}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}									
+									</pre>
+									<p>처음에는 컴포넌트를 추출하는 작업이 지루해 보일 수 있습니다. 하지만 재사용 가능한 컴포넌트를 만들어 놓는 것은 더 큰 앱에서 작업할 때 두각을 나타냅니다. UI 일부가 여러 번 사용되거나 (Button, Panel, Avatar), UI 일부가 자체적으로 복잡한 (App, FeedStory, Comment) 경우에는 별도의 컴포넌트로 만드는 게 좋습니다.</p>
+									
+									<h2>props는 읽기 전용입니다.</h2>
+									<p>함수 컴포넌트나 클래스 컴포넌트 모두 컴포넌트의 자체 props를 수정해서는 안 됩니다. 다음 sum 함수를 살펴봅시다.</p>
+									<pre class="code">
+function sum(a, b) {
+  return a + b;
+}									
+									</pre>
+									<p>이런 함수들은 순수 함수라고 호칭합니다. 입력값을 바꾸려 하지 않고 항상 동일한 입력값에 대해 동일한 결과를 반환하기 때문입니다.</p>
+									<p>반면에 다음 함수는 자신의 입력값을 변경하기 때문에 순수 함수가 아닙니다.</p>
+									<pre class="code">
+function withdraw(account, amount) {
+  account.total -= amount;
+}									
+									</pre>
+									<p>React는 매우 유연하지만 한 가지 엄격한 규칙이 있습니다.</p>
+									<p style="font-weight:bold;">모든 React 컴포넌트는 자신의 props를 다룰 때 반드시 순수 함수처럼 동작해야 합니다.</p>
+									<p>물론 애플리케이션 UI는 동적이며 시간에 따라 변합니다. 다음 장에서는 “state”라는 새로운 개념을 소개합니다. React 컴포넌트는 state를 통해 위 규칙을 위반하지 않고 사용자 액션, 네트워크 응답 및 다른 요소에 대한 응답으로 시간에 따라 자신의 출력값을 변경할 수 있습니다.</p>
+									
 								</section>
 
 							</div>

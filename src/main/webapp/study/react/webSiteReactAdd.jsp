@@ -38,42 +38,59 @@
 							<div class="col-10 col-12-medium">
 
 								<section>
-									<h2>React 설치하기</h2>
-									<p>React는 사용자 인터페이스(UI)를 만들 때 많이 사용되는 JavaScript 라이브러리입니다. React를 처음 설치하고, 간단한 컴포넌트를 만들어보자.</p>
 									
-									<h2>Node.js 설치</h2>
-									<p>React를 사용하기 위해서는 먼저 Node.js를 설치해야 합니다. Node.js는 Javascript런타임으로, React개발환경을 구축할 때 필수적으로 필요합니다.</p>
-									<p>https://nodejs.org/en/download/ 접속하여 node-v22.14.0-x64.msi 파일 다운로드 및 설치</p>
-									<p>설치가 완료되면 터미널을 열고 다음 명령어로 Node.js와 NPM(Node Package Manager)이 잘 설치되었는지 확인할 수 있습니다.</p>
+									<h2>웹 사이트에 React 추가하기</h2>
+									<p>React는 필요한 만큼만 사용하면 됩니다. 적게든 많게든 말이죠.</p>
+									<p>React는 처음부터 점진적으로 도입할 수 있게 설계되었습니다. 그래서 React는 필요한 만큼만 사용하면 됩니다. 아마 기존 페이지에 “상호작용”이라는 조미료를 첨가하기만 하고 싶을 수도 있습니다. 이럴 때 React 컴포넌트를 쓰면 좋습니다.</p>
+									<p>오늘날 웹사이트의 대부분은 싱글 페이지가 아니고 그래야 할 필요도 없습니다. 빌드 도구 없이 몇 줄의 코드만으로 웹사이트의 작은 부분에 먼저 React를 도입해보세요. React의 비중을 천천히 늘릴 수도 있고 아니면 동적인 위젯을 몇 개 추가하는 것으로 끝낼 수도 있습니다.</p>
+									
+									<h2>1분 내로 React 추가하기</h2>
+									<p>이 글에서는 기존 페이지에 React를 추가하는 법에 대해서 다룹니다. 기존의 웹사이트에서 시도 해보셔도 좋고, 연습삼아 새로운 HTML 파일에서 시도해보셔도 좋습니다.</p>
+									<p>복잡한 도구를 쓰거나 뭔가를 따로 설치해야 할 필요도 없습니다. 약간의 시간과 함께 인터넷만 연결 되어 있다면 이 문서에서 다루는 것을 모두 해볼 수 있습니다.</p>
 									
 									<pre class="code">
-C:\Users\PC>node -v
-v22.14.0
 
-C:\Users\PC>npm -v
-10.9.2
+&lt;div id="like_button_container"&gt;&lt;/div&gt;
+
+&lt;script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin&gt;&lt;/script&gt;
+&lt;script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin&gt;&lt;/script&gt;
+
+&lt;script&gt;
+
+const e = React.createElement;
+
+class LikeButton extends React.Component {
+	constructor(props) {
+    	super(props);
+    	this.state = { liked: false };
+  	}
+
+  	render() {
+    	if (this.state.liked) {
+      		return 'You liked this.';
+    	}
+
+    	return e(
+      		'button',
+      		{ onClick: () => this.setState({ liked: true }) },
+      	'Like'
+    	);
+  	}
+}
+
+&lt;!-- 만든 React 컴포넌트를 실행. --&gt;
+const domContainer = document.querySelector('#like_button_container');
+const root = ReactDOM.createRoot(domContainer);
+root.render(e(LikeButton));
+	
+&lt;/script&gt;
+
+									
 									</pre>
-									
-									<h2>React프로젝트 생성</h2>
-									<p>이제 React프로젝트를 쉽게 시작할 수 있는 Create React App 도구를 사용해 보겠습니다. 터미널에서 아래 명령어를 실행해 React 애플리케이션을 만들어 주세요.</p>
-									
-									<pre class="code">
-npx create-react-app 앱이름									
-									</pre>
-									<p>npx: Node.js와 함께 설치된 명령어 실행 도구입니다.</p>
-									
-									<h2>프로젝트 실행</h2>
-									<p>프로젝트 생성이 완료되면, 해당 디렉터리로 이동해 React개발 서버를 실행합니다.</p>
-									<pre class="code">
-cd 앱이름
-npm start									
-									</pre>
-									<p>reportWebVitals.js 에러가 발생할 경우 npm install web-vitals실행</p>
-									
-									<p>브라우저에 http://localhost:3000 을 열면 기본적으로 설정된 React애플리케이션이 실행되는 것을 확인할 수 있습니다.</p>
+								</section>
 
 							</div>
-							<div class="col-2 col-12-medium">
+							<div class="col-2">
 
 								<jsp:include page="/study/react/right.jsp"></jsp:include>
 								
