@@ -43,7 +43,7 @@
 								<section>
 									<h2>Language</h2>
 									<ul class="link-list">
-										<li><a href="/study/react/index.jsp">React</a></li>
+										<li><a href="/study/react/install/start.jsp">React</a></li>
 										<li><a href="#">Sed neque nisi consequat</a></li>
 										<li><a href="#">Eget et amet consequat</a></li>
 										<li><a href="#">Dapibus sed mattis blandit</a></li>

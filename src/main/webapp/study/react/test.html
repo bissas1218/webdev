@@ -7,7 +7,9 @@
 </head>
 <body>
 
-<div id="like_button_container"></div>
+<div class="like_button_container" data-commentid="1" ></div>
+<div class="like_button_container" data-commentid="2" ></div>
+<div class="like_button_container" data-commentid="3" ></div>
 
   <!-- ... 다른 HTML ... -->
 
@@ -21,29 +23,38 @@
 const e = React.createElement;
 
 class LikeButton extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { liked: false };
-  }
-
-  render() {
-    if (this.state.liked) {
-      return 'You liked this.';
-    }
-
-    return e(
-      'button',
-      { onClick: () => this.setState({ liked: true }) },
-      'Like'
-    );
-  }
-}
-
-  	<!-- 만든 React 컴포넌트를 실행. -->
-	const domContainer = document.querySelector('#like_button_container');
-	const root = ReactDOM.createRoot(domContainer);
-	root.render(e(LikeButton));
 	
+	constructor(props){
+		super(props);
+		console.log('constructor comment id : '+props.commentID);
+		this.state = {liked: false};
+	}
+	
+	render(){
+		console.log('render');	
+		if(this.state.liked){
+			return 'You liked this.';
+		}
+		
+		return e(
+			'button',
+			{onClick: () => this.setState({ liked: true }) },
+			'Like'
+		);
+	}
+	
+}
+  
+document.querySelectorAll('.like_button_container').forEach(domContainer => {
+	const commentID = parseInt(domContainer.dataset.commentid, 10);
+	console.log(commentID); // 1,2,3
+	const root = ReactDOM.createRoot(domContainer);
+	
+	root.render(
+		e(LikeButton, {commentID: commentID})
+	);
+});
+  
 </script>
 
 
