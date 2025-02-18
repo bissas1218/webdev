@@ -39,67 +39,18 @@
 
 								<section>
 									
-									<h2>웹 사이트에 React 추가하기</h2>
-									<p>React는 필요한 만큼만 사용하면 됩니다. 적게든 많게든 말이죠.</p>
-									<p>React는 처음부터 점진적으로 도입할 수 있게 설계되었습니다. 그래서 React는 필요한 만큼만 사용하면 됩니다. 아마 기존 페이지에 “상호작용”이라는 조미료를 첨가하기만 하고 싶을 수도 있습니다. 이럴 때 React 컴포넌트를 쓰면 좋습니다.</p>
-									<p>오늘날 웹사이트의 대부분은 싱글 페이지가 아니고 그래야 할 필요도 없습니다. 빌드 도구 없이 몇 줄의 코드만으로 웹사이트의 작은 부분에 먼저 React를 도입해보세요. React의 비중을 천천히 늘릴 수도 있고 아니면 동적인 위젯을 몇 개 추가하는 것으로 끝낼 수도 있습니다.</p>
-									
-									<h2>1분 내로 React 추가하기</h2>
-									<p>이 글에서는 기존 페이지에 React를 추가하는 법에 대해서 다룹니다. 기존의 웹사이트에서 시도 해보셔도 좋고, 연습삼아 새로운 HTML 파일에서 시도해보셔도 좋습니다.</p>
-									<p>복잡한 도구를 쓰거나 뭔가를 따로 설치해야 할 필요도 없습니다. 약간의 시간과 함께 인터넷만 연결 되어 있다면 이 문서에서 다루는 것을 모두 해볼 수 있습니다.</p>
+									<h2>Hello World</h2>
+									<p>가장 단순한 React 예시는 다음과 같이 생겼습니다.</p>
 									
 									<pre class="code">
-
-&lt;div id="like_button_container1"&gt;&lt;/div&gt;
-
-&lt;div class="like_button_container" data-commentid="1" &gt;&lt;/div&gt;
-&lt;div class="like_button_container" data-commentid="2" &gt;&lt;/div&gt;
-&lt;div class="like_button_container" data-commentid="3" &gt;&lt;/div&gt;
-
-&lt;script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin&gt;&lt;/script&gt;
-&lt;script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin&gt;&lt;/script&gt;
-
-&lt;script&gt;
-
-const e = React.createElement;
-
-class LikeButton extends React.Component {
-	constructor(props) {
-    	super(props);
-    	this.state = { liked: false };
-  	}
-
-  	render() {
-    	if (this.state.liked) {
-      		return 'You liked this.';
-    	}
-
-    	return e(
-      		'button',
-      		{ onClick: () => this.setState({ liked: true }) },
-      	'Like'
-    	);
-  	}
-}
-
-&lt;!-- 만든 React 컴포넌트를 실행. --&gt;
-const domContainer = document.querySelector('#like_button_container1');
-const root = ReactDOM.createRoot(domContainer);
-root.render(e(LikeButton));
-	
-&lt;!-- 반복실행 --&gt;	
-document.querySelectorAll('.like_button_container').forEach(domContainer => {
-	const commentID = parseInt(domContainer.dataset.commentid, 10);
-	const root = ReactDOM.createRoot(domContainer);
-	root.render(
-		e(LikeButton, {commentID: commentID})
-	);
-});
-	
-&lt;/script&gt;
-
-									
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(&lt;h1&gt;Hello, world!&lt;/h1&gt;);									
 									</pre>
+									
+									<p>위 코드는 페이지에 “Hello, world!”라는 제목을 보여줍니다.</p>
+									
+									<h2>지식수준 가정</h2>
+									<p>React는 JavaScript 라이브러리이며, 따라서 JavaScript 언어에 대한 기본적인 이해가 필요합니다. 아직 자신이 없다면, JavaScript 튜토리얼 살펴보기를 통해 자신의 지식수준을 확인해보길 권장드리며 이를 통해 길을 잃지 않고 이 안내서를 잘 따라올 수 있게 될 것입니다. 30분에서 1시간 가량 소요되지만, 결과적으로 더 이상 React와 JavaScript를 동시에 배운다는 느낌을 받지 않을 수 있습니다.</p>
 								</section>
 
 							</div>

@@ -7,9 +7,14 @@
 </head>
 <body>
 
+<div id="like_button_container1"></div>
+<br/>
+
 <div class="like_button_container" data-commentid="1" ></div>
 <div class="like_button_container" data-commentid="2" ></div>
 <div class="like_button_container" data-commentid="3" ></div>
+
+<div id="root"></div>
 
   <!-- ... 다른 HTML ... -->
 
@@ -18,6 +23,8 @@
   <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
 
+	<script src="/study/react/test.js"></script>
+	
 <script>
 
 const e = React.createElement;
@@ -45,15 +52,19 @@ class LikeButton extends React.Component {
 	
 }
   
+const domContainer = document.querySelector('#like_button_container1');
+const root = ReactDOM.createRoot(domContainer);
+root.render(e(LikeButton));
+
 document.querySelectorAll('.like_button_container').forEach(domContainer => {
 	const commentID = parseInt(domContainer.dataset.commentid, 10);
-	console.log(commentID); // 1,2,3
 	const root = ReactDOM.createRoot(domContainer);
-	
 	root.render(
 		e(LikeButton, {commentID: commentID})
 	);
 });
+  
+  
   
 </script>
 

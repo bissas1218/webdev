@@ -39,73 +39,16 @@
 
 								<section>
 									
-									<h2>웹 사이트에 React 추가하기</h2>
-									<p>React는 필요한 만큼만 사용하면 됩니다. 적게든 많게든 말이죠.</p>
-									<p>React는 처음부터 점진적으로 도입할 수 있게 설계되었습니다. 그래서 React는 필요한 만큼만 사용하면 됩니다. 아마 기존 페이지에 “상호작용”이라는 조미료를 첨가하기만 하고 싶을 수도 있습니다. 이럴 때 React 컴포넌트를 쓰면 좋습니다.</p>
-									<p>오늘날 웹사이트의 대부분은 싱글 페이지가 아니고 그래야 할 필요도 없습니다. 빌드 도구 없이 몇 줄의 코드만으로 웹사이트의 작은 부분에 먼저 React를 도입해보세요. React의 비중을 천천히 늘릴 수도 있고 아니면 동적인 위젯을 몇 개 추가하는 것으로 끝낼 수도 있습니다.</p>
+									<h2>Javascript 언어개요</h2>
+									<p>JavaScript는 타입 및 연산자, 표준 내장 객체 및 메소드를 포함하는 다중 패러다임 동적 언어입니다. 문법은 Java 및 C 언어를 기반으로 합니다. 해당 언어들의 많은 구조가 JavaScript에도 적용됩니다. JavaScript는 객체 프로토타입 및 클래스를 사용하여 객체 지향 프로그래밍을 지원합니다. 또한 함수는 표현식을 통해 쉽게 생성되고 다른 객체처럼 전달될 수 있는 first-class이므로 함수형 프로그래밍을 지원합니다.</p>
+									<p>이 페이지는 C 또는 Java와 같은 다른 언어에 대한 배경 지식이 있는 독자를 위해 작성된, 다양한 JavaScript 언어 기능에 대한 간략한 개요를 제공합니다.</p>
 									
-									<h2>1분 내로 React 추가하기</h2>
-									<p>이 글에서는 기존 페이지에 React를 추가하는 법에 대해서 다룹니다. 기존의 웹사이트에서 시도 해보셔도 좋고, 연습삼아 새로운 HTML 파일에서 시도해보셔도 좋습니다.</p>
-									<p>복잡한 도구를 쓰거나 뭔가를 따로 설치해야 할 필요도 없습니다. 약간의 시간과 함께 인터넷만 연결 되어 있다면 이 문서에서 다루는 것을 모두 해볼 수 있습니다.</p>
-									
-									<pre class="code">
-
-&lt;div id="like_button_container1"&gt;&lt;/div&gt;
-
-&lt;div class="like_button_container" data-commentid="1" &gt;&lt;/div&gt;
-&lt;div class="like_button_container" data-commentid="2" &gt;&lt;/div&gt;
-&lt;div class="like_button_container" data-commentid="3" &gt;&lt;/div&gt;
-
-&lt;script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin&gt;&lt;/script&gt;
-&lt;script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin&gt;&lt;/script&gt;
-
-&lt;script&gt;
-
-const e = React.createElement;
-
-class LikeButton extends React.Component {
-	constructor(props) {
-    	super(props);
-    	this.state = { liked: false };
-  	}
-
-  	render() {
-    	if (this.state.liked) {
-      		return 'You liked this.';
-    	}
-
-    	return e(
-      		'button',
-      		{ onClick: () => this.setState({ liked: true }) },
-      	'Like'
-    	);
-  	}
-}
-
-&lt;!-- 만든 React 컴포넌트를 실행. --&gt;
-const domContainer = document.querySelector('#like_button_container1');
-const root = ReactDOM.createRoot(domContainer);
-root.render(e(LikeButton));
-	
-&lt;!-- 반복실행 --&gt;	
-document.querySelectorAll('.like_button_container').forEach(domContainer => {
-	const commentID = parseInt(domContainer.dataset.commentid, 10);
-	const root = ReactDOM.createRoot(domContainer);
-	root.render(
-		e(LikeButton, {commentID: commentID})
-	);
-});
-	
-&lt;/script&gt;
-
-									
-									</pre>
 								</section>
 
 							</div>
 							<div class="col-2">
 
-								<jsp:include page="/study/react/right.jsp"></jsp:include>
+								<jsp:include page="/study/javascript/right.jsp"></jsp:include>
 								
 
 							</div>
