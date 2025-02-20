@@ -40,6 +40,7 @@
 								<section>
 									
 									<h2>Javascript 언어개요</h2>
+									<p>https://developer.mozilla.org/ko/docs/Web/JavaScript/Language_overview</p>
 									<p>JavaScript는 타입 및 연산자, 표준 내장 객체 및 메소드를 포함하는 다중 패러다임 동적 언어입니다. 문법은 Java 및 C 언어를 기반으로 합니다. 해당 언어들의 많은 구조가 JavaScript에도 적용됩니다. JavaScript는 객체 프로토타입 및 클래스를 사용하여 객체 지향 프로그래밍을 지원합니다. 또한 함수는 표현식을 통해 쉽게 생성되고 다른 객체처럼 전달될 수 있는 first-class이므로 함수형 프로그래밍을 지원합니다.</p>
 									<p>이 페이지는 C 또는 Java와 같은 다른 언어에 대한 배경 지식이 있는 독자를 위해 작성된, 다양한 JavaScript 언어 기능에 대한 간략한 개요를 제공합니다.</p>
 									

@@ -124,6 +124,31 @@ ol {
 			margin-bottom: 1.25rem;
 		}
 			
+ul {
+		list-style: disc;
+		margin: 0 0 2rem 0;
+		padding-left: 1rem;
+	}
+
+		ul li {
+			padding: 0.35rem;
+		}
+
+		ul.divided {
+			list-style: none;
+			padding-left: 0;
+		}
+
+			ul.divided li {
+				border-top: solid 1px;
+				padding: 0.5rem 0;
+			}
+
+				ul.divided li:first-child {
+					border-top: 0;
+					padding-top: 0;
+				}
+							
 /* Basic */
 
 	html {
@@ -201,7 +226,7 @@ ol {
 	}
 
 	ul {
-		padding: 0.25em 0 0 0;
+		padding: 0.25em 0 0 1.5em;
 	}
 
 	a {

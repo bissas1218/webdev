@@ -191,6 +191,143 @@ root.render(&lt;Clock /&gt;);
 									<p>또한 Clock에 의해 생성된 DOM이 삭제될 때마다 타이머를 해제하려고 합니다. 이것은 React에서 “언마운팅”이라고 합니다.</p>
 									<p>컴포넌트 클래스에서 특별한 메서드를 선언하여 컴포넌트가 마운트되거나 언마운트 될 때 일부 코드를 작동할 수 있습니다.</p>
 									
+									<pre class="code">
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {date: new Date()};
+  }
+
+  componentDidMount() {
+  }
+
+  componentWillUnmount() {
+  }
+
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;Hello, world!&lt;/h1&gt;
+        &lt;h2&gt;It is {this.state.date.toLocaleTimeString()}.&lt;/h2&gt;
+      &lt;/div&gt;
+    );
+  }
+}									
+									</pre>
+									
+									<p>이러한 메서드들은 “생명주기 메서드”라고 불립니다.</p>
+									<p>componentDidMount() 메서드는 컴포넌트 출력물이 DOM에 렌더링 된 후에 실행됩니다. 이 장소가 타이머를 설정하기에 좋은 장소입니다.</p>
+
+									<pre class="code">
+componentDidMount() {
+    this.timerID = setInterval(
+      () => this.tick(),
+      1000
+    );
+  }									
+									</pre>
+									<p>this (this.timerID)에서 어떻게 타이머 ID를 제대로 저장하는지 주의해주세요.</p>
+									<p>this.props가 React에 의해 스스로 설정되고 this.state가 특수한 의미가 있지만, 타이머 ID와 같이 데이터 흐름 안에 포함되지 않는 어떤 항목을 보관할 필요가 있다면 자유롭게 클래스에 수동으로 부가적인 필드를 추가해도 됩니다.</p>
+									<p>componentWillUnmount() 생명주기 메서드 안에 있는 타이머를 분해해 보겠습니다.</p>
+
+									<pre class="code">
+componentWillUnmount() {
+    clearInterval(this.timerID);
+  }									
+									</pre>
+									<p>마지막으로 Clock 컴포넌트가 매초 작동하도록 하는 tick()이라는 메서드를 구현해 보겠습니다.</p>
+									<p>이것은 컴포넌트 로컬 state를 업데이트하기 위해 this.setState()를 사용합니다.</p>
+									
+									<pre class="code">
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {date: new Date()};
+  }
+
+  componentDidMount() {
+    this.timerID = setInterval(
+      () => this.tick(),
+      1000
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  tick() {
+    this.setState({
+      date: new Date()
+    });
+  }
+
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;Hello, world!&lt;/h1&gt;
+        &lt;h2&gt;It is {this.state.date.toLocaleTimeString()}.&lt;/h2&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(&lt;Clock /&gt;);									
+									</pre>
+									
+									<p>이제 시계는 매초 째깍거립니다.</p>
+									<p>현재 어떤 상황이고 메서드가 어떻게 호출되는지 순서대로 빠르게 요약해 보겠습니다.</p>
+									<ol>
+										<li>&lt;Clock /&gt;가 root.render()로 전달되었을 때 React는 Clock 컴포넌트의 constructor를 호출합니다. Clock이 현재 시각을 표시해야 하기 때문에 현재 시각이 포함된 객체로 this.state를 초기화합니다. 나중에 이 state를 업데이트할 것입니다.</li>
+										<li>React는 Clock 컴포넌트의 render() 메서드를 호출합니다. 이를 통해 React는 화면에 표시되어야 할 내용을 알게 됩니다. 그 다음 React는 Clock의 렌더링 출력값을 일치시키기 위해 DOM을 업데이트합니다.</li>
+										<li>Clock 출력값이 DOM에 삽입되면, React는 componentDidMount() 생명주기 메서드를 호출합니다. 그 안에서 Clock 컴포넌트는 매초 컴포넌트의 tick() 메서드를 호출하기 위한 타이머를 설정하도록 브라우저에 요청합니다.</li>
+										<li>매초 브라우저가 tick() 메서드를 호출합니다. 그 안에서 Clock 컴포넌트는 setState()에 현재 시각을 포함하는 객체를 호출하면서 UI 업데이트를 진행합니다. setState() 호출 덕분에 React는 state가 변경된 것을 인지하고 화면에 표시될 내용을 알아내기 위해 render() 메서드를 다시 호출합니다. 이 때 render() 메서드 안의 this.state.date가 달라지고 렌더링 출력값은 업데이트된 시각을 포함합니다. React는 이에 따라 DOM을 업데이트합니다.</li>
+										<li>Clock 컴포넌트가 DOM으로부터 한 번이라도 삭제된 적이 있다면 React는 타이머를 멈추기 위해 componentWillUnmount() 생명주기 메서드를 호출합니다.</li>
+									</ol>
+
+									<h2>State를 올바르게 사용하기</h2>
+									<p>예를 들어, 이 코드는 컴포넌트를 다시 렌더링하지 않습니다.</p>
+									<pre class="code">
+// Wrong
+this.state.comment = 'Hello';									
+									</pre>
+									<p>대신에 setState()를 사용합니다.</p>
+									<pre class="code">
+// Correct
+this.setState({comment: 'Hello'});									
+									</pre>
+									<p>this.state를 지정할 수 있는 유일한 공간은 바로 constructor입니다.</p>
+
+									<h2>State 업데이트는 비동기적일 수도 있습니다.</h2>
+									<p>React는 성능을 위해 여러 setState() 호출을 단일 업데이트로 한꺼번에 처리할 수 있습니다.</p>
+									<p>this.props와 this.state가 비동기적으로 업데이트될 수 있기 때문에 다음 state를 계산할 때 해당 값에 의존해서는 안 됩니다.</p>
+									<p>예를 들어, 다음 코드는 카운터 업데이트에 실패할 수 있습니다.</p>
+									<pre class="code">
+// Wrong
+this.setState({
+  counter: this.state.counter + this.props.increment,
+});									
+									</pre>
+									<p>이를 수정하기 위해 객체보다는 함수를 인자로 사용하는 다른 형태의 setState()를 사용합니다. 그 함수는 이전 state를 첫 번째 인자로 받아들일 것이고, 업데이트가 적용된 시점의 props를 두 번째 인자로 받아들일 것입니다.</p>
+									<pre class="code">
+// Correct
+this.setState((state, props) => ({
+  counter: state.counter + props.increment
+}));									
+									</pre>
+									<p>위에서는 화살표 함수를 사용했지만, 일반적인 함수에서도 정상적으로 작동합니다.</p>
+									<pre class="code">
+// Correct
+this.setState(function(state, props) {
+  return {
+    counter: state.counter + props.increment
+  };
+});
+									
+									</pre>
+									
+									
 								</section>
 
 							</div>
