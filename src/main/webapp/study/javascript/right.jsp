@@ -15,6 +15,7 @@
     					<li><a href="/study/javascript/control-structure.jsp">제어구조</a></li>
     					<li><a href="/study/javascript/objects.jsp">객체(Objects)</a></li>
     					<li><a href="/study/javascript/arrays.jsp">배열(Arrays)</a></li>
+    					<li><a href="/study/javascript/functions.jsp">함수(Functions)</a></li>
     				</ul>
     			</div>
     		</div>
