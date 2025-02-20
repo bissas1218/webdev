@@ -10,6 +10,11 @@
     				<ul class="link-list">
     					<li><a href="/study/javascript/index.jsp">시작하기</a></li>
     					<li><a href="/study/javascript/data-type.jsp">데이터 타입</a></li>
+    					<li><a href="/study/javascript/variables.jsp">변수</a></li>
+    					<li><a href="/study/javascript/operator.jsp">연산자</a></li>
+    					<li><a href="/study/javascript/control-structure.jsp">제어구조</a></li>
+    					<li><a href="/study/javascript/objects.jsp">객체(Objects)</a></li>
+    					<li><a href="/study/javascript/arrays.jsp">배열(Arrays)</a></li>
     				</ul>
     			</div>
     		</div>
