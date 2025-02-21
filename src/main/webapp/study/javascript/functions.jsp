@@ -94,9 +94,104 @@ function avg(firstValue, secondValue, thirdValue = 0) {
 avg(1, 2); // NaN 대신, 1입니다.
 									</pre>
 									
+									<h2>익명 함수</h2>
+									<p>JavaScript에서는 익명 함수(이름이 없는 함수)를 만들 수 있습니다. 실제로, 이런 이름없는 함수들은 다른 함수의 인자로 전달하거나 함수를 호출하는 데 사용할 수 있는 변수에 즉시 할당되거나 다른 함수에서 반환됩니다.</p>
+									<pre class="code">
+// 괄호 앞에 함수명이 없음을 주목해주세요.
+const avg = function (...args) {
+  let sum = 0;
+  for (const item of args) {
+    sum += item;
+  }
+  return sum / args.length;
+};
+									</pre>
+									<p>위에 정의된 익명 함수는 인수와 함께 avg()와 같은 형태로 실행할 수 있습니다. 즉, function avg() {}와 같이 이름을 붙인 함수 선언과 의미적으로 같습니다.</p>
+									<p>화살표 함수를 사용하여 익명 함수를 정의하는 또 다른 방법이 있습니다.</p>
+									<pre class="code">
+// 괄호 앞에 함수명이 없음을 주목해주세요.
+const avg = (...args) => {
+  let sum = 0;
+  for (const item of args) {
+    sum += item;
+  }
+  return sum / args.length;
+};
+
+// 단순히 표현식을 반환할 때, `return`을 생략할 수 있습니다.
+const sum = (a, b, c) => a + b + c;
+									</pre>
+									
+									<p>화살표 함수는 의미적으로 함수 표현식과 동일하지 않습니다. 자세한 내용은 참조 페이지를 참조하세요.</p>
+									<p>익명 함수가 유용할 수 있는 또 다른 방법이 있습니다. 즉시 실행 함수 표현(IIFE, Immediately Invoked Function Expressions)이라는 단일 표현식에서 익명 함수를 동시에 선언하고 호출할 수 있습니다.</p>
+									<pre class="code">
+(function () {
+  // …
+})();
+									</pre>
+									<p>IIFE의 사용 사례에 대해서는 클로저를 이용해서 프라이빗 메서드 흉내내기을 참조하세요.</p>
+									
+									<h2>재귀 함수</h2>
+									<p>JavaScript는 재귀적으로 함수를 호출할 수 있습니다. 이는 브라우저 DOM 등에서 볼 수 있는 트리 구조를 다루는데 유용합니다.</p>
+									<pre class="code">
+function countChars(elm) {
+  if (elm.nodeType === 3) {
+    // TEXT_NODE
+    return elm.nodeValue.length;
+  }
+  let count = 0;
+  for (let i = 0, child; (child = elm.childNodes[i]); i++) {
+    count += countChars(child);
+  }
+  return count;
+}
+									</pre>
+									<p>함수 표현식에도 이름을 지정할 수 있으므로, 재귀적일 수 있습니다.</p>
+									<pre class="code">
+const charsInBody = (function counter(elm) {
+  if (elm.nodeType === 3) {
+    // TEXT_NODE
+    return elm.nodeValue.length;
+  }
+  let count = 0;
+  for (let i = 0, child; (child = elm.childNodes[i]); i++) {
+    count += counter(child);
+  }
+  return count;
+})(document.body);
+									</pre>
+									<p>위와 같이 함수 표현식에 제공된 이름은 함수 자체 범위에서만 사용할 수 있습니다. 이를 통해 엔진에서 더 많은 최적화를 수행할 수 있으며, 결과적으로 더 읽기 쉬운 코드가 생성됩니다. 이 이름은 디버거와 일부 스택 추적에도 표시되므로, 디버깅 시 시간을 절약할 수 있습니다.</p>
+									<p>함수형 프로그래밍에 익숙하다면 JavaScript에서 재귀가 성능에 미치는 영향에 주의하세요. 언어 명세에는 꼬리 호출 최적화(tail-call optimization)로 지정되어 있지만, 스택 추적 및 디버깅의 어려움으로 인해 JavaScriptCore (Safari에서 사용)에서만 구현했습니다. 깊은 재귀의 경우 스택 오버플로우를 방지하기 위해, 대신 반복을 사용하는 것이 좋습니다.</p>
+									
+									<h2>함수는 일급 객체(first-class objects)입니다</h2>
+									<p>JavaScript 함수는 일급 객체(first-class objects)입니다. 즉, 변수에 할당하고 다른 함수에 인수로 전달하고 다른 함수에서 반환할 수 있습니다. 또한, JavaScript는 명시적인 캡처 없이 즉시 사용 가능한 클로저(closures)를 지원하므로 함수형 프로그래밍 스타일을 편리하게 적용할 수 있습니다.</p>
+									<pre class="code">
+// 함수를 반환하는 함수
+const add = (x) => (y) => x + y;
+// 함수를 매개변수로 받는 함수
+const babies = ["dog", "cat", "hen"].map((name) => `baby ${name}`);
+									</pre>
+									<p>JavaScript 함수는 JavaScript의 다른 모든 것과 마찬가지로 그 자체로 객체이며, 이전 객체 섹션에서 본 것처럼 속성을 추가하거나 변경할 수 있습니다.</p>
+									
+									<h2>내장 함수 (Inner functions)</h2>
+									<p>JavaScript의 함수 선언은 다른 함수 내부에서도 가능합니다. JavaScript의 중첩 함수에서는 부모 함수 범위에 있는 변수에 접근이 가능하다는 게 중요합니다.</p>
+									<pre class="code">
+function parentFunc() {
+  const a = 1;
+
+  function nestedFunc() {
+    const b = 4; // parentFunc은 사용할 수 없는 변수
+    return a + b;
+  }
+  return nestedFunc(); // 5
+}
+									</pre>
+									<p>이런 특성은 유지보수가 용이한 코드를 만드는데 도움이 됩니다. 호출된 함수가 다른 한두 개의 함수에서만 호출되며 그 외의 다른 코드에서는 사용이 안되는 경우, 해당 함수를 내부에 중첩시킬 수 있습니다. 이런 방법을 통해 전역 범위에 함수의 개수가 줄어듭니다.</p>
+									<p>또한 전역 변수에 대한 유혹을 뿌리칠 수 있는 좋은 대안이 됩니다. 복잡한 코드를 작성하게 될 때면 여러 함수들 간에 값을 공유하기 위한 용도로 전역 변수를 사용하고 싶어지지만, 전역 변수는 유지보수를 힘들게 합니다. 이런 상황에 중첩 함수는 부모의 변수를 공유함으로써 전역 이름공간을 더럽히지 않고 함수들을 연동할 수 있습니다.</p>
+									
 								</section>
 <script>
-
+/*
 function add(x, y){
 	const total = x + y;
 	return total;
@@ -105,6 +200,69 @@ function add(x, y){
 console.log(add());
 
 console.log(add(2, 3, 4));
+
+function avg(...args){
+	console.log(args);
+	let sum = 0;
+	for(const item of args){
+		sum += item;
+	}
+	return sum/args.length;
+	
+}
+
+console.log(avg(2, 3, 4, 5));
+
+function area({width, height}){
+	return width * height;
+}
+
+console.log(area({width:10, height:10}));
+
+function avg2(firstValue, secondValue, thirdValue = 0){
+	console.log(firstValue+', '+secondValue+', '+thirdValue);
+	return(firstValue + secondValue + thirdValue) / 3;
+}
+
+console.log(avg2(1, 2));
+
+const avg3 = function (...args){
+	let sum = 0;
+	for(const item of args){
+		sum += item;
+	}
+	console.log('sum:'+sum+', args len:'+args.length);
+	return sum/args.length;
+}
+console.log( avg3(1,2,3) );
+
+const avg4 = (...args) => {
+	let sum = 0;
+	for(const item of args){
+		sum += item;
+	}
+	return sum / args.length;
+}
+console.log( avg4(1,2,3) );
+*/
+
+const add = (x) => (y) => x + y;
+console.log(add);
+
+const babies = ["dog", "cat", "hen"].map((name) => `baby `);
+console.log(babies);
+
+function parentFunc(){
+	const a = 1;
+	
+	function nestedFunc(){
+		const b = 4;
+		return a + b;
+	}
+	return nestedFunc();
+}
+
+console.log(parentFunc());
 
 </script>
 							</div>
