@@ -72,6 +72,19 @@ class Admin extends withAuthentication(Person) {
 								</section>
 <script>
 
+class Person {
+	constructor(name){
+		console.log('constructor:'+name);
+		this.name = name;
+	}
+	sayHello(){
+		console.log('sayHello');
+		return `Hello, I'm `+this.name+`!`;
+	}
+}
+
+const p = new Person("Maria");
+console.log(p.sayHello());
 
 </script>
 							</div>
