@@ -40,6 +40,55 @@
 								<section>
 									
 									<h2>클래스</h2>
+									<p>Class는 객체를 생성하기 위한 템플릿입니다. 클래스는 데이터와 이를 조작하는 코드를 하나로 추상화합니다. JavaScript에서 클래스는 프로토타입을 이용해서 만들어졌지만 ES5의 클래스 의미와는 다른 문법과 의미를 가집니다.</p>
+									
+									<h2>Class 정의</h2>
+									<p>Class는 사실 "특별한 함수"입니다. 함수를 함수 표현식과 함수 선언으로 정의할 수 있듯이 class문법도 class표현식 and class선언 두 가지 방법을 제공합니다.</p>
+									
+									<h2>Class 선언</h2>
+									<p>Class를 정의하는 한 가지 방법은 class선언을 이용하는 것입니다. class를 선언하기 위해서는 클래스의 이름(여기서 "Rectangle")과 함께 class 키워드를 사용해야 합니다.</p>
+									<pre class="code">
+class Rectangle {
+  constructor(height, width) {
+    this.height = height;
+    this.width = width;
+  }
+}									
+									</pre>
+									<h2>Hoisting</h2>
+									<p>함수 선언과 클래스 선언의 중요한 차이점은 함수의 경우 정의하기 전에 호출할 수 있지만, 클래스는 반드시 정의한 뒤에 사용할 수 있다는 점입니다. 다음 코드는 ReferenceError를 던질 것입니다.</p>
+									<pre class="code">
+const p = new Rectangle(); // ReferenceError
+
+class Rectangle {}									
+									</pre>
+									<p>예외가 발생하는 이유는 클래스가 호이스팅될 때 초기화는 되지 않기 때문입니다.</p>
+									
+									<h2>Class 표현식</h2>
+									<p>Class 표현식은 class를 정의하는 또 다른 방법입니다. Class표현식은 이름을 가질 수도 있고, 갖지 않을 수도 있습니다. 이름을 가진 class표현식의 이름은 클래스 body의 local scope에 한해 유효합니다. (하지만, 클래스의(인스턴스 이름이 아닌) name속성을 통해 찾을 수 있습니다).</p>
+									<pre class="code">
+// unnamed
+let Rectangle = class {
+  constructor(height, width){
+    this.height = height;
+    this.width = width;
+  }
+};						
+console.log(Rectangle.name);
+// 출력: "Rectangle"
+			
+// named
+let Rectangle = class Rectangle2 {
+  constructor(height, width){
+    this.height = height;
+    this.width = width;
+  }
+};			
+console.log(Rectangle.name);
+// 출력: "Rectangle2"
+									</pre>
+									
+									
 									<p>JavaScript는 Java와 매우 유사한 class 문법을 제공합니다.</p>
 									<pre class="code">
 class Person {
@@ -72,19 +121,15 @@ class Admin extends withAuthentication(Person) {
 								</section>
 <script>
 
-class Person {
-	constructor(name){
-		console.log('constructor:'+name);
-		this.name = name;
-	}
-	sayHello(){
-		console.log('sayHello');
-		return `Hello, I'm `+this.name+`!`;
-	}
-}
 
-const p = new Person("Maria");
-console.log(p.sayHello());
+
+let Rectangle = class Rectangle2 {
+	  constructor(height, width){
+	    this.height = height;
+	    this.width = width;
+	  }
+	};						
+console.log(Rectangle.name);
 
 </script>
 							</div>
