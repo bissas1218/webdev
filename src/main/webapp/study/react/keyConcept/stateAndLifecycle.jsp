@@ -35,7 +35,7 @@
 				<div id="main">
 					<div class="container">
 						<div class="row main-row">
-							<div class="col-10 col-12-medium">
+							<div class="col-9 col-12-medium">
 
 								<section>
 									
@@ -327,11 +327,77 @@ this.setState(function(state, props) {
 									
 									</pre>
 									
+									<h2>State 업데이트는 병합됩니다</h2>
+									<p>setState()를 호출할 때 React는 제공한 객체를 현재 state로 병합합니다.</p>
+									<p>예를 들어, state는 다양한 독립적인 변수를 포함할 수 있습니다.</p>
+									
+									<pre class="code">
+  constructor(props) {
+    super(props);
+    this.state = {
+      posts: [],
+      comments: []
+    };
+  }									
+									</pre>
+									
+									<p>별도의 setState() 호출로 이러한 변수를 독립적으로 업데이트할 수 있습니다.</p>
+									
+									<pre class="code">
+  componentDidMount() {
+    fetchPosts().then(response => {
+      this.setState({
+        posts: response.posts
+      });
+    });
+
+    fetchComments().then(response => {
+      this.setState({
+        comments: response.comments
+      });
+    });
+  }									
+									</pre>
+									<p>병합은 얕게 이루어지기 때문에 this.setState({comments})는 this.state.posts에 영향을 주진 않지만 this.state.comments는 완전히 대체됩니다.</p>
+									
+									<h2>데이터는 아래로 흐릅니다</h2>
+									
+									<p>부모 컴포넌트나 자식 컴포넌트 모두 특정 컴포넌트가 유상태인지 또는 무상태인지 알 수 없고, 그들이 함수나 클래스로 정의되었는지에 대해서 관심을 가질 필요가 없습니다.</p>
+									<p>이 때문에 state는 종종 로컬 또는 캡슐화라고 불립니다. state가 소유하고 설정한 컴포넌트 이외에는 어떠한 컴포넌트에도 접근할 수 없습니다.</p>
+									<p>컴포넌트는 자신의 state를 자식 컴포넌트에 props로 전달할 수 있습니다.</p>
+									
+									<pre class="code">
+&lt;FormattedDate date={this.state.date} /&gt;									
+									</pre>
+									<p>FormattedDate 컴포넌트는 date를 자신의 props로 받을 것이고 이것이 Clock의 state로부터 왔는지, Clock의 props에서 왔는지, 수동으로 입력한 것인지 알지 못합니다.</p>
+									
+									<pre class="code">
+function FormattedDate(props) {
+  return &lt;h2&gt;It is {props.date.toLocaleTimeString()}.&lt;/h2&gt;;
+}									
+									</pre>
+									<p>일반적으로 이를 “하향식(top-down)” 또는 “단방향식” 데이터 흐름이라고 합니다. 모든 state는 항상 특정한 컴포넌트가 소유하고 있으며 그 state로부터 파생된 UI 또는 데이터는 오직 트리구조에서 자신의 “아래”에 있는 컴포넌트에만 영향을 미칩니다.</p>
+									<p>트리구조가 props들의 폭포라고 상상하면 각 컴포넌트의 state는 임의의 점에서 만나지만 동시에 아래로 흐르는 부가적인 수원(water source)이라고 할 수 있습니다.</p>
+									<p>모든 컴포넌트가 완전히 독립적이라는 것을 보여주기 위해 App 렌더링하는 세 개의 &lt;Clock&gt;을 만들었습니다.</p>
+									
+									<pre class="code">
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;Clock /&gt;
+      &lt;Clock /&gt;
+      &lt;Clock /&gt;
+    &lt;/div&gt;
+  );
+}									
+									</pre>
+									<p>각 Clock은 자신만의 타이머를 설정하고 독립적으로 업데이트를 합니다.</p>
+									<p>React 앱에서 컴포넌트가 유상태 또는 무상태에 대한 것은 시간이 지남에 따라 변경될 수 있는 구현 세부 사항으로 간주합니다. 유상태 컴포넌트 안에서 무상태 컴포넌트를 사용할 수 있으며, 그 반대 경우도 마찬가지로 사용할 수 있습니다.</p>
 									
 								</section>
 
 							</div>
-							<div class="col-2 col-12-medium">
+							<div class="col-3 col-12-medium">
 
 								<jsp:include page="/study/react/right.jsp"></jsp:include>
 								

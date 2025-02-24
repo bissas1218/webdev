@@ -27,7 +27,8 @@
 						<li><a href="/study/react/keyConcept/jsxIntro.jsp">JSX소개</a></li>
 						<li><a href="/study/react/keyConcept/elementRendering.jsp">엘리먼트렌더링</a></li>
 						<li><a href="/study/react/keyConcept/componentsProps.jsp">Components와 Props</a></li>
-						<li><a href="/study/react/keyConcept/stateAndLifecycle.jsp">State and Lifecycle</a></li>
+						<li><a href="/study/react/keyConcept/stateAndLifecycle.jsp">State와 생명주기</a></li>
+						<li><a href="/study/react/keyConcept/eventProcess.jsp">이벤트 처리하기</a></li>
 					</ul>
 				</div>
 			</div>
