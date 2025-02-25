@@ -139,6 +139,123 @@ root.render(&lt;LoginControl /&gt;);
 									<h2>논리 && 연산자로 If를 인라인으로 표현하기</h2>
 									<p>JSX 안에는 중괄호를 이용해서 표현식을 포함 할 수 있습니다. 그 안에 JavaScript의 논리 연산자 &&를 사용하면 쉽게 엘리먼트를 조건부로 넣을 수 있습니다.</p>
 									
+									<pre class="code">
+function Mailbox(props) {
+  const unreadMessages = props.unreadMessages;
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Hello!&lt;/h1&gt;
+      {unreadMessages.length &gt; 0 &&
+        &lt;h2&gt;
+          You have {unreadMessages.length} unread messages.
+        &lt;/h2&gt;
+      }
+    &lt;/div&gt;
+  );
+}
+
+const messages = ['React', 'Re: React', 'Re:Re: React'];
+
+const root = ReactDOM.createRoot(document.getElementById('root')); 
+root.render(&lt;Mailbox unreadMessages={messages} /&gt;);									
+									</pre>
+									
+									<p>JavaScript에서 true && expression은 항상 expression으로 평가되고 false && expression은 항상 false로 평가됩니다.</p>
+									<p>따라서 && 뒤의 엘리먼트는 조건이 true일때 출력이 됩니다. 조건이 false라면 React는 무시하고 건너뜁니다.</p>
+									<p>falsy 표현식을 반환하면 여전히 && 뒤에 있는 표현식은 건너뛰지만 falsy 표현식이 반환된다는 것에 주의해주세요. 아래 예시에서, &lt;div&gt;0&lt;/div&gt;이 render 메서드에서 반환됩니다.</p>
+									
+									<pre class="code">
+render() {
+  const count = 0;
+  return (
+    &lt;div&gt;
+      {count && &lt;h1&gt;Messages: {count}&lt;/h1&gt;}
+    &lt;/div&gt;
+  );
+}									
+									</pre>
+									
+									<h2>조건부 연산자로 If-Else구문 인라인으로 표현하기</h2>
+									<p>엘리먼트를 조건부로 렌더링하는 다른 방법은 조건부 연산자인 condition ? true: false를 사용하는 것입니다.</p>
+									<p>아래의 예시에서는 짧은 구문을 조건부로 렌더링합니다.</p>
+									
+									<pre class="code">
+render() {
+  const isLoggedIn = this.state.isLoggedIn;
+  return (
+    &lt;div&gt;
+      The user is &lt;b&gt;{isLoggedIn ? 'currently' : 'not'}&lt;/b&gt; logged in.
+    &lt;/div&gt;
+  );
+}									
+									</pre>
+									<p>가독성은 좀 떨어지지만, 더 큰 표현식에도 이 구문을 사용할 수 있습니다.</p>
+									
+									<pre class="code">
+render() {
+  const isLoggedIn = this.state.isLoggedIn;
+  return (
+    &lt;div&gt;
+      {isLoggedIn
+        ? &lt;LogoutButton onClick={this.handleLogoutClick} /&gt;
+        : &lt;LoginButton onClick={this.handleLoginClick} /&gt;
+      }
+    &lt;/div&gt;
+  );
+}									
+									</pre>
+									
+									<p>JavaScript와 마찬가지로, 가독성이 좋다고 생각하는 방식을 선택하면 됩니다. 또한 조건이 너무 복잡하다면 컴포넌트를 분리하기 좋을 때 일 수도 있다는 것을 기억하세요.</p>
+
+									<h2>컴포넌트가 렌더링하는 것을 막기</h2>
+									
+									<p>가끔 다른 컴포넌트에 의해 렌더링될 때 컴포넌트 자체를 숨기고 싶을 때가 있을 수 있습니다. 이때는 렌더링 결과를 출력하는 대신 null을 반환하면 해결할 수 있습니다.</p>
+									<p>아래의 예시에서는 &lt;WarningBanner /&gt;가 warn prop의 값에 의해서 렌더링됩니다. prop이 false라면 컴포넌트는 렌더링하지 않게 됩니다.</p>
+									
+									<pre class="code">
+function WarningBanner(props) {
+  if (!props.warn) {
+    return null;
+  }
+
+  return (
+    &lt;div className="warning"&gt;
+      Warning!
+    &lt;/div&gt;
+  );
+}
+
+class Page extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {showWarning: true};
+    this.handleToggleClick = this.handleToggleClick.bind(this);
+  }
+
+  handleToggleClick() {
+    this.setState(state =&gt; ({
+      showWarning: !state.showWarning
+    }));
+  }
+
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;WarningBanner warn={this.state.showWarning} /&gt;
+        &lt;button onClick={this.handleToggleClick}&gt;
+          {this.state.showWarning ? 'Hide' : 'Show'}
+        &lt;/button&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root')); 
+root.render(&lt;Page /&gt;);									
+									</pre>
+									
+									<p>컴포넌트의 render 메서드로부터 null을 반환하는 것은 생명주기 메서드 호출에 영향을 주지 않습니다. 그 예로 componentDidUpdate는 계속해서 호출되게 됩니다.</p>
+									
 								</section>
 <script>
 
