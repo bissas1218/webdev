@@ -30,6 +30,7 @@
 						<li><a href="/study/react/keyConcept/stateAndLifecycle.jsp">State와 생명주기</a></li>
 						<li><a href="/study/react/keyConcept/eventProcess.jsp">이벤트 처리하기</a></li>
 						<li><a href="/study/react/keyConcept/conditionRender.jsp">조건부 렌더링</a></li>
+						<li><a href="/study/react/keyConcept/list-key.jsp">List와 Key</a></li>
 					</ul>
 				</div>
 			</div>
