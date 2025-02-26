@@ -35,7 +35,7 @@
 				<div id="main">
 					<div class="container">
 						<div class="row main-row">
-							<div class="col-10 col-12-medium">
+							<div class="col-9 col-12-medium">
 
 								<section>
 									<h2>React 설치하기</h2>
@@ -73,7 +73,7 @@ npm start
 									<p>브라우저에 http://localhost:3000 을 열면 기본적으로 설정된 React애플리케이션이 실행되는 것을 확인할 수 있습니다.</p>
 
 							</div>
-							<div class="col-2 col-12-medium">
+							<div class="col-3 col-12-medium">
 
 								<jsp:include page="/study/react/right.jsp"></jsp:include>
 								

@@ -35,7 +35,7 @@
 				<div id="main">
 					<div class="container">
 						<div class="row main-row">
-							<div class="col-10 col-12-medium">
+							<div class="col-9 col-12-medium">
 
 								<section>
 									<h2>CDN 링크</h2>
@@ -60,7 +60,7 @@
 									</pre>
 									<p>또한 사용 중인 CDN이 Access-Control-Allow-Origin: * HTTP 헤더 설정을 사용하는지 확인하는 것이 좋습니다.</p>
 							</div>
-							<div class="col-2 col-12-medium">
+							<div class="col-3 col-12-medium">
 
 								<jsp:include page="/study/react/right.jsp"></jsp:include>
 								

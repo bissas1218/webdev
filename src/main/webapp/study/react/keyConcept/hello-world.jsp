@@ -35,7 +35,7 @@
 				<div id="main">
 					<div class="container">
 						<div class="row main-row">
-							<div class="col-10 col-12-medium">
+							<div class="col-9 col-12-medium">
 
 								<section>
 									
@@ -54,7 +54,7 @@ root.render(&lt;h1&gt;Hello, world!&lt;/h1&gt;);
 								</section>
 
 							</div>
-							<div class="col-2">
+							<div class="col-3">
 
 								<jsp:include page="/study/react/right.jsp"></jsp:include>
 								

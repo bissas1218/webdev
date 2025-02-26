@@ -35,7 +35,7 @@
 				<div id="main">
 					<div class="container">
 						<div class="row main-row">
-							<div class="col-10 col-12-medium">
+							<div class="col-9 col-12-medium">
 
 								<section>
 									
@@ -285,15 +285,11 @@ function NumberList(props) {
 <script>
 
 
-const numbers = [1, 2, 3, 4, 5];
-const listItems = numbers.map((number) =>
-  console.log({number});
-);									
 
 
 </script>
 							</div>
-							<div class="col-2 col-12-medium">
+							<div class="col-3 col-12-medium">
 
 								<jsp:include page="/study/react/right.jsp"></jsp:include>
 								
