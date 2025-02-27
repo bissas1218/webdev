@@ -201,6 +201,66 @@ class FlavorForm extends React.Component {
 										</pre>
 									</blockquote>
 									
+									<h2>file input 태그</h2>
+									<p>HTML에서 &lt;input type="file"&gt;는 사용자가 하나 이상의 파일을 자신의 장치 저장소에서 서버로 업로드하거나 File API를 통해 JavaScript로 조작할 수 있습니다.</p>
+									
+									<pre class="code">
+&lt;input type="file" /&gt;									
+									</pre>
+									
+									<p>값이 읽기 전용이기 때문에 React에서는 비제어 컴포넌트입니다. 문서 뒷부분에서 다른 비제어 컴포넌트와 함께 설명하고 있습니다.</p>
+									
+									<h2>다중 입력 제어하기</h2>
+									<p>여러 input 엘리먼트를 제어해야할 때, 각 엘리먼트에 name 어트리뷰트를 추가하고 event.target.name 값을 통해 핸들러가 어떤 작업을 할 지 선택할 수 있게 해줍니다.</p>
+									<p>아래는 예시입니다.</p>
+									
+									<pre class="code">
+class Reservation extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isGoing: true,
+      numberOfGuests: 2
+    };
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
+  render() {
+    return (
+      &lt;form&gt;
+        &lt;label&gt;
+          Is going:
+          &lt;input
+            name="isGoing"
+            type="checkbox"
+            checked={this.state.isGoing}
+            onChange={this.handleInputChange} /&gt;
+        &lt;/label&gt;
+        &lt;br /&gt;
+        &lt;label&gt;
+          Number of guests:
+          &lt;input
+            name="numberOfGuests"
+            type="number"
+            value={this.state.numberOfGuests}
+            onChange={this.handleInputChange} /&gt;
+        &lt;/label&gt;
+      &lt;/form&gt;
+    );
+  }
+}									
+									</pre>
 								</section>
 
 							</div>
