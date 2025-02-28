@@ -32,6 +32,7 @@
 						<li><a href="/study/react/keyConcept/conditionRender.jsp">조건부 렌더링</a></li>
 						<li><a href="/study/react/keyConcept/list-key.jsp">List와 Key</a></li>
 						<li><a href="/study/react/keyConcept/form.jsp">Form</a></li>
+						<li><a href="/study/react/keyConcept/state-pullup.jsp">State 끌어올리기</a></li>
 					</ul>
 				</div>
 			</div>
