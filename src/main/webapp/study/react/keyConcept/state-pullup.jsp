@@ -83,6 +83,61 @@ class Calculator extends React.Component {
   }
 }									
 									</pre>
+									
+									<h2>두 번째 Input 추가하기</h2>
+									
+									<p>새 요구사항으로써 섭씨 입력 필드뿐만 아니라 화씨 입력 필드를 추가하고 두 필드 간에 동기화 상태를 유지하도록 해보겠습니다.</p>
+									<p>Calculator에서 TemperatureInput 컴포넌트를 빼내는 작업부터 시작해봅시다. 또한 "c" 또는 "f"의 값을 가질 수 있는 scale prop를 추가할 것입니다.</p>
+
+									<pre class="code">
+const scaleNames = {
+  c: 'Celsius',
+  f: 'Fahrenheit'
+};
+
+class TemperatureInput extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.state = {temperature: ''};
+  }
+
+  handleChange(e) {
+    this.setState({temperature: e.target.value});
+  }
+
+  render() {
+    const temperature = this.state.temperature;
+    const scale = this.props.scale;
+    return (
+      &lt;fieldset&gt;
+        &lt;legend&gt;Enter temperature in {scaleNames[scale]}:&lt;/legend&gt;
+        &lt;input value={temperature}
+               onChange={this.handleChange} /&gt;
+      &lt;/fieldset&gt;
+    );
+  }
+}									
+									</pre>
+									
+									<p>이제 Calculator가 분리된 두 개의 온도 입력 필드를 렌더링하도록 변경할 수 있습니다.</p>
+									
+									<pre class="code">
+class Calculator extends React.Component {
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;TemperatureInput scale="c" /&gt;
+        &lt;TemperatureInput scale="f" /&gt;
+      &lt;/div&gt;
+    );
+  }
+}									
+									</pre>
+									
+									<p>이제 두 개의 입력 필드를 갖게 되었습니다. 그러나 둘 중 하나에 온도를 입력하더라도 다른 하나는 갱신되지 않는 문제가 있습니다. 이것은 두 입력 필드 간에 동기화 상태를 유지하고자 했던 원래 요구사항과는 맞지 않습니다.</p>
+									<p>또한 Calculator에서 BoilingVerdict도 역시 보여줄 수 없는 상황입니다. 현재 입력된 온도 정보가 TemperatureInput 안에 숨겨져 있으므로 Calculator는 그 값을 알 수 없기 때문입니다.</p>
+
 								</section>
 
 							</div>
