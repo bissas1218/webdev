@@ -33,6 +33,7 @@
 						<li><a href="/study/react/keyConcept/list-key.jsp">List와 Key</a></li>
 						<li><a href="/study/react/keyConcept/form.jsp">Form</a></li>
 						<li><a href="/study/react/keyConcept/state-pullup.jsp">State 끌어올리기</a></li>
+						<li><a href="/study/react/keyConcept/compositionVsInheritance.jsp">합성(Composition) vs 상속(Inheritance)</a></li>
 					</ul>
 				</div>
 			</div>
