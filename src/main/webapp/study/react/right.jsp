@@ -34,6 +34,7 @@
 						<li><a href="/study/react/keyConcept/form.jsp">Form</a></li>
 						<li><a href="/study/react/keyConcept/state-pullup.jsp">State 끌어올리기</a></li>
 						<li><a href="/study/react/keyConcept/compositionVsInheritance.jsp">합성(Composition) vs 상속(Inheritance)</a></li>
+						<li><a href="/study/react/keyConcept/react-think.jsp">React로 사고하기</a></li>
 					</ul>
 				</div>
 			</div>
