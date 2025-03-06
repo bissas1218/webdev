@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     
 <header id="header">
-	<h1><a href="/" id="logo">Minimaxing</a></h1>
+	<a href="/" class="logo">Minimaxing</a>
 	<nav id="nav">
 		<a href="/study/index.jsp" <c:if test="${param.menu eq 'study'}">class="current-page-item"</c:if>>Study</a>
 		<a href="/openApi/index.jsp" <c:if test="${param.menu eq 'openapi'}">class="current-page-item"</c:if>>Open API</a>

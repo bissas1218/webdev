@@ -47,7 +47,34 @@
 
 									<p>React는 접근성을 갖춘 웹사이트를 만들 수 있도록 모든 지원을 하고 있으며, 대부분은 표준 HTML 기술이 사용됩니다.</p>
 									
+									<h2>표준 및 지침</h2>
+									<h3>WCAG</h3>
+									<p><a href="https://www.w3.org/WAI/standards-guidelines/wcag/" target="_blank">Web Content Accessibility Guidelines</a>는 접근성을 갖춘 웹사이트를 만드는 데 필요한 지침을 제공합니다.</p>
 
+									<p>아래 WCAG 체크리스트를 통해 간략하게 살펴볼 수 있습니다.</p>
+
+									<ul>
+										<li><a href="https://www.wuhcag.com/wcag-checklist/" target="_blank">Wuhcag의 WCAG 체크리스트</a></li>
+										<li><a href="https://webaim.org/standards/wcag/checklist" target="_blank">WebAIM의 WCAG 체크리스트</a></li>
+										<li><a href="https://www.a11yproject.com/checklist/" target="_blank">The A11Y Project의 체크리스트</a></li>
+									</ul>
+
+									<h3>WAI-ARIA</h3>
+									<p><a href="https://www.w3.org/WAI/standards-guidelines/aria/" target="_blank">Web Accessibility Initiative - Accessible Rich Internet Applications</a> 문서에는 접근성을 갖춘 JavaScript 위젯을 만드는 데 필요한 기술들이 담겨있습니다.</p>
+
+									<p>참고로, JSX에서는 모든 aria-* HTML 어트리뷰트를 지원하고 있습니다. React에서 대부분의 DOM 프로퍼티와 어트리뷰트에 대한 값이 캐멀 케이스로 지원되는 반면, aria-*와 같은 어트리뷰트는 일반적인 HTML과 마찬가지로 hypen-case(혹은 kebab-case, lisp-case 등)로 작성해야 합니다.</p>
+
+									<pre class="code">
+&lt;input
+  type="text"
+  aria-label={labelText}
+  aria-required="true"
+  onChange={onchangeHandler}
+  value={inputValue}
+  name="name"
+/&gt;									
+									</pre>
+									
 								</section>
 
 							</div>

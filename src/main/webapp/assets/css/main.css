@@ -177,9 +177,12 @@ ul {
 		font-weight: normal;
 	}
 
-/*	h1 {
-		text-transform: lowercase;
-	}*/
+	h1 {
+		font-size: 2.2em;
+		letter-spacing: -1px;
+		margin-top: 1.0em;
+		margin-bottom: 0.25em;
+	}
 
 	h2 {
 	/*	text-transform: lowercase;*/
@@ -189,14 +192,16 @@ ul {
 		margin-bottom: 0.25em;
 	}
 
-	h3, h4 {
+	/*h3, h4 {
 		color: #283121;
 		margin-bottom: 0.5em;
-	}
+	}*/
 
 	h3 {
-		font-size: 1.2em;
-		margin-bottom: 0.8em;
+		font-size: 1.5em;
+		letter-spacing: -1px;
+		margin-top: 0.8em;
+		margin-bottom: 0.2em;
 	}
 
 	h4 {
@@ -1646,7 +1651,7 @@ ul {
 		height: 86px;
 	}
 
-		#header h1 {
+		#header .logo {
 			position: absolute;
 			left: 40px;
 			top: 0;
@@ -1656,7 +1661,7 @@ ul {
 			line-height: 86px;
 		}
 
-			#header h1 a {
+			#header .logo {
 				color: #fff;
 				text-decoration: none;
 			}
@@ -1781,7 +1786,7 @@ ul {
 				height: 76px;
 			}
 
-				#header h1 {
+				#header .logo {
 					font-size: 2em;
 					line-height: 76px;
 				}
