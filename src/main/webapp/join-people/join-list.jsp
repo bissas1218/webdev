@@ -38,17 +38,111 @@
 							</ul>
 						</nav>
 
-					<!-- Banner 
-						<section id="banner">
-							<header>
-								<h2>Howdy. This is Dopetrope.</h2>
-								<p>A responsive template by HTML5 UP</p>
-							</header>
-						</section>
--->
-					<!-- Intro 
+					<!-- Intro -->
 						<section id="intro" class="container">
-							<div class="row">
+							<div class="col-4 col-12-medium">
+							<section class="first">
+								<form method="post" action="#">
+									<div class="row">
+									    <!-- 찾기 -->
+										<div class="col-12 col-12-small">
+											<input type="text" name="name" id="name" placeholder="방제목" />
+										</div>
+										<!-- 
+										<div class="col-3 col-12-small">
+											<ul class="actions">
+												<li><input type="submit" value="조회하기" /></li>
+											</ul>
+										</div>
+										 -->
+										 
+										<!-- 지역 -->
+										<div class="col-6 col-12-small">
+											<select>
+												<option>지역선택</option>
+												<option value="1100000000">서울특별시</option>
+												<option value="2600000000">부산광역시</option>
+												<option value="2700000000">대구광역시</option>
+												<option value="2800000000">인천광역시</option>
+												<option value="2900000000">광주광역시</option>
+												<option value="3000000000">대전광역시</option>
+												<option value="3100000000">울산광역시</option>
+												<option value="3611000000">세종특별자치시</option>
+												<option value="4100000000">경기도</option>
+												<option value="4300000000">충청북도</option>
+												<option value="4400000000">충청남도</option>
+												<option value="4600000000">전라남도</option>
+												<option value="4700000000">경상북도</option>
+												<option value="4800000000">경상남도</option>
+												<option value="5000000000">제주특별자치도</option>
+												<option value="5100000000">강원특별자치도</option>
+												<option value="5200000000">전북특별자치도</option>
+											</select>
+										</div>
+										
+										<!-- 일자선택 -->
+										<div class="col-2 col-12-small">
+											<input type="text" name="name" id="name" placeholder="조인년도" maxlength="4" />
+										</div>
+										<div class="col-2 col-12-small">
+											<input type="text" name="name" id="name" placeholder="조인월" />
+										</div>
+										<div class="col-2 col-12-small">
+											<input type="text" name="name" id="name" placeholder="조인일" />
+										</div>
+										
+										<!-- Break -->
+										<div class="col-2 col-12-small">
+											<input type="radio" id="demo-priority-low" name="demo-priority" checked>
+											<label for="demo-priority-low">성별무관</label>
+										</div>
+										<div class="col-2 col-12-small">
+											<input type="radio" id="demo-priority-normal" name="demo-priority">
+											<label for="demo-priority-normal">남성</label>
+										</div>
+										<div class="col-2 col-12-small">
+											<input type="radio" id="demo-priority-high" name="demo-priority">
+											<label for="demo-priority-high">여성</label>
+										</div>
+										
+										<!-- Break -->
+										<div class="col-3 col-12-small">
+											<input type="radio" id="demo-priority-low2" name="demo-priority2" checked>
+											<label for="demo-priority-low2">18홀</label>
+										</div>
+										<div class="col-3 col-12-small">
+											<input type="radio" id="demo-priority-normal2" name="demo-priority2">
+											<label for="demo-priority-normal2">9홀</label>
+										</div>
+										
+										<!-- Break 
+										<div class="col-6 col-12-small">
+											<input type="checkbox" id="demo-copy" name="demo-copy">
+											<label for="demo-copy">Email me a copy</label>
+										</div>
+										<div class="col-6 col-12-small">
+											<input type="checkbox" id="demo-human" name="demo-human" checked>
+											<label for="demo-human">I am a human</label>
+										</div>
+										
+										<div class="col-12">
+											<input type="text" name="subject" id="subject" placeholder="Subject" />
+										</div>
+										<div class="col-12">
+											<textarea name="message" id="message" placeholder="Message"></textarea>
+										</div>
+										
+										<div class="col-12">
+											<ul class="actions">
+												<li><input type="submit" value="조회하기" /></li>
+												<li><input type="reset" value="Clear Form" class="alt" /></li>
+											</ul>
+										</div>-->
+									</div>
+								</form>
+								</section>
+							</div>
+							<!-- 
 								<div class="col-4 col-12-medium">
 									<section class="first">
 										<i class="icon solid featured fa-cog"></i>
@@ -75,15 +169,14 @@
 										</header>
 										<p>Nisl amet dolor sit ipsum veroeros sed blandit consequat veroeros et magna tempus.</p>
 									</section>
-								</div>
-							</div>
+								</div> -->
 							<footer>
 								<ul class="actions">
-									<li><a href="#" class="button large">Get Started</a></li>
-									<li><a href="#" class="button alt large">Learn More</a></li>
+									<li><a href="#" class="button large">조회하기</a></li>
+									<li><a href="#" class="button alt large">방만들기</a></li>
 								</ul>
 							</footer>
-						</section>-->
+						</section>
 
 				</section>
 
@@ -94,16 +187,19 @@
 						<div class="row">
 							<div class="col-12 col-12-medium">
 								<section>
+								
 									<header>
 										<h2>2025년 3월</h2>
 									</header>
+									
 									<ul class="dates">
-									<c:forEach begin="0" end="5">
+									<c:forEach var="test" begin="0" end="5">
 										<li>
 											<span class="date">3 <strong>27</strong></span>
-											<h3><a href="#">충남 예산시, 세종시, 대전시, 충북 보은시, 경북 상주시, 경북 문경시, 충북 청주시</a></h3>
+											<h3><a href="#">[비밀방] 충남 예산시, 세종시, 대전시, 충북 보은시, 경북 상주시, 경북 문경시, 충북 청주시</a></h3>
 											<p>
 												시간 05시~13시, 그린피 30,000~120,000원, 타수무관, 성별무관, 현재3명, 18홀
+												<input type="password" name="subject" id="subject" placeholder="비밀번호" />
 												<a href="#" class="button">참여하기</a>
 											</p>
 										</li>

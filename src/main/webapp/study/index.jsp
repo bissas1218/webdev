@@ -45,7 +45,7 @@
 									<ul class="link-list">
 										<li><a href="/study/react/install/start.jsp">React</a></li>
 										<li><a href="/study/javascript/index.jsp">Javascript</a></li>
-										<li><a href="#">Eget et amet consequat</a></li>
+										<li><a href="/join-people/join-list.jsp">Join People</a></li>
 										<li><a href="#">Dapibus sed mattis blandit</a></li>
 										<li><a href="#">Vitae magna sed dolore</a></li>
 										<li><a href="#">Eget et amet consequat</a></li>
