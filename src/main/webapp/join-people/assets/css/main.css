@@ -1563,6 +1563,17 @@ input[type="radio"] + label:before {
 		border: 0;
 	}
 
+	.dates .small-input
+	 {
+		border: 0;
+		margin:0 0 0 0.5em;
+		padding: 0.4em 1.2em 0.1em 1.3em;
+		font-size: 0.9em;
+		border-radius: 5px;
+		border: solid 1px #dddddd;
+		background: #fff;
+	}
+	
 /* Tables */
 
 	table {

@@ -81,50 +81,83 @@
 										</div>
 										
 										<!-- 일자선택 -->
-										<div class="col-2 col-12-small">
+										<div class="col-2 col-4-small">
 											<input type="text" name="name" id="name" placeholder="조인년도" maxlength="4" />
 										</div>
-										<div class="col-2 col-12-small">
+										<div class="col-2 col-4-small">
 											<input type="text" name="name" id="name" placeholder="조인월" />
 										</div>
-										<div class="col-2 col-12-small">
+										<div class="col-2 col-4-small">
 											<input type="text" name="name" id="name" placeholder="조인일" />
 										</div>
 										
 										<!-- Break -->
-										<div class="col-2 col-12-small">
+										<div class="col-2 col-4-small">
+											<input type="checkbox" id="demo-copy" name="demo-copy">
+											<label for="demo-copy">충주시</label>
+										</div>
+										<div class="col-2 col-4-small">
+											<input type="checkbox" id="demo-human" name="demo-human" checked>
+											<label for="demo-human">제천시</label>
+										</div>
+										<div class="col-2 col-4-small">
+											<input type="checkbox" id="demo-human" name="demo-human" checked>
+											<label for="demo-human">보은군</label>
+										</div>
+										<div class="col-2 col-4-small">
+											<input type="checkbox" id="demo-human" name="demo-human" checked>
+											<label for="demo-human">옥천군</label>
+										</div>
+										<div class="col-2 col-4-small">
+											<input type="checkbox" id="demo-human" name="demo-human" checked>
+											<label for="demo-human">영동군</label>
+										</div>
+										<div class="col-2 col-4-small">
+											<input type="checkbox" id="demo-human" name="demo-human" checked>
+											<label for="demo-human">진천군</label>
+										</div>
+										<div class="col-2 col-4-small">
+											<input type="checkbox" id="demo-human" name="demo-human" checked>
+											<label for="demo-human">괴산군</label>
+										</div>
+										<div class="col-2 col-4-small">
+											<input type="checkbox" id="demo-human" name="demo-human" checked>
+											<label for="demo-human">음성군</label>
+										</div>
+										<div class="col-2 col-4-small">
+											<input type="checkbox" id="demo-human" name="demo-human" checked>
+											<label for="demo-human">단양군</label>
+										</div>
+										<div class="col-2 col-12-small"></div>
+										<div class="col-2 col-12-small"></div>
+										<div class="col-2 col-12-small"></div>
+										
+										<!-- Break -->
+										<div class="col-2 col-4-small">
 											<input type="radio" id="demo-priority-low" name="demo-priority" checked>
 											<label for="demo-priority-low">성별무관</label>
 										</div>
-										<div class="col-2 col-12-small">
+										<div class="col-2 col-4-small">
 											<input type="radio" id="demo-priority-normal" name="demo-priority">
 											<label for="demo-priority-normal">남성</label>
 										</div>
-										<div class="col-2 col-12-small">
+										<div class="col-2 col-4-small">
 											<input type="radio" id="demo-priority-high" name="demo-priority">
 											<label for="demo-priority-high">여성</label>
 										</div>
 										
 										<!-- Break -->
-										<div class="col-3 col-12-small">
+										<div class="col-3 col-6-small">
 											<input type="radio" id="demo-priority-low2" name="demo-priority2" checked>
 											<label for="demo-priority-low2">18홀</label>
 										</div>
-										<div class="col-3 col-12-small">
+										<div class="col-3 col-6-small">
 											<input type="radio" id="demo-priority-normal2" name="demo-priority2">
 											<label for="demo-priority-normal2">9홀</label>
 										</div>
 										
-										<!-- Break 
-										<div class="col-6 col-12-small">
-											<input type="checkbox" id="demo-copy" name="demo-copy">
-											<label for="demo-copy">Email me a copy</label>
-										</div>
-										<div class="col-6 col-12-small">
-											<input type="checkbox" id="demo-human" name="demo-human" checked>
-											<label for="demo-human">I am a human</label>
-										</div>
 										
+										<!--
 										<div class="col-12">
 											<input type="text" name="subject" id="subject" placeholder="Subject" />
 										</div>
@@ -187,7 +220,6 @@
 						<div class="row">
 							<div class="col-12 col-12-medium">
 								<section>
-								
 									<header>
 										<h2>2025년 3월</h2>
 									</header>
@@ -199,7 +231,7 @@
 											<h3><a href="#">[비밀방] 충남 예산시, 세종시, 대전시, 충북 보은시, 경북 상주시, 경북 문경시, 충북 청주시</a></h3>
 											<p>
 												시간 05시~13시, 그린피 30,000~120,000원, 타수무관, 성별무관, 현재3명, 18홀
-												<input type="password" name="subject" id="subject" placeholder="비밀번호" />
+												<input type="password" name="pwd" id="pwd" placeholder="비밀번호" size="8" maxlength="8" class="small-input" />
 												<a href="#" class="button">참여하기</a>
 											</p>
 										</li>
