@@ -179,7 +179,7 @@
 							<footer>
 								<ul class="actions">
 									<li><a href="#" class="button large">조회하기</a></li>
-									<li><a href="/join-people/join-insert.jsp" class="button alt large">방만들기</a></li>
+									<li><a href="#" class="button alt large">방만들기</a></li>
 								</ul>
 							</footer>
 							

@@ -2815,7 +2815,7 @@ input[type="radio"] + label:before {
 			}
 
 				ul.actions li .button {
-					width: 100%;
+					width: 90%;
 				}
 
 				ul.actions li:first-child {
