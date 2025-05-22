@@ -86,7 +86,7 @@ public class aptChart extends HttpServlet {
 			request.setAttribute("yearList", yearList);
 			
 		}catch(SQLException e) {
-			
+			e.printStackTrace();
 		}finally {
 			try {
 
@@ -96,6 +96,10 @@ public class aptChart extends HttpServlet {
 				
 				if (con != null && !con.isClosed()) {
 					con.close();
+				}
+				
+				if(rs != null) {
+					rs.close();
 				}
 				
 			} catch (SQLException e) {
