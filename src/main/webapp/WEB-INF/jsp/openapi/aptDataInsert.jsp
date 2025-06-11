@@ -29,6 +29,9 @@ function submit(lawdCd){
 	form.lawdCd.value=lawdCd;
 	
 	form.submit();
+	
+	$("#wrap").children().prop("disabled", true);
+	$("#wrap").children().children().prop("disabled", true);
 }
 
 function submitAll(lawdCd){
@@ -136,6 +139,7 @@ function next_month(){
 	
 	<div style="font-weight:bold;" id="sidoNm"><c:out value="${dongCdList.name }" />[<c:out value="${fn:substring(dongCdList.code, 0, 5)}" />]
 	
+	
 		<!-- 세종이 아닐경우 -->
 		<c:if test="${dongCdList.code ne '3611000000' }"> 
 			<input name="<c:out value="${fn:substring(dongCdList.code,0,2) }" />" id="<c:out value="${fn:substring(dongCdList.code,0,2) }" />" 
@@ -159,24 +163,29 @@ function next_month(){
 		<!-- 군구 출력 -->
 		<c:set var="index" value="1" />
 		<c:forEach items="${dongCdList2 }" var="dongCdList2" varStatus="status" >
-			
+		
 			<c:if test="${fn:substring(dongCdList.code, 0, 2) eq fn:substring(dongCdList2.code, 0, 2) and dongCdList.code ne dongCdList2.code}">
-				<c:set var="splitNm" value="${fn:split(dongCdList2.name, ' ')}" />
-				<c:if test="${fn:length(splitNm) eq 2 }">
-				<c:out value="${fn:split(dongCdList2.name, ' ')[1] }" />
-				</c:if>
-				<c:if test="${fn:length(splitNm) eq 3 }">
-				<c:out value="${fn:split(dongCdList2.name, ' ')[1] }" /> <c:out value="${fn:split(dongCdList2.name, ' ')[2] }" />
-				</c:if>
-				[<c:out value="${fn:substring(dongCdList2.code,0,5) }" />]
-				(<c:out value="${dongCdList2.cnt }" />)
-				<c:if test="${dongCdList2.cnt eq -1 }">
-				<script> $("#"+${fn:substring(dongCdList2.code,0,2)}).hide(); </script>
-				</c:if>
-				<c:if test="${dongCdList2.cnt eq '0'}">
-				<input type="button" value="저장" onclick="submit('<c:out value="${fn:substring(dongCdList2.code,0,5) }" />');" />
-				</c:if>,
+			
+				<c:if test="${dongCdList2.cnt ne -1}">
 				
+					<c:set var="splitNm" value="${fn:split(dongCdList2.name, ' ')}" />
+					<c:if test="${fn:length(splitNm) eq 2 }">
+					<c:out value="${fn:split(dongCdList2.name, ' ')[1] }" />
+					</c:if>
+					<c:if test="${fn:length(splitNm) eq 3 }">
+					<c:out value="${fn:split(dongCdList2.name, ' ')[1] }" /> <c:out value="${fn:split(dongCdList2.name, ' ')[2] }" />
+					</c:if>
+					[<c:out value="${fn:substring(dongCdList2.code,0,5) }" />]
+					(<c:out value="${dongCdList2.cnt }" />)
+					<c:if test="${dongCdList2.cnt eq -1 }">
+					<script> $("#"+${fn:substring(dongCdList2.code,0,2)}).hide(); </script>
+					</c:if>
+					<c:if test="${dongCdList2.cnt eq '0'}">
+					<input type="button" value="저장" onclick="submit('<c:out value="${fn:substring(dongCdList2.code,0,5) }" />');" />
+					</c:if>,
+				
+				</c:if>
+			
 			</c:if>
 			<c:set var="index" value="${index + 1 }" />
 		</c:forEach>

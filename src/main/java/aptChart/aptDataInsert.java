@@ -111,7 +111,7 @@ public class aptDataInsert extends HttpServlet {
 				// 시도일경우
 				if(dongCdVO.getCode().substring(2,10).trim().equals("00000000") ) {
 					
-					dongCdVO.setCnt(1);
+					dongCdVO.setCnt(-2);
 					dongCdList2.add(dongCdVO);
 					
 					sidoCdBak = dongCdVO.getCode().substring(0,5);
@@ -168,6 +168,12 @@ public class aptDataInsert extends HttpServlet {
 				
 			}
 			
+		//	System.out.println(dongCdList.size());
+			
+		//	System.out.println(dongCdList2.size());
+			for(int i=0; i<dongCdList.size(); i++) {
+				System.out.println(dongCdList.get(i).getCnt());
+			}
 			request.setAttribute("dongCdList", dongCdList);
 			request.setAttribute("dongCdList2", dongCdList2);
 			
